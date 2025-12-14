@@ -1,0 +1,170 @@
+.text
+
+main:	lui $15, 0x1001
+	addi $15, $15, 65536
+	addi $12, $0, 0x485054
+	addi $13, $0, 0x2e2e2e
+	
+	add $4, $0, $15
+	add $5, $0, $12
+	addi $6, $0, 64
+	addi $7, $0, 34
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, -1024
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 63
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -1024
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 62
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -1024
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 61
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -1024
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 60
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -1024
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 59
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -1024
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 58
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -1024
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 57
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $12
+	addi $6, $0, 57
+	addi $7, $0, 128
+	
+	jal verticais
+	add $15, $0, $2
+	
+	
+
+fim:	addi $2, $0, 10
+	syscall	
+	# $4 = Vetor; onde começa as operação
+	# $5 = Cor; a cor
+	# $6 = Quantidade; pixels da cor serão colocados em sequência
+	# $7 = Salto pós fim; em que espaço de memória o programa deve retornar do original ($4)
+	
+sequencia:	add $8, $0, $6
+	add $9, $0, $4
+
+qtd:	sw $5, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	bne $8, $0, qtd
+	add $9, $9, $7
+	add $2, $0, $9
+	
+	jr $31
+	
+	# $4 = Vetor; onde começa as operação
+	# $5 =  Primeira cor
+	# $6 =  Segunda cor
+	# $7 = Quantidade; pixels da cor serão colocados em sequência; se por um número ímpar, a ultima cor a ser colocada será a primeira
+	
+	
+par:	add $8, $0, $7
+	add $9, $0, $4
+	
+subpar:	sw $5, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	add $2, $0, $9
+	beq $8, $0, acabou
+	
+	sw $6, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	add $2, $0, $9
+	bne $8, $0, subpar
+	
+acabou:	jr $31
+
+	# $4 = Vetor; Ponto de paartida da operaçõa
+	# $5 = Cor; A cor em hexadecimal
+	# $6 = Quantidade; Quantas vezes ele será colocado( Linhas de uma coluna)
+
+vertical:	add $8, $0, $6
+	add $9, $0, $4
+	
+lins:	sw $5, 0($9)
+	
+	addi $9, $9, 1024
+	addi $8, $8, -1
+	bne $8, $0, lins
+	add $2, $4, 4 	# O retorno da função é a coluna seguinte
+	jr $31
+	
+	# $4 = Vetor; Ponto de paartida da operaçõa
+	# $5 = Cor; A cor em hexadecimal
+	# $6 = Quantidade; Quantas vezes ele será colocado( Linhas de uma coluna)
+	# $7 = Quantidade de colunas; Quantas colunas serão preenchidas com a mesma quantidade de cor
+	
+
+verticais:	add $8, $0, $6
+	add $9, $0, $4
+	add $10, $0, $7
+	add $11, $0, $4
+	
+coluns:	sw $5, 0($9)
+	
+	addi $9, $9, 1024
+	addi $8, $8, -1
+	bne $8, $0, coluns
+	
+	addi $11, $11, 4
+	add $9, $0, $11
+	add $8, $0, $6
+	addi $10, $10, -1
+	
+	bne $10, $0, coluns	
+	add $2, $0, $9 	# O retorno da função é a coluna seguinte
+	jr $31

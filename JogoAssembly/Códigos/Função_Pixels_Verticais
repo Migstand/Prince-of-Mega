@@ -1,0 +1,20 @@
+.text
+	#Feito por MIguel Rodrigues Spínola da Hora
+	
+main:	# $4 = Vetor; Ponto de paartida da operaçõa
+	# $5 = Cor; A cor em hexadecimal
+	# $6 = Quantidade; Quantas vezes ele será colocado( Linhas de uma coluna)
+
+vertical:	add $8, $0, $6
+	add $9, $0, $4
+	
+lins:	sw $5, 0($9)
+	
+	addi $9, $9, 1024
+	addi $8, $8, -1
+	bne $8, $0, lins
+	add $2, $4, 4 	# O retorno da função é a coluna seguinte
+	jr $31
+	
+	
+	

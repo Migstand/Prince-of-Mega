@@ -1,0 +1,341 @@
+.text
+
+main:	
+	lui $15, 0x1001
+	addi $15, $15, 60
+	
+	addi $14, $0, 0xff00ff # Preto pea ver na tela
+	addi $10, $0, 0x99d9ea #Azul claro
+	addi $11, $0, 0x4d6df3 #Azul escuro
+	addi $12, $0, 0xfff9bd #Pele do megaman
+	addi $13, $0, 0xffffff #Olho do megaman
+
+l1:	add $4, $0, $15
+	add $5, $0, $14
+	addi $6, $0, 3
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $15, $0, $2
+	#Fim da linha 1 #Pulo da coluna 13 até a 9
+	
+l2:	add $4, $0, $15
+	add $5, $0, $14
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $10
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $14
+	addi $7, $0, 1
+	
+	jal par
+	add $15, $0, $2
+	
+	addi $15, $15, 996
+	#Fim da linha 2 #Pulo da coluna 14 até a 8
+	
+l3:	add $4, $0, $15
+	add $5, $0, $14
+	addi $7, $0, 1
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $10
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $10
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	addi $15, $15, 988
+	# Fim da linha 3 # Inicio da linha 4 Pulo da coluna 15 até a 7
+	
+l4:	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $14
+	addi $7, $0, 1
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15 # Função par send usada com sequencial
+	add $5, $0, $14
+	add $6, $0, $14
+	addi $7, $0, 4
+	
+	jal par
+	add $15, $0, $2
+	
+	addi $15, $15, 984 # Inicio da linha 5 Pulo da coluna 16 até a 7
+	# Fim da linha 4
+	
+l5:	add $4, $0, $15
+	add $5, $0, $14
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $14
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $10
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+		
+	add $4, $0, $15
+	add $5, $0, $14
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, 976 #Pulo da coluna 17 até a 6
+	# Fim da linha 5
+	
+l6:	
+	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $10
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	add $6, $0, $11
+	addi $7, $0, 6
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	addi $15, $15, 976 #Pulo da coluna 17 até a 6
+
+l7:	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $10
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	add $6, $0, $11
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	sw $12, 0($15)
+	addi $15, $15, 4
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	addi $15, $15, 976 #Pulo da coluna 17 até a 6
+	# Fim da linha 7
+	
+l8:	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $10
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $11
+	add $6, $0, $12
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	add $6, $0, $13
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $14
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $12
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	add $5, $0, $13
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+	
+	addi $15, $15, 980 #Pulo da coluna 17 até a 7
+
+l9:	add $4, $0, $15
+	add $5, $0, $13
+	add $6, $0, $14
+	addi $7, $0, 2
+	
+	jal par
+	add $15, $0, $2
+
+fim:	addi $2, $0, 10
+	syscall
+
+	# $4 = Vetor; onde começa as operação
+	# $5 = Cor; a cor
+	# $6 = Quantidade; pixels da cor serão colocados em sequência
+	# $7 = Salto pós fim; em que espaço de memória o programa deve retornar do original ($4)
+	
+sequencia:	add $8, $0, $6
+	add $9, $0, $4
+
+qtd:	sw $5, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	bne $8, $0, qtd
+	add $9, $9, $7
+	add $2, $0, $9
+	
+	jr $31
+	
+	# $4 = Vetor; onde começa as operação
+	# $5 =  Primeira cor
+	# $6 =  Segunda cor
+	# $7 = Quantidade; pixels da cor serão colocados em sequência; se por um número ímpar, a ultima cor a ser colocada será a primeira
+	
+	
+par:	add $8, $0, $7
+	add $9, $0, $4
+	
+subpar:	sw $5, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	add $2, $0, $9
+	beq $8, $0, acabou
+	
+	sw $6, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	add $2, $0, $9
+	bne $8, $0, subpar
+	
+acabou:	jr $31

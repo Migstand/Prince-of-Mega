@@ -1,0 +1,19 @@
+.text
+	# Feito por Miguel Rodrigues Spínola da Hora
+	
+main:	# $4 = Vetor; onde começa as operação
+	# $5 = Cor; a cor
+	# $6 = Quantidade; pixels da cor serão colocados em sequência
+	# $7 = Salto pós fim; em que espaço de memória o programa deve retornar do original ($4)
+	
+sequencia:	add $8, $0, $6
+	add $9, $0, $4
+
+qtd:	sw $5, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	bne $8, $0, qtd
+	add $9, $9, $7
+	add $2, $0, $9
+	
+	jr $31

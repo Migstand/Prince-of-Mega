@@ -1,0 +1,29 @@
+.text
+	#Feito por MIguel Rodrigues Spínola da Hora
+	
+main:	# $4 = Vetor; Ponto de paartida da operaçõa
+	# $5 = Cor; A cor em hexadecimal
+	# $6 = Quantidade; Quantas vezes ele será colocado( Linhas de uma coluna)
+	# $7 = Quantidade de colunas; Quantas colunas serão preenchidas com a mesma quantidade de cor
+	
+
+verticais:	add $8, $0, $6
+	add $9, $0, $4
+	add $10, $0, $7
+	add $11, $0, $4
+	
+coluns:	sw $5, 0($9)
+	
+	addi $9, $9, 1024
+	addi $8, $8, -1
+	bne $8, $0, coluns
+	
+	addi $11, $11, 4
+	add $9, $0, $11
+	add $8, $0, $6
+	addi $10, $10, -1
+	
+	bne $10, $0, coluns	
+	add $2, $0, $9 	# O retorno da função é a coluna seguinte
+	jr $31
+	

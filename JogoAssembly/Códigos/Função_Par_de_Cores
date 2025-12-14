@@ -1,0 +1,25 @@
+.text
+	# Feito por Miguel Rodrigues Spínola da Hora
+	
+main:	# $4 = Vetor; onde começa as operação
+	# $5 =  Primeira cor
+	# $6 =  Segunda cor
+	# $7 = Quantidade; pixels da cor serão colocados em sequência; se por um número ímpar, a ultima cor a ser colocada será a primeira
+	
+	
+par:	add $8, $0, $7
+	add $9, $0, $4
+	
+subpar:	sw $5, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	add $2, $0, $9
+	beq $8, $0, acabou
+	
+	sw $6, 0($9)
+	addi $9, $9, 4
+	addi $8, $8, -1
+	add $2, $0, $9
+	bne $8, $0, subpar
+	
+acabou:	jr $31

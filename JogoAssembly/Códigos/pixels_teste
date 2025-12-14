@@ -1,0 +1,932 @@
+.text
+
+main:	lui $15, 0x1001
+	addi $9, $0, 0xff00ff # Roxo pea ver na tela
+	addi $8, $0, 3
+	addi $10, $0, 0x99d9ea #Azul claro
+	addi $11, $0, 0x4d6df3 #Azul escuro
+	addi $12, $0, 0xfff9bd #Pele do megaman
+	addi $13, $0, 0xffffff #Olho do megaman
+	
+	addi $15, $15, 60
+	
+ca:	beq $8, $0, li1
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j ca
+	
+li1:	addi $8, $0, 3
+	addi $15, $15, 1008
+	
+	# Fim da linha 1
+ca2:	beq $8, $0, fca2  #Pulo da coluna 13 até a 9
+	
+	sw $9, 0($15)
+	addi $8, $8, -1
+	addi $15, $15, 4
+	j ca2
+	
+fca2:	addi $9, $0, 0x99d9ea
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $9, $0, 0xff00ff
+ 	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 2
+	
+l3:	addi $15, $15, 1000 #Pulo da coluna 14 até a 8
+	sw $9, 0($15)
+	
+	addi $8, $0, 3
+	addi $9, $0,0x4d6df3
+	
+ca3:	beq $8, $0, seca3
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j ca3
+	
+seca3:	addi $9, $0, 0xff00ff
+ 	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $15, $15, 4
+	
+	addi $9, $0, 0x99d9ea #Azul claro da 3 linha de megaman
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $9, $0, 0xff00ff
+ 	addi $15, $15, 4
+ 	sw $9, 0($15)
+	
+	# Fim da linha 3
+	
+l4:	addi $15, $15, 992 # Inicio da linha 4 Pulo da coluna 15 até a 7
+	
+	sw $9, 0($15)
+	
+	addi $8, $0, 5
+	addi $9, $0,0x4d6df3 #Azul escuro
+	
+ca4:	beq $8, $0, fca4
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j ca4
+	
+fca4:	addi $8, $0, 4
+	addi $9, $0,0xff00ff
+	
+endca4:	beq $8, $0, li5
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j endca4
+	# Fim da linha 4
+	
+li5:	addi $15, $15, 988 # Inicio da linha 5 Pulo da coluna 16 até a 7
+	sw $9, 0($15)
+	
+	addi $8, $0, 5
+	addi $9, $0,0x4d6df3
+	
+ca5:	beq $8, $0, seca5
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j ca5
+	
+seca5:	addi $9, $0,0xff00ff
+	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $0, 2
+	addi $9, $0, 0x99d9ea
+	
+ensec5:	beq $8, $0, fca5
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $8, -1
+	j ensec5
+	
+fca5:	addi $15, $15, 4
+	addi $9, $0,0x4d6df3
+	sw $9, 0($15)
+	
+	addi $15, $15, 4
+	addi $9, $0,0xff00ff
+	sw $9, 0($15)
+	# Fim da linha 5
+	
+l6:	addi $15, $15, 980 #Pulo da coluna 17 até a 6
+	sw $9, 0($15)
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	
+	addi $8, $0, 6
+ca6:	beq $8, $0, seca6 #Azuis escuros
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	
+	j ca6
+	
+seca6:	addi $8, $0, 2
+
+enca6:	beq $8, $0, fca6
+	
+	addi $15, $15, 4
+	sw $9, 0($15)	
+	addi $8, $8, -1
+	
+	j enca6
+
+fca6:	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 6
+	
+l7:	addi $15, $15, 980 #Pulo da coluna 17 até a 6
+	sw $9, 0($15)
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	
+	addi $8, $0, 2
+
+prica7:	beq $8, $0, zoica7
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	
+	addi $8, $8, -1
+	
+	j prica7
+	
+zoica7:	addi $15, $15, 4
+	sw $12, 0($15)
+	
+	addi $8, $0, 3
+	
+olca7:	beq $8, $0, capca7
+	
+	addi $15, $15, 4
+	sw $13, 0($15)
+	
+	addi $8, $8, -1
+	
+	j olca7
+	
+capca7:	addi $8, $0, 2
+	
+azca7:	beq $8, $0, fca7
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	
+	addi $8, $8, -1
+	
+	j azca7
+	
+fca7:	addi $15, $15, 4
+	sw $13, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	#Fim da linha 7
+	
+l8:	addi $15, $15, 980 #Pulo da coluna 17 até a 6
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $15, $15, 4
+	sw $12, 0($15)
+	
+	
+	addi $8, $0, 2
+	
+olca8:	beq $8, $0, pupca8
+	
+	addi $15, $15, 4
+	sw $13, 0($15)
+	
+	addi $8, $8, -1
+	
+	j olca8
+	
+pupca8:	addi $8, $0, 2
+	
+olaca8:	beq $8, $0, fca8
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $8, -1
+	
+	j olaca8
+
+fca8:	addi $15, $15, 4
+	sw $12, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $13, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 8
+	
+l9:	addi $15, $15, 984 #Pulo da coluna 17 até a 7
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $15, $15, 4
+	sw $12, 0($15)
+	
+	addi $8, $0, 2
+	
+olca9:	beq $8, $0, pupca9
+	
+	addi $15, $15, 4
+	sw $13, 0($15)
+	
+	addi $8, $8, -1
+	
+	j olca9
+	
+pupca9:	addi $8, $0, 2
+	
+olaca9:	beq $8, $0, fca9
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $8, -1
+	
+	j olaca9
+
+fca9:	addi $15, $15, 4
+	sw $12, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $13, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 9
+	
+l10:	addi $15, $15, 980 #Pulo da coluna 17 até a 6
+	
+	addi $8, $0, 2
+	
+prica10:	beq $8, $0, ca10
+	
+	sw $9, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	j prica10
+	
+ca10:	sw $11, 0($15)
+	addi $8, $0, 2
+	
+seca10:	beq $8, $0, olca10
+	
+	addi $15, $15, 4
+	sw $12, 0($15)
+	addi $8, $8, -1
+	j seca10
+	
+olca10:	addi $8, $0, 3
+	
+trica10:	beq $8, $0, fca10
+	
+	addi $15, $15, 4
+	sw $13, 0($15)
+	addi $8, $8, -1
+	j trica10
+	 
+fca10:	addi $15, $15, 4
+	sw $12, 0($15)
+	addi $15, $15, 4
+	sw $13, 0($15)
+	addi $15, $15, 4
+	sw $12, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 10
+
+l11:	addi $15, $15, 972 #Pulo da coluna 17 até a 4
+
+	addi $8, $0, 2
+	
+prica11:	beq $8, $0, om11
+	
+	sw $9, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	j prica11
+	
+om11:	addi $8, $0, 2
+	
+omb11:	beq $8, $0, ca11
+	
+	sw $10, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	j omb11
+
+ca11:	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $15, $15, 4
+	sw $12, 0($15)
+	
+	addi $8, $0, 4
+	
+boca:	beq $8, $0, fca11
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j boca
+	
+fca11:	addi $15, $15, 4
+	sw $12, 0($15)
+
+	addi $8, $0, 3
+	
+enca11:	beq $8, $0, l12
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j enca11
+	# Fim da linha 11
+	
+l12:	addi $15, $15, 964 #Pulo da linha 18 até a 3
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $11, 0($15)
+	
+	addi $8, $0, 4
+	
+om12:	beq $8, $0, ca12
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	
+	j om12
+	
+ca12:	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $0, 5
+	
+cab12:	beq $8, $0, omd12
+	
+	addi $15, $15, 4
+	sw $12, 0($15)
+	addi $8, $8, -1
+	
+	j cab12
+	
+omd12:	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $0, 2
+	
+azom12:	beq $8, $0, fom12
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	
+	j azom12
+
+fom12:	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 12
+	
+l13:	addi $15, $15, 960 #Pulo da linha 19 até a 3 
+	sw $9, 0($15)
+	
+	addi $8, $0, 2
+	
+priom13:	beq $8, $0, om13
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j priom13
+	
+om13:	addi $8, $0, 4
+	
+seom13:	beq $8, $0, queix13
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j seom13
+		
+queix13:	addi $8, $0, 5
+	
+triom13:	beq $8, $0, omd13
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j triom13
+	
+omd13:	addi $8, $0, 2
+	
+quaom13:	beq $8, $0, azomd13
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j quaom13
+	
+azomd13:	addi $8, $0, 2
+	
+enom13:	beq $8, $0, fom13
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j enom13
+	
+fom13:	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 13
+	
+l14:	addi $15, $15, 956 #Pulo da linha 19 até a 2
+	sw $9, 0($15)
+	
+	addi $8, $0, 3
+	
+ma14:	beq $8, $0, sema14
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j ma14
+
+sema14:	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $0, 7
+	
+ba14:	beq $8, $0, mad14
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j ba14
+
+mad14:	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $10, 0($15)
+	
+	addi $8, $0, 3
+	
+azma14:	beq $8, $0, fma14
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j azma14
+	
+fma14:	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 14
+	
+l15:	addi $15, $15, 952 #Pulo da linha 20 até a 2
+	sw $9, 0($15)
+	
+	addi $8, $0, 2
+	
+ma15:	beq $8, $0, suv15
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j ma15
+	
+suv15:	addi $8, $0, 3
+	
+prisu15:	beq $8, $0, ba15
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j prisu15
+	
+ba15:	addi $8, $0, 7
+	
+buxo15:	beq $8, $0, sesu15
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j buxo15
+	
+sesu15:	addi $8, $0, 3
+	
+presu15:	beq $8, $0, sema15
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j presu15
+	
+sema15:	addi $8, $0, 2
+	
+azma15:	beq $8, $0, fma15
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j azma15
+
+fma15:	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 15
+	
+l16:	addi $15, $15, 952 #Pulo da linha 20 até a 2
+	sw $9, 0($15)
+	
+	addi $8, $0, 3
+	
+ma16:	beq $8, $0, suv16
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j ma16
+	
+suv16:	addi $8, $0, 2
+	
+prisu16:	beq $8, $0, ba16
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j prisu16
+	
+ba16:	addi $8, $0, 7
+	
+buxo16:	beq $8, $0, sesu16
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j buxo16
+	
+sesu16:	addi $8, $0, 2
+	
+presu16:	beq $8, $0, sema16
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j presu16
+	
+sema16:	addi $8, $0, 3
+	
+azma16:	beq $8, $0, fma16
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j azma16
+
+fma16:	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 16
+	
+l17:	addi $15, $15, 952 #Pulo da linha 20 até a 2
+	sw $9, 0($15)
+	
+	addi $8, $0, 3
+	
+ma17:	beq $8, $0, suv17
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j ma17
+	
+suv17:	addi $8, $0, 2
+	
+prisu17:	beq $8, $0, ba17
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j prisu17
+	
+ba17:	addi $8, $0, 7
+	
+buxo17:	beq $8, $0, sesu17
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j buxo17
+	
+sesu17:	addi $8, $0, 2
+	
+presu17:	beq $8, $0, sema17
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j presu17
+	
+sema17:	addi $8, $0, 3
+	
+azma17:	beq $8, $0, fma17
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j azma17
+
+fma17:	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 17
+	
+l18:	addi $15, $15, 956 #Pulo da linha 20 até a 3
+	
+	addi $8, $0, 3
+ded18:	beq $8, $0, bux18
+	
+	sw $9, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	j ded18
+
+bux18:	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $0, 7
+	
+buxo18:	beq $8, $0, ci18
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j buxo18
+	
+	
+ci18:	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $0, 3
+	addi $15, $15, 4
+	
+fded18:	beq $8, $0, l19
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j fded18
+	# Fim da linha 18
+	
+l19:	addi $15, $15, 972 #Pulo da linha 19 até a 6
+	sw $9, 0($15)
+	
+	addi $8, $0, 2
+	
+cox19:	beq $8, $0, cue19
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j cox19
+	
+cue19:	addi $8, $0, 4
+	
+pricue19:	beq $8, $0, coxd19
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j pricue19
+	
+coxd19:	addi $8, $0, 3
+	
+secox19:	beq $8, $0, fcox19
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j secox19
+	
+fcox19:	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 19
+	
+l20:	addi $15, $15, 980 #Pulo da linha 16 até a 5
+	sw $9, 0($15)
+	
+	addi $8, $0, 2
+	
+ju20:	beq $8, $0, cox20
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	j ju20
+
+cox20:	addi $8, $0, 3
+	
+coxe20:	beq $8, $0, pi20
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j coxe20
+	
+pi20:	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $8, $0, 4
+	
+coxd20:	beq $8, $0, fju20
+	
+	addi $15, $15, 4
+	sw $10, 0($15)
+	addi $8, $8, -1
+	j coxd20
+	
+fju20:	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	#Fim da linha 20
+	
+l21:	addi $15, $15, 972 #Pulo da linha 17 até a 4
+	
+	addi $8, $0, 2
+	
+per21:	beq $8, $0, cane21
+	
+	sw $9, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	
+	j per21
+
+cane21:	addi $8, $0, 3
+	
+canee21:	beq $8, $0, dob21
+	
+	sw $11, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	
+	j canee21
+	
+dob21:	sw $10, 0($15)
+	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $15, $15, 8
+	sw $9, 0($15)
+	addi $15, $15, 4
+	sw $10, 0($15)
+	
+	
+	addi $8, $0, 3
+	
+caned21:	beq $8, $0, fper21
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	
+	j caned21
+
+fper21:	addi $8, $0, 2
+	
+enper21:	beq $8, $0, l22
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	
+	j enper21
+	#Fim da linha 21
+	
+l22:	addi $15, $15, 960 #Pulo da linha 18 até a 2
+
+	addi $8, $0, 2
+	
+per22:	beq $8, $0, cal22
+	
+	sw $9, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	
+	j per22
+	
+cal22:	addi $8, $0, 5
+	
+cale22:	beq $8, $0, dob22
+	
+	sw $11, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	
+	j cale22
+		
+dob22:	sw $9, 0($15)
+	
+	addi $15, $15, 16
+	sw $9, 0($15)
+	
+	addi $8, $0, 5
+	
+cald22:	beq $8, $0, fcal22
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	
+	j cald22
+	
+fcal22:	addi $8, $0, 2
+
+encal22:	beq $8, $0, l23
+	
+	addi $15, $15, 4
+	sw $9, 0($15)
+	addi $8, $8, -1
+	j encal22
+	#Fim da linha 23
+	
+l23:	addi $15, $15, 948 #Pulo da linha 20 até a 1
+	sw $9, 0($15)
+	
+	
+	
+pe23:	addi $8, $0, 7
+	
+pripe23:	beq $8, $0, dob23
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	
+	j pripe23
+	
+dob23:	addi $15, $15, 4
+	sw $9, 0($15)
+	
+	addi $15, $15, 16
+	sw $9, 0($15)
+	
+	addi $8, $0, 7
+	
+sepe23:	beq $8, $0, fpe23
+	
+	addi $15, $15, 4
+	sw $11, 0($15)
+	addi $8, $8, -1
+	
+	j sepe23
+	
+fpe23:	addi $15, $15, 4
+	sw $9, 0($15)
+	# Fim da linha 23
+	
+l24:	addi $15, $15, 944 #Pulo da linha 21 até a 1
+	
+	addi $8, $0, 9
+	
+sola24:	beq $8, $0, solad24
+	
+	sw $9, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	
+	j sola24
+	
+solad24:	addi $15, $15, 12
+	
+	addi $8, $0, 9
+	
+fsola24:	beq $8, $0, fim
+	
+	sw $9, 0($15)
+	addi $15, $15, 4
+	addi $8, $8, -1
+	
+	j fsola24
+	
+fim:	addi $2, $0, 10
+	syscall
