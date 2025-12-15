@@ -1545,9 +1545,11 @@ megaman:	lui $24, 0x1001
 	# ffffff = OLHO
 	# 000000 = CONTORNO/PUPILA/ BOCA
 	# ff00ff = CONTORNO DE DESENVOLVIMENTO
-
+	#POSICAO AUXILIAR
+	
 #============== NUCA	
 	addi $24, $24, 14396
+	add $21, $0, $24
 	
 	add $4, $0, $24
 	add $5, $0, 0x000000
@@ -2451,13 +2453,19 @@ skullman:
 	addi $4, $0, 500000
 	jal timer
 	
-funx:	addi $13, $0, 25
+	lui $23, 0xffff
+	# $9 = Vai ser quem vai carregar a letra do teclado
+	# $17 = Valor de movimento; Indica qual movimento deve fazer no momento
+	# $10 = Vai ser o comparador de teclas; ver se é igual a "TECLA"
+	# $16 = Vai guardar a cópia da letra 
+	
+funx:	addi $13, $0, 10
 	
 #=============== POSIÇÃO ACIMA
 # 	$20 = GUARDA A POSICAO AUXILIAR DO SKULLMAN
 # 	POR ENQUANTO NESSE CÓDIGO O $13 vai cuidar do pulo mas não deve ser usado assim no código final provavelmente
 puloskull:	beq $13, $0, puloskull2
-	
+	jal moveset
 	
 	add $25, $0, $20
 	add $20, $0, $25
@@ -2465,7 +2473,7 @@ puloskull:	beq $13, $0, puloskull2
 	add $4, $0, $25
 	addi $4, $4, -40
 	addi $5, $0, 28
-	addi $6, $0, 35
+	addi $6, $0, 38
 	
 	jal apagarp
 		
@@ -2474,26 +2482,26 @@ puloskull:	beq $13, $0, puloskull2
 	addi $25, $20, -1024
 	addi $20, $20, -1024
 	
-	addi $10, $0, 200
-	add $4, $10, $0
+	
+	add $4, $0, 50
 	
 	jal timer
 	
-	addi $13, $13, -1
+puloskuf:	addi $13, $13, -1
 	j puloskull
 	
 
-puloskull2:	addi $13, $0, 20
+puloskull2:	addi $13, $0, 10
 	
 pulosku2:	beq $13, $0, puloskull3
-	
+	jal moveset
 	add $25, $0, $20
 	add $20, $0, $25
 	
 	add $4, $0, $25
 	addi $4, $4, -40
 	addi $5, $0, 28
-	addi $6, $0, 35
+	addi $6, $0, 38
 	
 	jal apagarp
 		
@@ -2501,46 +2509,50 @@ pulosku2:	beq $13, $0, puloskull3
 	
 	addi $25, $20, -1024
 	addi $20, $20, -1024
+	
+	
+	addi $4, $0, 200
+	jal timer
+	
+
+puloskuf2:	addi $13, $13, -1
+	j pulosku2
+	
+puloskull3:	addi $13, $0, 6
+	
+pulosku3:	beq $13, $0, queda
+	jal moveset
+	add $25, $0, $20
+	add $20, $0, $25
+	add $4, $0, $25
+	addi $4, $4, -40
+	addi $5, $0, 28
+	addi $6, $0, 38
+	
+	jal apagarp
+		
+	jal jskull
+	
+	addi $25, $20, -1024
+	addi $20, $20, -1024
+	
 	
 	addi $4, $0, 5000
 	jal timer
 	
-	addi $13, $13, -1
-	j pulosku2
-	
-puloskull3:	addi $13, $0, 5
-	
-pulosku3:	beq $13, $0, queda
-	
-	add $25, $0, $20
-	add $20, $0, $25
-	add $4, $0, $25
-	addi $4, $4, -40
-	addi $5, $0, 28
-	addi $6, $0, 35
-	
-	jal apagarp
-		
-	jal jskull
-	
-	addi $25, $20, -1024
-	addi $20, $20, -1024
-	
-	addi $4, $0, 10000
-	jal timer
-	
-	addi $13, $13, -1
+
+puloskuf3:	addi $13, $13, -1
 	j pulosku3
 	
 queda:	
-	addi $4, $0, 50000
+	addi $4, $0, 25000
 	
 	jal timer
-	
-	addi $13, $0, 5
+	jal moveset
+	addi $13, $0, 6
 	
 quedasku:	beq $13, $0, queda2
-	
+	jal moveset
 	add $25, $0, $20
 	add $20, $0, $25
 	
@@ -2556,17 +2568,20 @@ quedasku:	beq $13, $0, queda2
 	addi $25, $20, 1024
 	addi $20, $20, 1024
 	
-	add $4, $0, 10000
+	
+	add $4, $0, 5000
 	
 	jal timer
 	
-	addi $13, $13, -1
+	
+
+quedaskulf:	addi $13, $13, -1
 	j quedasku
 	
-queda2:	addi $13, $0, 20
+queda2:	addi $13, $0, 10
 
 quedasku2:	beq $13, $0, queda3
-	
+	jal moveset
 	add $25, $0, $20
 	add $20, $0, $25
 	add $4, $0, $25
@@ -2580,18 +2595,22 @@ quedasku2:	beq $13, $0, queda3
 	
 	addi $25, $20, 1024
 	addi $20, $20, 1024
+	
 	
 	add $4, $0, 200
 	
 	jal timer
 	
+	
+quedaskulf2:	
+	
 	addi $13, $13, -1
 	j quedasku2
 	
-queda3:	addi $13, $0, 25 
+queda3:	addi $13, $0, 10
 	
 quedasku3:	beq $13, $0, chasku
-	
+	jal moveset
 	add $25, $0, $20
 	add $20, $0, $25
 	add $4, $0, $25
@@ -2609,9 +2628,14 @@ quedasku3:	beq $13, $0, chasku
 	add $4, $0, 50
 	
 	jal timer
+	
+	
+	
+
+quedaskulf3:
 
 	addi $13, $13, -1
-	bne $13, 3, qnor
+notaskuj:	bne $13, 3, qnor
 	
 	addi $6, $0, 7
 	addi $7, $0, 127
@@ -2623,7 +2647,7 @@ quedasku3:	beq $13, $0, chasku
 	
 qnor:	
 	j quedasku3
-chasku:	
+chasku:	jal moveset
 	add $4, $0, $25
 	addi $4, $4, -40
 	addi $5, $0, 28
@@ -2633,10 +2657,14 @@ chasku:
 
 	jal skull
 
-fim:	
-	add $4, $0, 500000
+fim:	jal moveset
+
+	add $4, $0, 25000
 	
 	jal timer
+	
+	jal moveset
+	
 	j funx
 	
 	addi $2, $0, 10
@@ -5190,7 +5218,7 @@ mega:
 #============== NUCA	
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -5198,7 +5226,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
@@ -5209,7 +5237,7 @@ mega:
 	addi $24, $24, 1004
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -5217,7 +5245,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -5236,7 +5264,7 @@ mega:
 	addi $24, $24, 1000
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -5255,7 +5283,7 @@ mega:
 	addi $24, $24, 1004
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -5270,14 +5298,14 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -5307,7 +5335,7 @@ mega:
 	addi $24, $24, 980
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -5343,7 +5371,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -5359,7 +5387,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -5418,7 +5446,7 @@ mega:
 	add $24, $0, $2
 
 	add $4, $0, $24 #======= OLHO ESQUEDO
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 2
 	
@@ -5433,7 +5461,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24 #======= OLHO DIREITO
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -5443,7 +5471,7 @@ mega:
 	addi $24, $24, 2008
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -5451,7 +5479,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -5495,7 +5523,7 @@ mega:
 	addi $24, $24, 972
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -5511,7 +5539,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	add $6, $0, 0x1d61b5
 	addi $7, $0, 2
 	
@@ -5527,7 +5555,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 0
 	
@@ -5543,7 +5571,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 0
 	
@@ -5554,7 +5582,7 @@ mega:
 	addi $24, $24, 960
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -5599,7 +5627,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -5631,7 +5659,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 0
 	
@@ -5639,7 +5667,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -5672,7 +5700,7 @@ mega:
 	addi $24, $24, 960
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	
 	jal vertical
@@ -5689,7 +5717,7 @@ mega:
 	addi $24, $24, 8
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -5704,7 +5732,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -5721,7 +5749,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	
 	jal vertical
@@ -5731,7 +5759,7 @@ mega:
 	addi $24, $24, 960
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -5739,7 +5767,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -5748,14 +5776,14 @@ mega:
 	addi $24, $24, 36
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -5811,7 +5839,7 @@ mega:
 	addi $24, $24, 976
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 44
 	
@@ -5819,7 +5847,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 0
 	
@@ -5858,7 +5886,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -5869,7 +5897,7 @@ mega:
 	addi $24, $24, -1024
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -5896,7 +5924,7 @@ mega:
 	
 #=============== CONTORNO DA PERNA DIREITA
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -5906,7 +5934,7 @@ mega:
 	addi $24, $24, 2048
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
@@ -5916,7 +5944,7 @@ mega:
 	addi $24, $24, 1032
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -5927,7 +5955,7 @@ mega:
 	addi $24, $24, 944
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -5937,7 +5965,7 @@ mega:
 	addi $24, $24, -1020
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -5947,7 +5975,7 @@ mega:
 	addi $24, $24, -1020
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
@@ -5977,7 +6005,7 @@ mega:
 	addi $24, $24, 1024
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6006,7 +6034,7 @@ mega:
 #============== PÉ DIREITO
 
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6053,7 +6081,7 @@ mega:
 
 #============== SOLA DOS PÉS
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 9
 	addi $7, $0, 12
 	
@@ -6061,7 +6089,7 @@ mega:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 9
 	addi $7, $0, 0
 	
@@ -6114,7 +6142,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 1
 	addi $7, $0, -3068
 	
@@ -6122,7 +6150,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1008
 	
@@ -6131,7 +6159,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	
 #_______________ Condtorno esquerdo
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -6146,7 +6174,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -6172,7 +6200,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -6183,7 +6211,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 3048
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -6191,7 +6219,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 1
 	addi $7, $0, -9280
 	
@@ -6200,7 +6228,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	
 #============== BRAÇO ESQUERDO
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -6208,7 +6236,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6217,7 +6245,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 2048
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6226,7 +6254,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 2040
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6235,7 +6263,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, -20
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6244,7 +6272,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 2048
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, -7172
 	
@@ -6285,7 +6313,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, -4092
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #COR
+	addi $5, $0, 0x000000 #COR
 	addi $6, $0, 2
 	addi $7, $0, 1016
 	
@@ -6358,7 +6386,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #Roupa
+	addi $5, $0, 0x000000 #Roupa
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -6421,7 +6449,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #Contorno
+	addi $5, $0, 0x000000 #Contorno
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -6439,7 +6467,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6448,7 +6476,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 2040
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1024
 	
@@ -6456,7 +6484,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6466,7 +6494,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, -36
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6476,7 +6504,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 1024
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 7
 	addi $7, $0, -4124
 	
@@ -6484,7 +6512,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	
 	jal vertical
@@ -6514,7 +6542,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 #============== PÉ ESQUERDO
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 	addi $7, $0, 1
 		
@@ -6522,7 +6550,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 	addi $7, $0, 1
 		
@@ -6532,7 +6560,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, -3068
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 		
 	jal vertical
@@ -6541,7 +6569,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 4092
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 	addi $7, $0, 1
 		
@@ -6552,7 +6580,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 3044
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 		
@@ -6562,7 +6590,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	addi $24, $24, 1028
 		
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 		
@@ -6570,7 +6598,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1024
 		
@@ -6578,7 +6606,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 0
 		
@@ -6586,7 +6614,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 		
@@ -6686,7 +6714,7 @@ megapaco2:
 	addi $24, $24, 4
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -6696,7 +6724,7 @@ megapaco2:
 	addi $24, $24, 1024
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6722,7 +6750,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 1004
 	
@@ -6732,7 +6760,7 @@ megapaco2:
 #============== PERNA DIREITA QUE TÁ NO FUNDO
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff 
+	addi $5, $0, 0x000000 
 	addi $6, $0, 4
 	
 	jal vertical
@@ -6746,7 +6774,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -6755,7 +6783,7 @@ megapaco2:
 	addi $24, $24, 1020
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -6767,7 +6795,7 @@ megapaco2:
 	addi $24, $24, -28
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
@@ -6775,7 +6803,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -6786,7 +6814,7 @@ megapaco2:
 	addi $24, $24, -3080
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
@@ -6796,7 +6824,7 @@ megapaco2:
 	addi $24, $24, -1024
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -6804,7 +6832,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -6815,7 +6843,7 @@ megapaco2:
 	addi $24, $24, -1052
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -6825,7 +6853,7 @@ megapaco2:
 	addi $24, $24, -2056
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -6965,7 +6993,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -6981,7 +7009,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7005,7 +7033,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -7014,7 +7042,7 @@ megapaco2:
 	addi $24, $24, 996
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -7030,7 +7058,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1008
 	
@@ -7046,7 +7074,7 @@ megapaco2:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -7055,7 +7083,7 @@ megapaco2:
 	addi $24, $24, 1004
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 5
 	addi $7, $0, 0
 	
@@ -7094,7 +7122,7 @@ megapaco3:
 	addi $24, $24, -1032
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1024
 	
@@ -7102,7 +7130,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	
 	jal vertical
@@ -7112,7 +7140,7 @@ megapaco3:
 	addi $24, $24, 980
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -7155,7 +7183,7 @@ megapaco3:
 	addi $24, $24 2032
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 7
 	addi $7, $0, -6184
 	
@@ -7163,7 +7191,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -7216,7 +7244,7 @@ megapaco3:
 	addi $24, $24, -6160
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1008
 	
@@ -7224,7 +7252,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7240,7 +7268,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7264,7 +7292,7 @@ megapaco3:
 	add $24, $0, $2
 
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	
 	jal vertical
@@ -7295,14 +7323,14 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 2040
 	
@@ -7313,7 +7341,7 @@ megapaco3:
 #============== PERNA ESQUERDA
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7323,7 +7351,7 @@ megapaco3:
 	addi $24, $24, 1012
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7331,7 +7359,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, -1044
 	
@@ -7339,7 +7367,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -7347,7 +7375,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1012
 
@@ -7394,7 +7422,7 @@ megapaco3:
 	addi $24, $24, 2028
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7402,7 +7430,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7410,7 +7438,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7426,7 +7454,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7434,7 +7462,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -7508,7 +7536,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7532,7 +7560,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7542,7 +7570,7 @@ megapaco3:
 	addi $24, $24, 1000
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -7559,7 +7587,7 @@ megapaco3:
 	addi $24, $24, 1024
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7567,7 +7595,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	addi $7, $0, 992
 	
@@ -7575,7 +7603,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -7590,7 +7618,7 @@ megapaco3:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 2
 	
 	jal vertical
@@ -7599,7 +7627,7 @@ megapaco3:
 	addi $24, $24, 996
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff #CONTORNO
+	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 6
 	addi $7, $0, 0
 	
@@ -7617,7 +7645,7 @@ megahead:
 	add $19, $0, $31
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7625,7 +7653,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
@@ -7636,7 +7664,7 @@ megahead:
 	addi $24, $24, 1004
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7644,7 +7672,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -7663,7 +7691,7 @@ megahead:
 	addi $24, $24, 1000
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -7682,7 +7710,7 @@ megahead:
 	addi $24, $24, 1004
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -7697,14 +7725,14 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7734,7 +7762,7 @@ megahead:
 	addi $24, $24, 980
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -7770,7 +7798,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7786,7 +7814,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -7845,7 +7873,7 @@ megahead:
 	add $24, $0, $2
 
 	add $4, $0, $24 #======= OLHO ESQUEDO
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 2
 	
@@ -7860,7 +7888,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24 #======= OLHO DIREITO
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -7870,7 +7898,7 @@ megahead:
 	addi $24, $24, 988
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 1020
 	
@@ -7878,7 +7906,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -7928,7 +7956,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -7939,7 +7967,7 @@ megahead:
 	addi $24, $24, 996
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 1008
 	
@@ -7955,7 +7983,7 @@ megahead:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 0
 	
@@ -7975,7 +8003,7 @@ megaleve:
 	add $18, $0, $31
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -7983,7 +8011,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
@@ -7994,7 +8022,7 @@ megaleve:
 	addi $24, $24, 1004
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -8002,7 +8030,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -8021,7 +8049,7 @@ megaleve:
 	addi $24, $24, 1000
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -8040,7 +8068,7 @@ megaleve:
 	addi $24, $24, 1004
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -8055,14 +8083,14 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -8092,7 +8120,7 @@ megaleve:
 	addi $24, $24, 980
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -8128,7 +8156,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -8144,7 +8172,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -8203,7 +8231,7 @@ megaleve:
 	add $24, $0, $2
 
 	add $4, $0, $24 #======= OLHO ESQUEDO
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 2
 	
@@ -8218,7 +8246,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24 #======= OLHO DIREITO
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -8228,7 +8256,7 @@ megaleve:
 	addi $24, $24, 2008
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -8236,7 +8264,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -8280,7 +8308,7 @@ megaleve:
 	addi $24, $24, 972
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -8296,7 +8324,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	add $6, $0, 0x1d61b5
 	addi $7, $0, 2
 	
@@ -8312,7 +8340,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 0
 	
@@ -8328,7 +8356,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 0
 	
@@ -8339,7 +8367,7 @@ megaleve:
 	addi $24, $24, 960
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -8384,7 +8412,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -8416,7 +8444,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 0
 	
@@ -8424,7 +8452,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xff00ff
+	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -8457,7 +8485,7 @@ megaleve:
 	addi $24, $24, 960
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	
 	jal vertical
@@ -8474,7 +8502,7 @@ megaleve:
 	addi $24, $24, 8
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -8489,7 +8517,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -8506,7 +8534,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 4
 	
 	jal vertical
@@ -8516,7 +8544,7 @@ megaleve:
 	addi $24, $24, 960
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -8524,7 +8552,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -8533,14 +8561,14 @@ megaleve:
 	addi $24, $24, 36
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -8596,7 +8624,7 @@ megaleve:
 	addi $24, $24, 976
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 44
 	
@@ -8604,7 +8632,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 0
 	
@@ -8643,7 +8671,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -8654,7 +8682,7 @@ megaleve:
 	addi $24, $24, -1024
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 5
 	
 	jal vertical
@@ -8678,7 +8706,7 @@ megaleve:
 
 #============== CONTORNO DA COXA DIREITA
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -8687,7 +8715,7 @@ megaleve:
 	addi $24, $24, 3072
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1024
 	
@@ -8695,7 +8723,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -8705,7 +8733,7 @@ megaleve:
 	addi $24, $24, -76
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	
 	jal vertical
@@ -8714,7 +8742,7 @@ megaleve:
 	addi $24, $24, -1024
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, -1024
 	
@@ -8723,7 +8751,7 @@ megaleve:
 	
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, -1028
 	
@@ -8731,7 +8759,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -8759,7 +8787,7 @@ megaleve:
 	addi $24, $24, 1024
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 3
 	
 	jal vertical
@@ -8784,7 +8812,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 8
 	addi $7, $0, -3060
 	
@@ -8793,7 +8821,7 @@ megaleve:
 	
 #============== PÉ DIREITO
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 1
 	addi $7, $0, -1016
 	
@@ -8833,7 +8861,7 @@ megaleve:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	add $5, $0, 0xff00ff
+	add $5, $0, 0x000000
 	addi $6, $0, 7
 	addi $7, $0, 0
 	
@@ -8845,3 +8873,473 @@ megaleve:
 	jr $31
 	
 #============== FIM DA FUNÇÃO MEGALEVE
+
+#===================================================
+#	MOVESET DO MEGAMAN		
+moveset:
+	add $22, $0, $31
+					
+	add $24, $0, $21
+	lw $9, 4($23)
+	
+	bne $9, $0, cod
+	
+	jal mega
+	
+cod:	addi $10, $0, 'd'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'e'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'a'
+	beq $9, $10, tras
+	
+	addi $10, $0, 'q'
+	beq $9, $10, tras
+	
+	addi $17, $0, 0
+	
+	add $31, $0, $22
+	jr $31
+#================================================================
+#================================================================
+#	MOVIMENTAÇÃO PARA FRENTE
+	
+frente:	
+
+	lw $16, 4($23)
+	sw $0, 4($23)
+	
+	addi $21, $21, 4
+	add $24, $0, $21
+	
+	add $10, $0, 'e' #POR ENQUANTO ASSIM
+	beq $16, $10, pacoleve
+	beq $17, $0, paco1
+	beq $17, 1, paco2
+	beq $17, 2, paco3
+	
+	add $31, $0, $22
+	jr $31
+	
+pacoleve:	
+	addi $4, $24, 0
+	add $12, $0, $4
+	addi $5, $0, 10
+	addi $6, $0, 21
+	
+	jal apagarp
+	
+	jal megaleve
+	
+	addi $4, $0, 40000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, -44
+	addi $5, $0, 22
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	add $31, $0, $22
+	jr $31
+
+#-------------------------------------------
+#	PRIMEIRO PACO	
+paco1:	
+	addi $4, $24, -48
+	add $12, $0, $4
+	addi $5, $0, 28
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	jal megapaco1 #1
+	
+	addi $4, $0, 10000
+	jal timer
+	
+	addi $4, $24, -40
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp 
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco1 #2
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, -40
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco1 #3
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, 0
+	addi $5, $0, 26
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	
+	addi $17, $17, 1
+	addi $14, $0, 0
+	
+	add $31, $0, $22
+	jr $31
+	
+
+#-------------------------------------------
+#	SEGUNDO PACO	
+paco2:	
+	addi $4, $24, -44
+	add $12, $0, $4
+	addi $5, $0, 24
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	jal megapaco2 #1
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, -40
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco2 #2
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, -28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco2 #3
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, 0
+	addi $5, $0, 23
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	beq $14, 1, minus
+	addi $17, $17, 1
+	
+	add $31, $0, $22
+	jr $31
+	
+minus:	addi $17, $0, 0
+
+	add $31, $0, $22
+	jr $31
+
+#-------------------------------------------
+#	TEREIRO PACO
+	
+paco3:	
+	
+	addi $4, $24, -44
+	add $12, $0, $4
+	addi $5, $0, 24
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	jal megapaco3 #1
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, -28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco3 #2
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, -28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	jal apagarp
+	
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco3 #3
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, -8
+	addi $5, $0, 24
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	addi $17, $17, -1
+	
+	addi $14, $0, 1
+	
+	add $31, $0, $22
+	jr $31	
+
+
+#================================================================
+#================================================================
+#	MOVIMENTAÇÃO PARA TRAS
+
+tras:	
+
+	lw $16, 4($23)
+	sw $0, 4($23)
+	
+	addi $21, $21, -4
+	add $24, $0, $21
+	
+	add $10, $0, 'q' #POR ENQUANTO ASSIM
+	beq $16, $10, pacolevet
+	beq $17, $0, paco1t
+	beq $17, 1, paco2t
+	beq $17, 2, paco3t
+	
+	add $31, $0, $22
+	jr $31
+	
+pacolevet:	
+	addi $4, $24, 0
+	add $12, $0, $4
+	addi $5, $0, 10
+	addi $6, $0, 20
+	
+	jal apagarp
+	
+	jal megaleve
+	
+	addi $4, $0, 40000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, 0
+	addi $5, $0, 25
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	add $31, $0, $22
+	jr $31
+
+#-------------------------------------------
+#	PRIMEIRO PACO PARA TRAS
+paco1t:	
+	addi $4, $24, -40
+	add $12, $0, $4
+	addi $5, $0, 22
+	addi $6, $0, 19
+	
+	jal apagarp
+	
+	jal megapaco1 #1
+	
+	addi $4, $0, 10000
+	jal timer
+	
+	addi $4, $24, 4
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp 
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	jal megapaco1 #2
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, 4
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	jal megapaco1 #3
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, -16
+	addi $5, $0, 27
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	
+	addi $17, $17, 1
+	addi $14, $0, 0
+	
+	add $31, $0, $22
+	jr $31
+	
+
+#-------------------------------------------
+#	SEGUNDO PACO PARA TRAS
+paco2t:	
+	addi $4, $24, 0
+	add $12, $0, $4
+	addi $5, $0, 26
+	addi $6, $0, 23
+	
+	jal apagarp
+	
+	jal megapaco2 #1
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, 4
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	jal megapaco2 #2
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, 4
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	jal megapaco2 #3
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, 4
+	addi $5, $0, 26
+	addi $6, $0, 23
+	
+	jal apagarp
+	
+	beq $14, 1, minust
+	addi $17, $17, 1
+	
+	add $31, $0, $22
+	jr $31
+	
+minust:	addi $17, $0, 0
+	jr $31
+
+#-------------------------------------------
+#	TEREIRO PACO PARA TRAS	
+paco3t:	
+	
+	addi $4, $24, -28
+	add $12, $0, $4
+	addi $5, $0, 28
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	jal megapaco3 #1
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, 28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	jal megapaco3 #2
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $4, $24, 28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	jal apagarp
+	
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	jal megapaco3 #3
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, -40
+	addi $5, $0, 25
+	addi $6, $0, 24
+	
+	jal apagarp
+	
+	addi $17, $17, 1
+	
+	addi $14, $0, 1
+	
+	add $31, $0, $22
+	jr $31
