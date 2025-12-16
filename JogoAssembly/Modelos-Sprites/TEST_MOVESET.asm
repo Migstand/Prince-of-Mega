@@ -5,7 +5,1538 @@ main:
 #============== ESTE ARQUIVO SERVE UNICAMENTE PARA TESTES DE MOVIMENTAÇÃO DOS PERSONAGENS
 
 #============= IMPORTE TODAS AS FUNÇÕES DE MOVIMENTO PARA FUNCIONAR E TESTAR
+cenario:	
+	# 485054 Piso 3d
+	# 242424 Tijolo do fundo
+	# 828282 Pilar
+	# 212121 Entre pilares
+	# 2e2e2e Sombra do pilar
+	# b0b0b0 Piso do pilar
+	
+	lui $15, 0x1001
+	
+	add $4, $0, $15
+	add $5, $0, 0x4850
+	sll $5, $5, 8
+	ori $5, $5, 0x54
+	addi $6, $0, 512
+	addi $7, $0, 972
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#==============	TETO CINZA
 
+#============== PRIMEIRO PILAR 
+	
+	add $4, $0, $15
+	add $5, $0, 0x8282
+	sll $5, $5, 8
+	ori $5, $5, 0x82
+	addi $6, $0, 21
+	addi $7, $0, 8
+	
+	jal verticais
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 21
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 20
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 19
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 18
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 17
+	
+	jal vertical
+	add $15, $0, $2
+	
+#============== PULA PARA UMA SEQUÊNCIA DE DIAGONAIS PARA O PISO DO PRIMEIRO PILAR
+	addi $15, $15, 22432
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 8
+	addi $7, $0, 4
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 7
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 9
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 1
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#============== SOMBRA NA FRENTE DO PISO DO PRIMEIRO PILAR
+	addi $15, $15, 928
+	add $4, $0, $15
+	addi $5, $0, 0x24224d
+	addi $6, $0, 24
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#=============== SOMBRA DO PISO DO PRIMEIRO PILAR 
+	addi $15, $15, 972
+	add $4, $0, $15
+	addi $5, $0, 0x032282
+	addi $6, $0, 12
+	addi $7, $0, 976
+	
+	jal sequencia
+	add $15, $0, $2
+
+#============== SEGUNDO PILAR ABAIXO DO PRIMEIRO
+	
+	add $4, $0, $15
+	add $5, $0, 0x828282
+	addi $6, $0, 29
+	addi $7, $0, 8
+	
+	jal verticais
+	add $15, $0, $2
+	
+#============= SEGUNDO PILAR SOMBRA
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 29
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 28
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 27
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 26
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 25
+	
+	jal vertical
+	add $15, $0, $2
+
+#============== SEGUNDO PILAR PISO
+	addi $15, $15, 29600
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 8
+	addi $7, $0, 4
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 7
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 9
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 1
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+#============== SEGUNDO PILAR SOBRA DO PISO
+	addi $15, $15, 928
+	add $4, $0, $15
+	addi $5, $0, 0x24224d
+	addi $6, $0, 24
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#=============== SOMBRA DO PISO DO SEGUNDO PILAR 
+	addi $15, $15, 972
+	add $4, $0, $15
+	addi $5, $0, 0x032282
+	addi $6, $0, 12
+	addi $7, $0, 976
+	
+	jal sequencia
+	add $15, $0, $2
+
+#=============== TERCEIRO PILAR
+	add $4, $0, $15
+	add $5, $0, 0x828282
+	addi $6, $0, 29
+	addi $7, $0, 8
+	
+	jal verticais
+	add $15, $0, $2
+	
+#============= TERCEIRO PILAR SOMBRA
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 29
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 28
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 27
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 26
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 25
+	
+	jal vertical
+	add $15, $0, $2
+
+#============== TERCEIRO PILAR PISO
+	addi $15, $15, 29600
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 8
+	addi $7, $0, 4
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 7
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 9
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 1
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+#============== TERCEIRO PILAR SOBRA DO PISO
+	addi $15, $15, 928
+	add $4, $0, $15
+	addi $5, $0, 0x24224d
+	addi $6, $0, 24
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#=============== SOMBRA DO PISO DO TERCEIRO PILAR 
+	addi $15, $15, 972
+	add $4, $0, $15
+	addi $5, $0, 0x032282
+	addi $6, $0, 12
+	addi $7, $0, 976
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============== QUARTO PILAR
+	add $4, $0, $15
+	add $5, $0, 0x828282
+	addi $6, $0, 29
+	addi $7, $0, 8
+	
+	jal verticais
+	add $15, $0, $2
+	
+#============= QUARTO PILAR SOMBRA
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 29
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 28
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 27
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 26
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 25
+	
+	jal vertical
+	add $15, $0, $2
+
+#============== QUARTO PILAR PISO
+	addi $15, $15, 29600
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 8
+	addi $7, $0, 4
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 7
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 9
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xb0b0b0
+	addi $6, $0, 1
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+#============== QUARTO PILAR SOBRA DO PISO
+	addi $15, $15, 928
+	add $4, $0, $15
+	addi $5, $0, 0x24224d
+	addi $6, $0, 24
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#=============== SOMBRA DO PISO DO QUARTO PILAR 
+	addi $15, $15, 972
+	add $4, $0, $15
+	addi $5, $0, 0x032282
+	addi $6, $0, 12
+	addi $7, $0, 976
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============== ULTIMO PILAR QUE NÃO PODE ENTRAR NO VETOR DE CLONAGEM/ESPELHADO
+	add $4, $0, $15
+	add $5, $0, 0x828282
+	addi $6, $0, 5
+	addi $7, $0, 8
+	
+	jal verticais
+	add $15, $0, $2
+	
+#============= QUARTO PILAR SOMBRA
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 5
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 5
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 5
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 5
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha da coluna no topo
+	add $5, $0, 0x24224d
+	addi $6, $0, 5
+	
+	jal vertical
+	add $15, $0, $2
+
+#============== PISO CENÁRIO
+	
+	lui $15, 0x1001
+	addi $15, $15, 32768
+	
+#=============== Borda superior DO PISO SUPERIOR
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 90
+	addi $7, $0, 664
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============== LAGE DO PISO SUPERIOR
+	add $4, $0, $15
+	add $5, $0, 0x485054
+	addi $6, $0, 12
+	addi $7, $0, 43
+	
+	jal verticais
+	add $15, $0, $2
+#============== DIAGONAIS DA LAGE DO PISO SUPERIOR
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 11
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 10
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 9
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 8
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 7
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 5
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 4
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 3
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 2
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha subindo
+	add $5, $0, 0x485054
+	addi $6, $0, 1
+	
+	jal vertical
+	add $15, $0, $2
+	
+#============== LINHA DE CORTE DA LAGE DO PISO SUPERIOR
+	addi $15, $15, 12236
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 13
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x474747
+	addi $6, $0, 13
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 13
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+#=============	DIAGONAIS DA LAGE DO PISO SUPERIOR
+	
+	addi $15, $15, -1020
+	add $4, $0, $15
+	addi $5, $0, 0x485054
+	addi $6, $0, 12
+	addi $7, $0, 27
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#============= FINAL DAS DIAGONAIS DO PISO SUPERIOR
+	
+	addi $15, $15, 1020
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 13
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xfffff7
+	addi $6, $0, 13
+	addi $7, $0, 5
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 13
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#============== BRILHO DO CHÃO DO PISO SUPERIOR 
+	addi $15, $15, -312
+	add $4, $0, $15
+	addi $5, $0, 0x828282
+	addi $6, $0, 41
+	addi $7, $0, 12
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x828282
+	addi $6, $0, 27
+	addi $7, $0, 732
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#=============== FIM DO PISO SUPERIOR COM A BORDA INFERIOR DELE
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 79
+	addi $7, $0, 716
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============	MURO DEBAIXO DO PISO SUPERIOR
+	add $4, $0, $15
+	add $5, $0, 0x242424
+	addi $6, $0, 81
+	addi $7, $0, 25
+	
+	jal verticais
+	add $15, $0, $2
+
+#============== lINHAS DIAGONAIS DO MURO DEBAIXO DO PISO SUPERIOR
+	addi $15, $15, 27548
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 25
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 9212
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 25
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 9212
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 25
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 9212
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 25
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 9212
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 25
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 9212
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 25
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 8192
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 24
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 32
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3b3b47
+	addi $6, $0, 15
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+#============== lINHAS VERTICAIS DO MURO DEBAIXO DO PISO SUPERIOR	
+	addi $15, $15, -81936
+	
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x3b3b47
+	addi $6, $0, 81
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 40
+	
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x3b3b47
+	addi $6, $0, 81
+	
+	jal vertical
+	add $15, $0, $2
+	
+#============== CONTORDO AO REDOR DO PILAR DEBAIXO DO PISO SUPERIOR
+	addi $15, $15, 96
+	
+	add $4, $0, $15 
+	add $5, $0, 0x212121
+	addi $6, $0, 39
+	
+	jal vertical
+	add $15, $0, $2
+	
+#============== SOMBRA DO PILAR DEBAIXO DO PISO SUPERIOR	
+	
+	add $4, $0, $15
+	addi $5, $0, 0x212121
+	addi $6, $0, 16
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============== SOMBRA DO PILAR DO FUNDO DEBAIXO DO PISO SUPERIOR
+	add $4, $0, $15
+	add $5, $0, 0x141414
+	addi $6, $0, 23
+	addi $7, $0, 6
+	
+	jal verticais
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x141414
+	addi $6, $0, 3
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============== PILAR DO FUNDO DEBAIXO DO PISO SUPERIOR
+	add $4, $0, $15
+	add $5, $0, 0x3d3d3d
+	addi $6, $0, 22
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+
+#============== PILAR DEBAIXO DO PISO SUPERIOR
+	
+	addi $15, $15, -104
+	add $4, $0, $15
+	add $5, $0, 0x828282
+	addi $6, $0, 38
+	addi $7, $0, 7
+	
+	jal verticais
+	add $15, $0, $2
+	
+#============== SOMBRA DO PILAR DEBAIXO DO PISO SUPERIOR
+
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x212121
+	addi $6, $0, 38
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x2e2e2e
+	addi $6, $0, 38
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x2e2e2e
+	addi $6, $0, 37
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x2e2e2e
+	addi $6, $0, 36
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x2e2e2e
+	addi $6, $0, 35
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 #Linha decendo
+	add $5, $0, 0x2e2e2e
+	addi $6, $0, 34
+	
+	jal vertical
+	add $15, $0, $2
+
+#============== CHÃO DA QUEDA DO PISO PRINCIPAL
+	addi $15, $15, 26624
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 6
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 7
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 8
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x3d3d3d
+	addi $6, $0, 9
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+#============== APOIO DO PILAR DEBAIXO DO PISO SUPERIOR
+	
+	addi $15, $15, 6084
+	add $4, $0, $15
+	addi $5, $0, 0x212121
+	addi $6, $0, 9
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+
+#============== APOIO DO CHÃO DA QUEDA DO PISO PRINCIPAL
+	add $4, $0, $15
+	addi $5, $0, 0x1f1f1f
+	addi $6, $0, 15
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $15, $0, $2
+#============== APOIO DO PISO PRINCIPAL NA PARTE SUPERIOR	
+	addi $15, $15, -15348
+	
+	add $4, $0, $15
+	addi $5, $0, 0x474747
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x474747
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0x474747
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -3064
+	
+	add $4, $0, $15 # A LINHA RETA DO PONTO SUPERIOR DO SUPORTE
+	add $5, $0, 0x474747
+	addi $6, $0, 2
+	addi $7, $0, 183
+	
+	jal verticais
+	add $15, $0, $2
+	
+#============== PEQUENA CONEXÃO COM O CHÃO DA QUEDA
+	addi $15, $15, 16596
+	
+	add $4, $0, $15
+	addi $5, $0, 0x474747
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x474747
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#============== PISO PRINCIPAL
+	add $4, $0, $15
+	addi $5, $0, 0x485054
+	addi $6, $0, 11
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+
+	add $4, $0, $15
+	addi $5, $0, 0x485054
+	addi $6, $0, 16
+	addi $7, $0, 175
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#============== SUPORTE INFERIOR DO PISO PRINCIPAL
+	addi $15, $15, 272 
+	
+	add $4, $0, $15
+	addi $5, $0, 0x828282
+	addi $6, $0, 188
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============= COLUNA DO PISO PRINCIPAL
+	addi $15, $15, -756
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 40
+	addi $7, $0, 189
+	
+	jal verticais
+	add $15, $0, $2
+
+#============== DIAGONAIS NÃO TÃO LEGAIS FORA DO RANGE
+	addi $15, $15, -1024
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 15
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 14
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 13
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 12
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 11
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#============== MALDITO TRIANGULO FORA DO RANGE DIAGONAL
+	addi $15, $15, -7140
+	
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0x242424
+	addi $6, $0, 1
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#============== DE VOLTA AS ORIGENS DA COLUNA
+	addi $15, $15, 7108
+		
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 41
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 2048
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 24
+	addi $7, $0, 11
+	
+	jal verticais
+	add $15, $0, $2
+
+#============== TRIANGULO INVERTIDO MALTIDO FORA DO RANGE DIAGONAL
+	addi $15, $15, 24532
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 7
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 5
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 4
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 3
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 2
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 1
+	
+	jal vertical
+	add $15, $0, $2
+	
+#============== DE VOLTA AS ORIGENS DA COLUNA DE NOVO  >:  (	!!!!!!!!!!!!!!!
+	addi $15, $15, 9188
+	
+	add $4, $0, $15 
+	add $5, $0, 0x242424
+	addi $6, $0, 6
+	addi $7, $0, 11
+	
+	jal verticais
+	add $15, $0, $2
+
+#============== TIJOLOS DA COLUNA
+	addi $15, $15, -33576
+	
+	addi $12, $0, 13
+	addi $13, $0, 4
+	
+loopmain:	beq $13, $0, copia
+
+loop:	beq $12, $0, loopm
+	add $4, $0, $15 
+	add $5, $0, 0x828282
+	addi $6, $0, 7
+	addi $7, $0, 11
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 12
+	addi $12, $12, -1
+	j loop
+	
+loopm:	addi $13, $13, -1
+	addi $12, $0, 13
+	addi $15, $15, 9512
+	j loopmain
+copia:	jal copiace
+
+testes:
+	
 	lui $24, 0x1001
 	
 	# 1d61b5 = Armadura
@@ -25,13 +1556,15 @@ main:
 	# $16 = Vai guardar a cópia da letra 
 	
 #ANOTAÇÕES:	O SALTO DE BYTES DE UM MOVIMENTO PARA OUTRO DE SER DE 24 (POR ENQUANTO	
-testes:	
+	
 	
 	jal mega 
 		
 looptest:
 	
 moveset:
+	beq $14, 20, pulacol
+	beq $14, 30, quedacol
 				
 	add $24, $0, $21
 	lw $9, 4($23)
@@ -56,7 +1589,7 @@ cod:	addi $10, $0, 'd'
 	beq $9, $10, pulomega
 	
 	addi $17, $0, 0
-	
+	addi $14, $0, 0
 #	jr $31
 	j moveset
 
@@ -66,7 +1599,7 @@ cod:	addi $10, $0, 'd'
 #	MOVIMENTAÇÃO PARA FRENTE
 	
 frente:	
-	addi $3, $0, 0 #APENAS PARA TESTES
+	
 	lw $16, 4($23)
 	sw $0, 4($23)
 	
@@ -273,20 +1806,136 @@ paco3:
 	addi $14, $0, 1
 	j looptest	
 
+#=========================================================
+#=========================================================
+#	MOVIMENTACAO VERTICAL
+
 pulomega:	sw $0, 4($23)
-	beq $3, 0, pulomegad
-	beq $3, 1, pulomegae	#APENAS PARA TESTES
+	addi $14, $0, 20
+	
+
+pulaco:	addi $16, $0, 10		
+pulacol:	beq $16, $0, quedaco
+	
+	
+	
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $21, $21, -1024
+	addi $24, $21, 0
+	
+	addi $4, $24, -1072
+	addi $5, $0, 26
+	addi $6, $0, 34
+	
+	jal apagarp
+	
+	lw $9, 4($23)
+	
+	addi $10, $0, 'd'
+	beq $9, $10, pulacod
+	
+	addi $10, $0, 'a'
+	beq $9, $10, pulacoe
+	
+	jal megapulo
+	
+	addi $16, $16, -1
 	j looptest
 	
+pulacod:	
+	sw $0, 4($23)
+	addi $21, $21, 8
+	addi $24, $21, 0
+	
+	jal megapulo
+	
+	
+	addi $16, $16, -1
+	j looptest
+	
+pulacoe:	
+	sw $0, 4($23)
+	addi $21, $21, -8
+	addi $24, $21, 0
+	
+	jal megapulo
+	
+	addi $16, $16, -1
+	j looptest
+		
+	
+quedaco:	addi $16, $0, 10
+	addi $14, $0, 30
+					
+quedacol:	beq $16, $0, jumperase
+	
+	
+	
+	
+	addi $4, $0, 15000
+	jal timer
+	
+	addi $21, $21, 1024
+	addi $24, $21, 0
+	
+	addi $4, $24, -1076
+	addi $5, $0, 31
+	addi $6, $0, 31
+	
+	jal apagarp
+	
+	
+	lw $9, 4($23)
+	
+	addi $10, $0, 'd'
+	beq $9, $10, quedacod
+	
+	addi $10, $0, 'a'
+	beq $9, $10, quedacoe
+	
+	jal megapulo
+	addi $16, $16, -1
+	j looptest
+	
+quedacod:	
+	sw $0, 4($23)
+	addi $21, $21, 8
+	addi $24, $21, 0
+	
+	jal megapulo
+	
+	addi $16, $16, -1
+	j looptest
+	
+quedacoe:	
+	sw $0, 4($23)
+	addi $21, $21, -8
+	addi $24, $21, 0
+	
+	jal megapulo
+	
+	addi $16, $16, -1
+	j looptest
+	
+jumperase:	addi $4, $21, -11312
+	addi $5, $0, 31
+	addi $6, $0, 42
+	
+	jal apagarp
+	
+	addi $14, $0, 0
+	j looptest
+	
+#==============================================================
+#==============  CODIGO NAO UTILIZADO
+
 pulomegad:	addi $13, $0, 10 #Só para testes
 
 pulomegadl:	beq $13, $0, quedamegad
-	addi $4, $24, -100
-	add $12, $0, $4
-	addi $5, $0, 24
-	addi $6, $0, 33
 	
-	jal apagarp
 	
 	jal megapulo
 	
@@ -296,10 +1945,10 @@ pulomegadl:	beq $13, $0, quedamegad
 	addi $21, $21, -1020
 	addi $24, $21, 0
 	
-	addi $4, $24, -68
+	addi $4, $24, -1072
 	add $12, $0, $4
 	addi $5, $0, 24
-	addi $6, $0, 30
+	addi $6, $0, 34
 	
 	jal apagarp
 	
@@ -309,12 +1958,7 @@ pulomegadl:	beq $13, $0, quedamegad
 quedamegad:	addi $13, $0, 10 #Só para testes
 
 quedamegadl:	beq $13, $0, looptest
-	addi $4, $24, -1072
-	add $12, $0, $4
-	addi $5, $0, 24
-	addi $6, $0, 24
 	
-	jal apagarp
 	
 	jal megapulo
 	
@@ -327,7 +1971,7 @@ quedamegadl:	beq $13, $0, looptest
 	addi $4, $24, -1072
 	add $12, $0, $4
 	addi $5, $0, 24
-	addi $6, $0, 40
+	addi $6, $0, 31
 	
 	jal apagarp
 	
@@ -338,12 +1982,7 @@ quedamegadl:	beq $13, $0, looptest
 pulomegae:	addi $13, $0, 10 #Só para testes
 
 pulomegael:	beq $13, $0, quedamegae
-	addi $4, $24, -100
-	add $12, $0, $4
-	addi $5, $0, 26
-	addi $6, $0, 31
 	
-	jal apagarp
 	
 	jal megapulo
 	
@@ -353,10 +1992,10 @@ pulomegael:	beq $13, $0, quedamegae
 	addi $21, $21, -1028
 	addi $24, $21, 0
 	
-	addi $4, $24, 1024
+	addi $4, $24, 5072
 	add $12, $0, $4
-	addi $5, $0, 26
-	addi $6, $0, 31
+	addi $5, $0, 29
+	addi $6, $0, 27
 	
 	jal apagarp
 	
@@ -366,13 +2005,7 @@ pulomegael:	beq $13, $0, quedamegae
 quedamegae:	addi $13, $0, 10 #Só para testes
 
 quedamegael:	beq $13, $0, looptest
-	addi $4, $24, -3104
-	add $12, $0, $4
-	addi $5, $0, 26
-	addi $6, $0, 26
-	
-	jal apagarp
-	
+
 	jal megapulo
 	
 	addi $4, $0, 15000
@@ -381,7 +2014,7 @@ quedamegael:	beq $13, $0, looptest
 	addi $21, $21, 1020
 	addi $24, $21, 0
 	
-	addi $4, $24, -3112
+	addi $4, $24, -1068
 	add $12, $0, $4
 	addi $5, $0, 26
 	addi $6, $0, 33
@@ -390,12 +2023,13 @@ quedamegael:	beq $13, $0, looptest
 	
 	addi $13, $13, -1
 	j quedamegael
-		
+
+#============== FIM DE CODIGO NAO UTILIZADO		
 #================================================================
 #================================================================
 #	MOVIMENTAÇÃO PARA TRAS
 
-tras:	addi $3, $0, 1
+tras:	
 
 	lw $16, 4($23)
 	sw $0, 4($23)
@@ -5115,3 +6749,22 @@ subpar:	sw $5, 0($9)
 	bne $8, $0, subpar
 	
 acabou:	jr $31
+
+	#Cópia do cenário
+	
+copiace:	
+	addi $8, $0, 131072
+	
+	lui $9, 0x1001
+
+
+loopce:
+	lw $10, 0($9)
+	
+	sw $10, 131072($9)
+	
+	addi $8, $8, -1
+	addi $9, $9, 4
+	bne $8, $0, loopce
+	
+	jr $31
