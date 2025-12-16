@@ -1554,6 +1554,613 @@ megapaco3:
 		
 #============== FIM DA FUNÇÃO MEGAPACO3
 	
+megapulo:	
+	
+	addi $24, $3, 360
+	add $18, $0, $31
+	
+	jal megahead
+	
+#=============	BOCA ABERTA
+	addi $24, $24, -2060
+	
+	add $4, $0, $24
+	add $5, $0, 0xf0cd90 #PELE
+	addi $6, $0, 1
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 # BOCA
+	addi $6, $0, 4
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0xf0cd90 #PELE
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 # BOCA
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#==============	BRACO DIREITO
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 1
+	addi $7, $0, -5116
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+#-------------- ANTEBRACO
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, -1028
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -4100
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1012
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- CONTORNO
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24 -3072
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 3076
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 8
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 8160
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+
+#============== BRACO ESQUERDO
+	addi $24, $24, -1072
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+#______________ Pixelzinho
+	addi $24, $24, -4112
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #Roupa
+	addi $6, $0, 1
+	addi $7, $0, -3084
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- ANTEBRACO	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -12
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, -5132
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+
+#-------------- CONTORNO DO BRACO ESQUERDO
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -24
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 8
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -3068
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 11276
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 1
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+
+#============== BARRIGA
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 11
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	addi $7, $0, 8
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+#============== CUECA
+	addi $24, $24, 3036
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 8
+	addi $7, $0, 992
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 7
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+
+#============== PERNA DIREITA
+
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #Roupa
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal diagoup
+	add $24, $0, $2
+
+#-------------- CANELA DIREITA	
+	addi $24, $24, -1020
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 3076
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 4
+	
+	jal verticais
+	add $24, $0, $2
+
+	addi $24, $24, -1032
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, -1032
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- CONTORNO DA PERNA DIREITA
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -5144
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2028
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1028
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+
+#============== LIGACAO ENTRE PERNAS/CONTORNO
+	addi $24, $24, -4136
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 4
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3072
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 7
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 6
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 6144
+	
+	add $4, $0, $24
+	add $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, -12304
+	
+	jal sequencia
+	add $24, $0, $2
+
+#============== PERNA ESQUERDA
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24,, $24, 1024
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 1
+	addi $7, $0, 2040
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- CANELA ESQUERDA
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1016
+	
+	add $4, $0, $24
+	add $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 7
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
 	
 fim:	addi $2, $0, 10
 	syscall

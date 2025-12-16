@@ -1,6 +1,6 @@
 .text
 
-main:	#ESSE � O PROGRAMA PARA CARREGAR O JOGO TODO
+main:	#ESSE ï¿½ O PROGRAMA PARA CARREGAR O JOGO TODO
 
 cenario:	
 	# 485054 Piso 3d
@@ -71,7 +71,7 @@ cenario:
 	jal vertical
 	add $15, $0, $2
 	
-#============== PULA PARA UMA SEQU�NCIA DE DIAGONAIS PARA O PISO DO PRIMEIRO PILAR
+#============== PULA PARA UMA SEQUï¿½NCIA DE DIAGONAIS PARA O PISO DO PRIMEIRO PILAR
 	addi $15, $15, 22432
 	
 	add $4, $0, $15
@@ -715,7 +715,7 @@ cenario:
 	jal sequencia
 	add $15, $0, $2
 	
-#============== ULTIMO PILAR QUE N�O PODE ENTRAR NO VETOR DE CLONAGEM/ESPELHADO
+#============== ULTIMO PILAR QUE Nï¿½O PODE ENTRAR NO VETOR DE CLONAGEM/ESPELHADO
 	add $4, $0, $15
 	add $5, $0, 0x828282
 	addi $6, $0, 5
@@ -760,7 +760,7 @@ cenario:
 	jal vertical
 	add $15, $0, $2
 
-#============== PISO CEN�RIO
+#============== PISO CENï¿½RIO
 	
 	lui $15, 0x1001
 	addi $15, $15, 32768
@@ -926,7 +926,7 @@ cenario:
 	jal diagoup
 	add $15, $0, $2
 	
-#============== BRILHO DO CH�O DO PISO SUPERIOR 
+#============== BRILHO DO CHï¿½O DO PISO SUPERIOR 
 	addi $15, $15, -312
 	add $4, $0, $15
 	addi $5, $0, 0x828282
@@ -1163,7 +1163,7 @@ cenario:
 	jal vertical
 	add $15, $0, $2
 
-#============== CH�O DA QUEDA DO PISO PRINCIPAL
+#============== CHï¿½O DA QUEDA DO PISO PRINCIPAL
 	addi $15, $15, 26624
 	
 	add $4, $0, $15
@@ -1245,7 +1245,7 @@ cenario:
 	jal sequencia
 	add $15, $0, $2
 
-#============== APOIO DO CH�O DA QUEDA DO PISO PRINCIPAL
+#============== APOIO DO CHï¿½O DA QUEDA DO PISO PRINCIPAL
 	add $4, $0, $15
 	addi $5, $0, 0x1f1f1f
 	addi $6, $0, 15
@@ -1294,7 +1294,7 @@ cenario:
 	jal verticais
 	add $15, $0, $2
 	
-#============== PEQUENA CONEX�O COM O CH�O DA QUEDA
+#============== PEQUENA CONEXï¿½O COM O CHï¿½O DA QUEDA
 	addi $15, $15, 16596
 	
 	add $4, $0, $15
@@ -1352,7 +1352,7 @@ cenario:
 	jal verticais
 	add $15, $0, $2
 
-#============== DIAGONAIS N�O T�O LEGAIS FORA DO RANGE
+#============== DIAGONAIS Nï¿½O Tï¿½O LEGAIS FORA DO RANGE
 	addi $15, $15, -1024
 	add $4, $0, $15
 	addi $5, $0, 0x242424
@@ -1536,7 +1536,7 @@ copia:	jal copiace
 #=============================================
 #=============================================
 
-#============= C�DIGO DO MEGAMAN
+#============= Cï¿½DIGO DO MEGAMAN
 megaman:	lui $24, 0x1001
 	
 	# 1d61b5 = Armadura
@@ -1646,7 +1646,7 @@ megaman:	lui $24, 0x1001
 	jal sequencia
 	add $24, $0, $2
 
-#============== NUCA PART5 / BOT�O DA CABE�A
+#============== NUCA PART5 / BOTï¿½O DA CABEï¿½A
 	addi $24, $24, 1016
 	
 	add $4, $0, $24
@@ -2030,7 +2030,7 @@ megaman:	lui $24, 0x1001
 	jal vertical
 	add $24, $0, $2
 	
-#============== BRA�O E BUXO
+#============== BRAï¿½O E BUXO
 	addi $24, $24, 960
 	
 	add $4, $0, $24
@@ -2089,7 +2089,7 @@ megaman:	lui $24, 0x1001
 	jal vertical
 	add $24, $0, $2
 	
-#============== ESPA�OES ENTRE M�O E COSTAS
+#============== ESPAï¿½OES ENTRE Mï¿½O E COSTAS
 	addi $24, $24, 960
 	
 	add $4, $0, $24
@@ -2124,7 +2124,7 @@ megaman:	lui $24, 0x1001
 	jal sequencia
 	add $24, $0, $2
 	
-#============== DEDOS DA M�O FECHADA
+#============== DEDOS DA Mï¿½O FECHADA
 	addi $24, $24, 972
 	
 	add $4, $0, $24
@@ -2316,7 +2316,7 @@ megaman:	lui $24, 0x1001
 	jal diagoup
 	add $24, $0, $2
 	
-#============== P� ESQUERDO
+#============== Pï¿½ ESQUERDO
 	addi $24, $24, -1024
 	
 	add $4, $0, $24
@@ -2365,7 +2365,7 @@ megaman:	lui $24, 0x1001
 	jal sequencia
 	add $24, $0, $2
 	
-#============== P� DIREITO
+#============== Pï¿½ DIREITO
 
 	add $4, $0, $24
 	add $5, $0, 0x000000
@@ -2413,7 +2413,7 @@ megaman:	lui $24, 0x1001
 	jal sequencia
 	add $24, $0, $2
 
-#============== SOLA DOS P�S
+#============== SOLA DOS Pï¿½S
 	add $4, $0, $24
 	add $5, $0, 0x000000
 	addi $6, $0, 9
@@ -2439,7 +2439,7 @@ skullman:
 #=============== CORES:
 #	b4b4b4 = Sombra
 #	ffffff = Oss
-#	ed1c24 = Bot�o
+#	ed1c24 = Botï¿½o
 #	000000 = Membros
 #	f0be89 = Pele
 	
@@ -2456,19 +2456,19 @@ skullman:
 	lui $23, 0xffff
 	# $9 = Vai ser quem vai carregar a letra do teclado
 	# $17 = Valor de movimento; Indica qual movimento deve fazer no momento
-	# $10 = Vai ser o comparador de teclas; ver se � igual a "TECLA"
-	# $16 = Vai guardar a c�pia da letra 
+	# $10 = Vai ser o comparador de teclas; ver se é igual a "TECLA"
+	# $16 = Vai guardar a cópia da letra 
 	
 funx:	addi $13, $0, 10
-	
-#=============== POSI��O ACIMA
+	add $25, $0, $20
+	add $20, $0, $25
+#=============== POSIÇÃO ACIMA
 # 	$20 = GUARDA A POSICAO AUXILIAR DO SKULLMAN
-# 	POR ENQUANTO NESSE C�DIGO O $13 vai cuidar do pulo mas n�o deve ser usado assim no c�digo final provavelmente
+# 	POR ENQUANTO NESSE CÓDIGO O $13 vai cuidar do pulo mas não deve ser usado assim no código final provavelmente
 puloskull:	beq $13, $0, puloskull2
 	jal moveset
 	
-	add $25, $0, $20
-	add $20, $0, $25
+	
 	
 	add $4, $0, $25
 	addi $4, $4, -40
@@ -2479,16 +2479,97 @@ puloskull:	beq $13, $0, puloskull2
 		
 	jal jskull
 	
-	addi $25, $20, -1024
-	addi $20, $20, -1024
 	
 	
-	add $4, $0, 50
+	bne $14, $0, lagp1
+	add $4, $0, 200
 	
 	jal timer
+
+	j bufp1
 	
-puloskuf:	addi $13, $13, -1
+lagp1:	
+	beq $13, 1, bufp1
+	beq $13, 2, bufp2
+	beq $13, 3, bufp3
+	beq $13, 4, bufp4
+	beq $13, 5, bufp5
+	beq $13, 6, bufp6
+	beq $13, 7, bufp7
+	beq $13, 8, bufp8
+	beq $13, 9, bufp9
+	beq $13, 10, bufp10
+bufp1:	
+	addi $25, $20, -1024
+	addi $20, $20, -1024
+		
+	addi $13, $13, -1
 	j puloskull
+
+bufp2:	
+	
+	addi $25, $20, -2048
+	addi $20, $20, -2048
+	
+	
+	
+	addi $13, $13, -2
+	j puloskull
+
+bufp3:	
+	
+	addi $25, $20, -3072
+	addi $20, $20, -3072
+	addi $13, $13, -3
+	j puloskull	
+
+bufp4:	
+	
+	
+	addi $25, $20, -4096
+	addi $20, $20, -4096
+	addi $13, $13, -4
+	j puloskull	
+bufp5:	
+	
+	addi $25, $20, -5120
+	addi $20, $20, -5120
+	addi $13, $13, -5
+	j puloskull
+
+bufp6:	
+	
+	addi $25, $20, -6144
+	addi $20, $20, -6144
+	addi $13, $13, -6
+	j puloskull
+bufp7:	
+	
+	addi $25, $20, -7168
+	addi $20, $20, -7168
+	addi $13, $13, -7
+	j puloskull
+bufp8:	
+	
+	addi $25, $20, -8192
+	addi $20, $20, -8192
+	addi $13, $13, -8
+	j puloskull
+bufp9:	
+	
+	
+	addi $25, $20, -9216
+	addi $20, $20, -9216
+	addi $13, $13, -9
+	j puloskull
+bufp10:	
+	
+	addi $25, $20, -10240
+	addi $20, $20, -10240
+	addi $13, $13, -10
+	j puloskull
+
+
 	
 
 puloskull2:	addi $13, $0, 10
@@ -2501,49 +2582,174 @@ pulosku2:	beq $13, $0, puloskull3
 	add $4, $0, $25
 	addi $4, $4, -40
 	addi $5, $0, 28
-	addi $6, $0, 38
+	addi $6, $0, 44
 	
 	jal apagarp
 		
 	jal jskull
 	
-	addi $25, $20, -1024
-	addi $20, $20, -1024
 	
-	
-	addi $4, $0, 200
+	bne $14, $0, lagp2
+	addi $4, $0, 1000
 	jal timer
 	
+	j bufp21
+	
+	j bufp21
+	
+lagp2:	
+	beq $13, 1, bufp21
+	beq $13, 2, bufp22
+	beq $13, 3, bufp23
+	beq $13, 4, bufp24
+	beq $13, 5, bufp25
+	beq $13, 6, bufp26
+	beq $13, 7, bufp27
+	beq $13, 8, bufp28
+	beq $13, 9, bufp29
+	beq $13, 10, bufp210
+bufp21:	
+	addi $25, $20, -1024
+	addi $20, $20, -1024
+		
+	addi $13, $13, -1
+	j pulosku2
 
-puloskuf2:	addi $13, $13, -1
+bufp22:	
+	
+	addi $25, $20, -2048
+	addi $20, $20, -2048
+	
+	
+	
+	addi $13, $13, -2
+	j pulosku2
+
+bufp23:	
+	
+	addi $25, $20, -3072
+	addi $20, $20, -3072
+	addi $13, $13, -3
+	j pulosku2
+
+bufp24:	
+	
+	
+	addi $25, $20, -4096
+	addi $20, $20, -4096
+	addi $13, $13, -4
+	j pulosku2	
+bufp25:	
+	
+	addi $25, $20, -5120
+	addi $20, $20, -5120
+	addi $13, $13, -5
+	j pulosku2
+
+bufp26:	
+	
+	addi $25, $20, -6144
+	addi $20, $20, -6144
+	addi $13, $13, -6
+	j pulosku2
+bufp27:	
+	
+	addi $25, $20, -7168
+	addi $20, $20, -7168
+	addi $13, $13, -7
+	j pulosku2
+bufp28:	
+	
+	addi $25, $20, -8192
+	addi $20, $20, -8192
+	addi $13, $13, -8
+	j pulosku2
+bufp29:	
+	
+	
+	addi $25, $20, -9216
+	addi $20, $20, -9216
+	addi $13, $13, -9
+	j pulosku2
+bufp210:	
+	
+	addi $25, $20, -10240
+	addi $20, $20, -10240
+	addi $13, $13, -10
 	j pulosku2
 	
 puloskull3:	addi $13, $0, 6
 	
 pulosku3:	beq $13, $0, queda
 	jal moveset
-	add $25, $0, $20
-	add $20, $0, $25
+	
 	add $4, $0, $25
 	addi $4, $4, -40
 	addi $5, $0, 28
-	addi $6, $0, 38
+	addi $6, $0, 44
 	
 	jal apagarp
 		
 	jal jskull
 	
-	addi $25, $20, -1024
-	addi $20, $20, -1024
 	
 	
+	bne $14, $0, lagp3
 	addi $4, $0, 5000
 	jal timer
 	
-
-puloskuf3:	addi $13, $13, -1
+	j bufp31
+lagp3:	
+	beq $13, 1, bufp31
+	beq $13, 2, bufp32
+	beq $13, 3, bufp33
+	beq $13, 4, bufp34
+	beq $13, 5, bufp35
+	beq $13, 6, bufp36
+bufp31:	
+	addi $25, $20, -1024
+	addi $20, $20, -1024
+		
+	addi $13, $13, -1
 	j pulosku3
+
+bufp32:	
 	
+	addi $25, $20, -2048
+	addi $20, $20, -2048
+	
+	
+	
+	addi $13, $13, -2
+	j pulosku3
+
+bufp33:	
+	
+	addi $25, $20, -3072
+	addi $20, $20, -3072
+	addi $13, $13, -3
+	j pulosku3
+
+bufp34:	
+	
+	
+	addi $25, $20, -4096
+	addi $20, $20, -4096
+	addi $13, $13, -4
+	j pulosku3	
+bufp35:	
+	
+	addi $25, $20, -5120
+	addi $20, $20, -5120
+	addi $13, $13, -5
+	j pulosku3
+
+bufp36:	
+	
+	addi $25, $20, -6144
+	addi $20, $20, -6144
+	addi $13, $13, -6
+	j pulosku3	
 queda:	
 	addi $4, $0, 25000
 	
@@ -2553,105 +2759,324 @@ queda:
 	
 quedasku:	beq $13, $0, queda2
 	jal moveset
-	add $25, $0, $20
-	add $20, $0, $25
+	
 	
 	add $4, $0, $25
 	addi $4, $4, -40
 	addi $5, $0, 28
-	addi $6, $0, 34
+	addi $6, $0, 40
 	
 	jal apagarp
 		
 	jal jskull
 	
-	addi $25, $20, 1024
-	addi $20, $20, 1024
 	
-	
+	bne $14, $0, lagq1
 	add $4, $0, 5000
 	
 	jal timer
 	
 	
+	j bufq1
+	
+lagq1:	
+	beq $13, 1, bufq1
+	beq $13, 2, bufq2
+	beq $13, 3, bufq3
+	beq $13, 4, bufq4
+	beq $13, 5, bufq5
+	beq $13, 6, bufq6
+	beq $13, 7, bufq7
+	beq $13, 8, bufq8
+	beq $13, 9, bufq9
+	beq $13, 10, bufq10
+bufq1:	
+	addi $25, $20, 1024
+	addi $20, $20, 1024
+		
+	addi $13, $13, -1
+	j quedasku
 
-quedaskulf:	addi $13, $13, -1
+bufq2:	
+	
+	addi $25, $20, 2048
+	addi $20, $20, 2048
+	
+	
+	
+	addi $13, $13, -2
+	j quedasku
+
+bufq3:	
+	
+	addi $25, $20, 3072
+	addi $20, $20, 3072
+	addi $13, $13, -3
+	j quedasku	
+
+bufq4:	
+	
+	
+	addi $25, $20, 4096
+	addi $20, $20, 4096
+	addi $13, $13, -4
+	j quedasku	
+bufq5:	
+	
+	addi $25, $20, 5120
+	addi $20, $20, 5120
+	addi $13, $13, -5
+	j quedasku
+
+bufq6:	
+	
+	addi $25, $20, 6144
+	addi $20, $20, 6144
+	addi $13, $13, -6
+	j quedasku
+bufq7:	
+	
+	addi $25, $20, 7168
+	addi $20, $20, 7168
+	addi $13, $13, -7
+	j quedasku
+bufq8:	
+	
+	addi $25, $20, 8192
+	addi $20, $20, 8192
+	addi $13, $13, -8
+	j quedasku
+bufq9:	
+	
+	
+	addi $25, $20, 9216
+	addi $20, $20, 9216
+	addi $13, $13, -9
+	j quedasku
+bufq10:	
+	
+	addi $25, $20, 10240
+	addi $20, $20, 10240
+	addi $13, $13, -10
 	j quedasku
 	
 queda2:	addi $13, $0, 10
 
 quedasku2:	beq $13, $0, queda3
 	jal moveset
-	add $25, $0, $20
-	add $20, $0, $25
+	
 	add $4, $0, $25
-	addi $4, $4, -40
+	addi $4, $4, -5160
 	addi $5, $0, 28
-	addi $6, $0, 34
+	addi $6, $0, 38
 	
 	jal apagarp
 		
 	jal jskull
 	
-	addi $25, $20, 1024
-	addi $20, $20, 1024
 	
-	
-	add $4, $0, 200
+	bne $14, $0, lagq2
+	add $4, $0, 500
 	
 	jal timer
 	
 	
-quedaskulf2:	
+	j bufq22
 	
+lagq2:	
+	beq $13, 1, bufq21
+	beq $13, 2, bufq22
+	beq $13, 3, bufq23
+	beq $13, 4, bufq24
+	beq $13, 5, bufq25
+	beq $13, 6, bufq26
+	beq $13, 7, bufq27
+	beq $13, 8, bufq28
+	beq $13, 9, bufq29
+	beq $13, 10, bufq210
+bufq21:	
+	addi $25, $20, 1024
+	addi $20, $20, 1024
+		
 	addi $13, $13, -1
+	j quedasku2
+
+bufq22:	
+	
+	addi $25, $20, 2048
+	addi $20, $20, 2048
+	
+	
+	
+	addi $13, $13, -2
+	j quedasku2
+
+bufq23:	
+	
+	addi $25, $20, 3072
+	addi $20, $20, 3072
+	addi $13, $13, -3
+	j quedasku2	
+
+bufq24:	
+	
+	
+	addi $25, $20, 4096
+	addi $20, $20, 4096
+	addi $13, $13, -4
+	j quedasku2	
+bufq25:	
+	
+	addi $25, $20, 5120
+	addi $20, $20, 5120
+	addi $13, $13, -5
+	j quedasku2
+
+bufq26:	
+	
+	addi $25, $20, 6144
+	addi $20, $20, 6144
+	addi $13, $13, -6
+	j quedasku2
+bufq27:	
+	
+	addi $25, $20, 7168
+	addi $20, $20, 7168
+	addi $13, $13, -7
+	j quedasku2
+bufq28:	
+	
+	addi $25, $20, 8192
+	addi $20, $20, 8192
+	addi $13, $13, -8
+	j quedasku2
+bufq29:	
+	
+	
+	addi $25, $20, 9216
+	addi $20, $20, 9216
+	addi $13, $13, -9
+	j quedasku2
+bufq210:	
+	
+	addi $25, $20, 10240
+	addi $20, $20, 10240
+	addi $13, $13, -10
 	j quedasku2
 	
 queda3:	addi $13, $0, 10
 	
 quedasku3:	beq $13, $0, chasku
 	jal moveset
-	add $25, $0, $20
-	add $20, $0, $25
+	
 	add $4, $0, $25
-	addi $4, $4, -40
+	addi $4, $4, -10280
 	addi $5, $0, 28
-	addi $6, $0, 34
+	addi $6, $0, 44
 	
 	jal apagarp
 		
 	jal jskull
 	
-	addi $25, $20, 1024
-	addi $20, $20, 1024
 	
-	add $4, $0, 50
+	bne $13, 3, qnor
+	
+	jal notaskuj
+	
+	
+qnor:	bne $14, $0, lagq3
+	add $4, $0, 100
 	
 	jal timer
-	
-	
-	
 
-quedaskulf3:
-
+	j bufq31
+	
+lagq3:	beq $13, 1, bufq31
+	beq $13, 2, bufq32
+	beq $13, 3, bufq33
+	beq $13, 4, bufq34
+	beq $13, 5, bufq35
+	beq $13, 6, bufq36
+	beq $13, 7, bufq37
+	beq $13, 8, bufq38
+	beq $13, 9, bufq39
+	beq $13, 10, bufq310
+bufq31:	
+	addi $25, $20, 1024
+	addi $20, $20, 1024
+		
 	addi $13, $13, -1
-notaskuj:	bne $13, 3, qnor
-	
-	addi $6, $0, 7
-	addi $7, $0, 127
-	
-	addi $4, $0, 64
-	addi $5, $0, 400
-	addi $2, $0, 31
-	syscall
-	
-qnor:	
 	j quedasku3
+
+bufq32:	
+	
+	addi $25, $20, 2048
+	addi $20, $20, 2048
+	
+	jal notaskuj
+	
+	addi $13, $13, -2
+	j quedasku3
+
+bufq33:	
+	jal notaskuj
+	
+	addi $25, $20, 3072
+	addi $20, $20, 3072
+	addi $13, $13, -3
+	j quedasku3	
+
+bufq34:	
+	jal notaskuj
+	
+	addi $25, $20, 4096
+	addi $20, $20, 4096
+	addi $13, $13, -4
+	j quedasku3	
+bufq35:	
+	jal notaskuj
+	addi $25, $20, 5120
+	addi $20, $20, 5120
+	addi $13, $13, -5
+	j quedasku3
+
+bufq36:	
+	jal notaskuj
+	addi $25, $20, 6144
+	addi $20, $20, 6144
+	addi $13, $13, -6
+	j quedasku3
+bufq37:	
+	jal notaskuj
+	addi $25, $20, 7168
+	addi $20, $20, 7168
+	addi $13, $13, -7
+	j quedasku3
+bufq38:	
+	jal notaskuj
+	addi $25, $20, 8192
+	addi $20, $20, 8192
+	addi $13, $13, -8
+	j quedasku3
+bufq39:	
+	
+	jal notaskuj
+	addi $25, $20, 9216
+	addi $20, $20, 9216
+	addi $13, $13, -9
+	j quedasku3
+bufq310:	
+	jal notaskuj
+	addi $25, $20, 10240
+	addi $20, $20, 10240
+	addi $13, $13, -10
+	j quedasku3
+	
 chasku:	jal moveset
 	add $4, $0, $25
-	addi $4, $4, -40
+	addi $4, $4, -10280
 	addi $5, $0, 28
-	addi $6, $0, 34
+	addi $6, $0, 44
 	
 	jal apagarp
 
@@ -2672,10 +3097,10 @@ fim:	jal moveset
 	
 #================================================================
 #	Colunas verticais
-	# $4 = Vetor; Ponto de paartida da opera��a
+	# $4 = Vetor; Ponto de paartida da operaï¿½ï¿½a
 	# $5 = Cor; A cor em hexadecimal
-	# $6 = Quantidade; Quantas vezes ele ser� colocado( Linhas de uma coluna)
-	# $7 = Quantidade de colunas; Quantas colunas ser�o preenchidas com a mesma quantidade de cor
+	# $6 = Quantidade; Quantas vezes ele serï¿½ colocado( Linhas de uma coluna)
+	# $7 = Quantidade de colunas; Quantas colunas serï¿½o preenchidas com a mesma quantidade de cor
 	
 
 verticais:	add $8, $0, $6
@@ -2695,14 +3120,14 @@ coluns:	sw $5, 0($9)
 	addi $10, $10, -1
 	
 	bne $10, $0, coluns	
-	add $2, $0, $9 	# O retorno da fun��o � a coluna seguinte
+	add $2, $0, $9 	# O retorno da funï¿½ï¿½o ï¿½ a coluna seguinte
 	jr $31
 	
 #================================================================	
 #	Coluna vertical
-	# $4 = Vetor; Ponto de paartida da opera��a
+	# $4 = Vetor; Ponto de paartida da operaï¿½ï¿½a
 	# $5 = Cor; A cor em hexadecimal
-	# $6 = Quantidade; Quantas vezes ele ser� colocado( Linhas de uma coluna)
+	# $6 = Quantidade; Quantas vezes ele serï¿½ colocado( Linhas de uma coluna)
 
 vertical:	add $8, $0, $6
 	add $9, $0, $4
@@ -2712,16 +3137,16 @@ lins:	sw $5, 0($9)
 	addi $9, $9, 1024
 	addi $8, $8, -1
 	bne $8, $0, lins
-	add $2, $4, 4 	# O retorno da fun��o � a coluna seguinte
+	add $2, $4, 4 	# O retorno da funï¿½ï¿½o ï¿½ a coluna seguinte
 	jr $31
 	
 #================================================================
 #	Linha horizontal
 
-	# $4 = Vetor; onde come�a as opera��o
+	# $4 = Vetor; onde comeï¿½a as operaï¿½ï¿½o
 	# $5 = Cor; a cor
-	# $6 = Quantidade; pixels da cor ser�o colocados em sequ�ncia
-	# $7 = Salto p�s fim; em que espa�o de mem�ria o programa deve retornar do original ($4)
+	# $6 = Quantidade; pixels da cor serï¿½o colocados em sequï¿½ncia
+	# $7 = Salto pï¿½s fim; em que espaï¿½o de memï¿½ria o programa deve retornar do original ($4)
 	
 sequencia:	add $8, $0, $6
 	add $9, $0, $4
@@ -2738,9 +3163,9 @@ qtd:	sw $5, 0($9)
 #================================================================	
 #	Diagonal subindo
 
-	# $4 = Vetor; onde come�a as opera��o
+	# $4 = Vetor; onde comeï¿½a as operaï¿½ï¿½o
 	# $5 = Cor; a cor
-	# $6 = Quantidade; pixels da cor ser�o colocados em sequ�ncia
+	# $6 = Quantidade; pixels da cor serï¿½o colocados em sequï¿½ncia
 	# $7 = Quantidade de diagonais; Quantas diagonais em seguida
 	
 diagoup:	add $8, $0, $6
@@ -2764,9 +3189,9 @@ diagosu:	sw $5, 0($9)
 	jr $31
 #================================================================
 #	Diagonal Decendo
-	# $4 = Vetor; onde come�a as opera��o
+	# $4 = Vetor; onde comeï¿½a as operaï¿½ï¿½o
 	# $5 = Cor; a cor
-	# $6 = Quantidade; pixels da cor ser�o colocados em sequ�ncia
+	# $6 = Quantidade; pixels da cor serï¿½o colocados em sequï¿½ncia
 	# $7 = Quantidade de diagonais; Quantas diagonais em seguida
 	
 diagodw:	add $8, $0, $6
@@ -2790,11 +3215,11 @@ diagosd:	sw $5, 0($9)
 	jr $31
 
 #=================================================================	
-#	Diagonal subindo para tr�s
+#	Diagonal subindo para trï¿½s
 
-	# $4 = Vetor; onde come�a as opera��o
+	# $4 = Vetor; onde comeï¿½a as operaï¿½ï¿½o
 	# $5 = Cor; a cor
-	# $6 = Quantidade; pixels da cor ser�o colocados em sequ�ncia
+	# $6 = Quantidade; pixels da cor serï¿½o colocados em sequï¿½ncia
 	# $7 = Quantidade de diagonais; Quantas diagonais em seguida
 	
 diagoupt:	add $8, $0, $6
@@ -2818,10 +3243,10 @@ diagosut:	sw $5, 0($9)
 	jr $31
 	
 #==============================================================	
-#	Diagonal Decendo para tr�s
-	# $4 = Vetor; onde come�a as opera��o
+#	Diagonal Decendo para trï¿½s
+	# $4 = Vetor; onde comeï¿½a as operaï¿½ï¿½o
 	# $5 = Cor; a cor
-	# $6 = Quantidade; pixels da cor ser�o colocados em sequ�ncia
+	# $6 = Quantidade; pixels da cor serï¿½o colocados em sequï¿½ncia
 	# $7 = Quantidade de diagonais; Quantas diagonais em seguida
 	
 diagodwt:	add $8, $0, $6
@@ -2845,11 +3270,11 @@ diagosdt:	sw $5, 0($9)
 	jr $31
 
 #=================================================================
-#	SEQU�CIA DE PAR DE CORES DIFERENTES
-	# $4 = Vetor; onde come�a as opera��o
+#	SEQUï¿½CIA DE PAR DE CORES DIFERENTES
+	# $4 = Vetor; onde comeï¿½a as operaï¿½ï¿½o
 	# $5 =  Primeira cor
 	# $6 =  Segunda cor
-	# $7 = Quantidade; pixels da cor ser�o colocados em sequ�ncia; se por um n�mero �mpar, a ultima cor a ser colocada ser� a primeira
+	# $7 = Quantidade; pixels da cor serï¿½o colocados em sequï¿½ncia; se por um nï¿½mero ï¿½mpar, a ultima cor a ser colocada serï¿½ a primeira
 	
 	
 par:	add $8, $0, $7
@@ -2871,11 +3296,11 @@ acabou:	jr $31
 
 
 #================================================================
-#	C�DIGO DA CABE�A DO SKULL MAN
+#	Cï¿½DIGO DA CABEï¿½A DO SKULL MAN
 
 skullhead:	
 #================= NUCA DO SKULL
-	# Por enquanto o registrador que vai guardar a cabe�a vai ser o $19
+	# Por enquanto o registrador que vai guardar a cabeï¿½a vai ser o $19
 	add $19, $0, $31
 	
 	add $4, $0, $25
@@ -3233,7 +3658,7 @@ skullhead:
 	jal vertical
 	add $25, $0, $2
 
-#============== CAMPO DE VIS�O/ OLHOS
+#============== CAMPO DE VISï¿½O/ OLHOS
 	addi $25, $25, -6168
 	
 	add $4, $0, $25
@@ -3397,7 +3822,7 @@ skullhead:
 	
 	add $31, $0, $19
 	jr $31
-#============= OBS: COLOCAR JR $31 NESSE PONTO PARA QUE A CABE�A SEJA UMA FUN��O
+#============= OBS: COLOCAR JR $31 NESSE PONTO PARA QUE A CABEï¿½A SEJA UMA FUNï¿½ï¿½O
 
 skull:	
 	add $18, $0, $31
@@ -3470,7 +3895,7 @@ skull:
 	jal vertical
 	add $25, $0, $2
 	
-#============ BRA�O ESQUERDO
+#============ BRAï¿½O ESQUERDO
 	addi $25, $25, 1004
 	
 	add $4, $0, $25
@@ -3498,7 +3923,7 @@ skull:
 	
 	addi $25, $25, -1024
 	
-	add $4, $0, $25 #Sombra do Bra�o
+	add $4, $0, $25 #Sombra do Braï¿½o
 	addi $5, $0, 0xb4b4b4
 	addi $6, $0, 2
 	addi $7, $0, 1
@@ -3508,7 +3933,7 @@ skull:
 	
 	addi $25, $25, 1020
 	
-	add $4, $0, $25 #Cor do bra�o
+	add $4, $0, $25 #Cor do braï¿½o
 	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 1
@@ -3516,7 +3941,7 @@ skull:
 	jal diagoup
 	add $25, $0, $2
 	
-	add $4, $0, $25 #Cor do Bra�o
+	add $4, $0, $25 #Cor do Braï¿½o
 	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 1
@@ -3534,7 +3959,7 @@ skull:
 	jal diagoup
 	add $25, $0, $2
 	
-	add $4, $0, $25 #Bico do canh�o
+	add $4, $0, $25 #Bico do canhï¿½o
 	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
@@ -3542,7 +3967,7 @@ skull:
 	jal diagoupt
 	add $25, $0, $2
 	
-	add $4, $0, $25 #Sombra debaixo do bra�o
+	add $4, $0, $25 #Sombra debaixo do braï¿½o
 	addi $5, $0, 0xb4b4b4
 	addi $6, $0, 3
 	addi $7, $0, 1
@@ -3570,7 +3995,7 @@ skull:
 	
 	addi $25, $25, 2036
 	
-	add $4, $0, $25 #Fim do contorno do bra�o esquedo
+	add $4, $0, $25 #Fim do contorno do braï¿½o esquedo
 	addi $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, 0
@@ -3580,7 +4005,7 @@ skull:
 	
 #============== PEITORAL
 
-#============== Come�o do peito esquerdo
+#============== Comeï¿½o do peito esquerdo
 	addi $25, $25, -7152
 	
 	add $4, $0, $25
@@ -3599,7 +4024,7 @@ skull:
 	jal sequencia
 	add $25, $0, $2
 	
-	add $4, $0, $25 #Come�o a pintar o peito esquerdo
+	add $4, $0, $25 #Comeï¿½o a pintar o peito esquerdo
 	addi $5, $0, 0xb4b4b4
 	addi $6, $0, 0xffffff
 	addi $7, $0, 2
@@ -3710,7 +4135,7 @@ skull:
 	jal sequencia
 	add $25, $0, $2
 	
-	add $4, $0, $25 #Liga��o da costela direita com a perna direita
+	add $4, $0, $25 #Ligaï¿½ï¿½o da costela direita com a perna direita
 	addi $5, $0, 0x000000
 	addi $6, $0, 6
 	
@@ -3746,7 +4171,7 @@ skull:
 	jal diagoup
 	add $25, $0, $2
 	
-	add $4, $0, $25 #In�cio da mescla com o bot�o
+	add $4, $0, $25 #Inï¿½cio da mescla com o botï¿½o
 	addi $5, $0, 0x000000
 	addi $6, $0, 0xed1c24
 	addi $7, $0, 2
@@ -3764,14 +4189,14 @@ skull:
 	jal par
 	add $25, $0, $2
 	
-	add $4, $0, $25 # Resto do bot�o vermelho
+	add $4, $0, $25 # Resto do botï¿½o vermelho
 	addi $5, $0, 0xed1c24
 	addi $6, $0, 2
 	
 	jal vertical
 	add $25, $0, $2
 	
-	add $4, $0, $25 # Contorno do bot�o
+	add $4, $0, $25 # Contorno do botï¿½o
 	addi $5, $0, 0x000000
 	addi $6, $0, 3
 	
@@ -3780,7 +4205,7 @@ skull:
 	
 	addi $25, $25, 2036
 	
-	add $4, $0, $25 # Contorno do bot�o
+	add $4, $0, $25 # Contorno do botï¿½o
 	addi $5, $0, 0x000000
 	addi $6, $0, 3
 	addi $7, $0, -20
@@ -3799,7 +4224,7 @@ skull:
 #============== OMBRO DIREITO !!!
 	addi $25, $25, -5104
 	
-	add $4, $0, $25 #In�cio do ombro
+	add $4, $0, $25 #Inï¿½cio do ombro
 	addi $5, $0, 0x000000
 	addi $6, $0, 4
 	addi $7, $0, 1
@@ -3825,7 +4250,7 @@ skull:
 	jal diagoup
 	add $25, $0, $2
 	
-	add $4, $0, $25 #Bra�o com o ombro
+	add $4, $0, $25 #Braï¿½o com o ombro
 	addi $5, $0, 0x000000
 	addi $6, $0, 7
 	addi $7, $0, 1
@@ -3835,7 +4260,7 @@ skull:
 	
 	addi $25, $25, -3080
 	
-	add $4, $0, $25 #In�cio do ombro
+	add $4, $0, $25 #Inï¿½cio do ombro
 	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 2036
@@ -3843,7 +4268,7 @@ skull:
 	jal sequencia
 	add $25, $0, $2
 	
-	add $4, $0, $25 #In�cio do ombro
+	add $4, $0, $25 #Inï¿½cio do ombro
 	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
@@ -3853,7 +4278,7 @@ skull:
 	
 	addi $25, $25, -1020
 	
-	add $4, $0, $25 #In�cio do ombro
+	add $4, $0, $25 #Inï¿½cio do ombro
 	addi $5, $0, 0xffffff
 	addi $6, $0, 1
 	addi $7, $0, 0
@@ -3869,10 +4294,10 @@ skull:
 	jal vertical
 	add $25, $0, $2
 	
-#============== BRA�O DIREITO DO SKULL
+#============== BRAï¿½O DIREITO DO SKULL
 	addi $25, $25, 2048
 	
-	add $4, $0, $25 #Contorno do bra�o
+	add $4, $0, $25 #Contorno do braï¿½o
 	addi $5, $0, 0x000000
 	addi $6, $0, 2
 	addi $7, $0, 1
@@ -3937,7 +4362,7 @@ skull:
 	jal diagoup
 	add $25, $0, $2
 	
-#============== INTERIOR DO BRA�O DIREITO
+#============== INTERIOR DO BRAï¿½O DIREITO
 	addi $25, $25, -6152
 	
 	add $4, $0, $25 
@@ -4103,7 +4528,7 @@ skull:
 	jal vertical
 	add $25, $0, $2
 
-#============== SOLA DO P� ESQUERDO	
+#============== SOLA DO Pï¿½ ESQUERDO	
 	addi $25, $25, 2012
 	 
 	add $4, $0, $25 
@@ -4275,12 +4700,12 @@ skull:
 	jr $31
 	
 #===========================================================
-#	FUN��O QUE APAGA O PERSONAGEM NA POSI��O X
+#	FUNï¿½ï¿½O QUE APAGA O PERSONAGEM NA POSIï¿½ï¿½O X
 	
-	# $4 = Vetor; onde come�ar� a ser apagado
-	# $5 = Largura; quantos pixels horizontais ser�o apagados
-	# $6 = Altura; quantos pixels verticais ser� apagados
-	# $7 = Valor da posi��o 
+	# $4 = Vetor; onde comeï¿½arï¿½ a ser apagado
+	# $5 = Largura; quantos pixels horizontais serï¿½o apagados
+	# $6 = Altura; quantos pixels verticais serï¿½ apagados
+	# $7 = Valor da posiï¿½ï¿½o 
 	
 apagarp:	add $8, $0, $6
 	add $9, $0, $4
@@ -4316,7 +4741,7 @@ tempo:	beq $8, $0, vol
 vol:	jr $31
 
 #===============================================================
-#	C�pia do cen�rio
+#	Cï¿½pia do cenï¿½rio
 	
 copiace:	addi $8, $0, 131072
 	
@@ -4344,10 +4769,10 @@ jskull:
 	
 jumpskull:	
 
-#============== BRA�O ESQUERDO
+#============== BRAï¿½O ESQUERDO
 	addi $25, $25, -1084
 	
-	add $4, $0, $25 #CONTORNO DO BRA�O 
+	add $4, $0, $25 #CONTORNO DO BRAï¿½O 
 	addi $5, $0, 0x000000 #Contorno
 	addi $6, $0, 2
 	addi $7, $0, 1
@@ -4395,7 +4820,7 @@ jumpskull:
 	jal diagoupt
 	add $25, $0, $2
 	
-#-------------- Dobra para o contorno em baixo do bra�o esquerdo
+#-------------- Dobra para o contorno em baixo do braï¿½o esquerdo
 	addi $25, $25, 1004
 	
 	add $4, $0, $25 
@@ -4424,7 +4849,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xffffff #Cor do bra�o
+	addi $5, $0, 0xffffff #Cor do braï¿½o
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4432,7 +4857,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xffffff #Cor do bra�o
+	addi $5, $0, 0xffffff #Cor do braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4447,11 +4872,11 @@ jumpskull:
 	jal diagodw
 	add $25, $0, $2
 	
-#-------------- Dobra do bra�o
+#-------------- Dobra do braï¿½o
 	addi $25, $25, 2048
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Bra�o
+	addi $5, $0, 0x000000 #Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 2
 	
@@ -4461,7 +4886,7 @@ jumpskull:
 	addi $25, $25, 2044
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Cor do bra�o
+	addi $5, $0, 0x000000 #Cor do braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4469,7 +4894,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	
-#============== BRA�O DIREITO
+#============== BRAï¿½O DIREITO
 	addi $25, $25, -8136
 	
 	add $4, $0, $25
@@ -4520,11 +4945,11 @@ jumpskull:
 	jal diagoupt
 	add $25, $0, $2
 	
-#-------------- DENTRO DA M�O
+#-------------- DENTRO DA Mï¿½O
 	addi $25, $25, 1004
 	
 	add $4, $0, $25
-	addi $5, $0, 0xffffff #Cor do Bra�o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4532,7 +4957,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xb4b4b4 #Cor do Bra�o
+	addi $5, $0, 0xb4b4b4 #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4540,7 +4965,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xffffff #Cor do Bra�o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 0x000000
 	addi $7, $0, 2
 	
@@ -4548,7 +4973,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Cor do Bra�o
+	addi $5, $0, 0x000000 #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4575,7 +5000,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Cor do Bra�o
+	addi $5, $0, 0x000000 #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4583,7 +5008,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Cor do Bra�o
+	addi $5, $0, 0x000000 #Cor do Braï¿½o
 	addi $6, $0, 8
 	addi $7, $0, 1
 	
@@ -4602,7 +5027,7 @@ jumpskull:
 	addi $25, $25, -28
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Cor do Bra�o
+	addi $5, $0, 0x000000 #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4618,7 +5043,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xffffff #Cor do Bra�o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4626,7 +5051,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xffffff #Cor do Bra�o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4651,11 +5076,11 @@ jumpskull:
 	jal diagodwt
 	add $25, $0, $2
 	
-#-------------- LIGA��O DO BRA�O COM O CORPO
+#-------------- LIGAï¿½ï¿½O DO BRAï¿½O COM O CORPO
 	addi $25, $25, 1004
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Bra�o
+	addi $5, $0, 0x000000 #Braï¿½o
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4665,7 +5090,7 @@ jumpskull:
 	addi $25, $25, 1020
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Bra�o
+	addi $5, $0, 0x000000 #Braï¿½o
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4673,7 +5098,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Bra�o
+	addi $5, $0, 0x000000 #Braï¿½o
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -4683,7 +5108,7 @@ jumpskull:
 	addi $25, $25, 1020
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #Bra�o
+	addi $5, $0, 0x000000 #Braï¿½o
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4817,7 +5242,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0x000000 #CONTORNO DO BOT�O VERMELHO
+	addi $5, $0, 0x000000 #CONTORNO DO BOTï¿½O VERMELHO
 	addi $6, $0, 2
 	addi $7, $0, 1008
 	
@@ -4832,11 +5257,11 @@ jumpskull:
 	jal par
 	add $25, $0, $2
 
-#______________ COME�O DA PINTURA DO BOT�O VERMELHO
+#______________ COMEï¿½O DA PINTURA DO BOTï¿½O VERMELHO
 
 	add $4, $0, $25
 	addi $5, $0, 0xffffff #COSTELA
-	addi $6, $0, 0xed1c24 #Bot�o
+	addi $6, $0, 0xed1c24 #Botï¿½o
 	addi $7, $0, 2
 	
 	jal par
@@ -4853,14 +5278,14 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xed1c24 #BOT�O VERMELHO
+	addi $5, $0, 0xed1c24 #BOTï¿½O VERMELHO
 	addi $6, $0, 2
 	addi $7, $0, 1008
 	
 	jal sequencia
 	add $25, $0, $2
 
-#______________ CONTORNO DO BOT�O
+#______________ CONTORNO DO BOTï¿½O
 
 	add $4, $0, $25
 	addi $5, $0, 0x000000 #COSTELA
@@ -5312,7 +5737,7 @@ mega:
 	jal sequencia
 	add $24, $0, $2
 
-#============== NUCA PART5 / BOT�O DA CABE�A
+#============== NUCA PART5 / BOTÃO DA CABEÇA
 	addi $24, $24, 1016
 	
 	add $4, $0, $24
@@ -5696,7 +6121,7 @@ mega:
 	jal vertical
 	add $24, $0, $2
 	
-#============== BRA�O E BUXO
+#============== BRAÇO E BUXO
 	addi $24, $24, 960
 	
 	add $4, $0, $24
@@ -5755,7 +6180,7 @@ mega:
 	jal vertical
 	add $24, $0, $2
 	
-#============== ESPA�OES ENTRE M�O E COSTAS
+#============== ESPAÇOES ENTRE MÃO E COSTAS
 	addi $24, $24, 960
 	
 	add $4, $0, $24
@@ -5790,7 +6215,7 @@ mega:
 	jal sequencia
 	add $24, $0, $2
 	
-#============== DEDOS DA M�O FECHADA
+#============== DEDOS DA MÃO FECHADA
 	addi $24, $24, 972
 	
 	add $4, $0, $24
@@ -5982,7 +6407,7 @@ mega:
 	jal diagoup
 	add $24, $0, $2
 	
-#============== P� ESQUERDO
+#============== PÉ ESQUERDO
 	addi $24, $24, -1024
 	
 	add $4, $0, $24
@@ -6031,7 +6456,7 @@ mega:
 	jal sequencia
 	add $24, $0, $2
 	
-#============== P� DIREITO
+#============== PÉ DIREITO
 
 	add $4, $0, $24
 	add $5, $0, 0x000000
@@ -6079,7 +6504,7 @@ mega:
 	jal sequencia
 	add $24, $0, $2
 
-#============== SOLA DOS P�S
+#============== SOLA DOS PÉS
 	add $4, $0, $24
 	add $5, $0, 0x000000
 	addi $6, $0, 9
@@ -6102,16 +6527,16 @@ mega:
 	
 	
 #=====================================================================================================
-#	FUN��O MEGAPACO1
+#	FUNÇÃO MEGAPACO1
 
-megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR ALINHADO NO CH�O
+megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR ALINHADO NO CHÃO
 	
 	add $18, $0, $31
 	
 	addi $24, $24, 2048
 	jal megahead
 
-#============== BRA�O DIREITO ESTICADO
+#============== BRAÇO DIREITO ESTICADO
 
 	addi $24, $24, 4
 	
@@ -6180,7 +6605,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	jal vertical
 	add $24, $0, $2
 	
-#-------------- DETRO DO BRA�O
+#-------------- DETRO DO BRAÇO
 	addi $24, $24, 3052
 	
 	add $4, $0, $24
@@ -6226,7 +6651,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	jal sequencia
 	add $24, $0, $2
 	
-#============== BRA�O ESQUERDO
+#============== BRAÇO ESQUERDO
 	add $4, $0, $24
 	addi $5, $0, 0x000000 #CONTORNO
 	addi $6, $0, 4
@@ -6279,7 +6704,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	jal sequencia
 	add $24, $0, $2
 	
-#-------------- PINTAR O BRA�O
+#-------------- PINTAR O BRAÇO
 	addi $24, $24, 2048
 	
 	add $4, $0, $24
@@ -6500,7 +6925,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	jal vertical
 	add $24, $0, $2
 	
-#______________	SOLA DO P� DIREITO
+#______________	SOLA DO PÉ DIREITO
 	addi $24, $24, 1024
 	
 	add $4, $0, $24
@@ -6539,7 +6964,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	jal sequencia
 	add $24, $0, $2
 	
-#============== P� ESQUERDO
+#============== PÉ ESQUERDO
 	
 	add $4, $0, $24
 	addi $5, $0, 0x000000 #CONTORNO
@@ -6621,7 +7046,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 	jal diagoup
 	add $24, $0, $2
 	
-#-------------- PINTAR POR DENTRO DO P� ESQUERDO
+#-------------- PINTAR POR DENTRO DO PÉ ESQUERDO
 	addi $24, $24, -3100
 	
 	add $4, $0, $24
@@ -6710,7 +7135,7 @@ megapaco2:
 	
 	jal megahead
 
-#============== M�O DIREITA
+#============== MÃO DIREITA
 	addi $24, $24, 4
 	
 	add $4, $0, $24
@@ -6757,7 +7182,7 @@ megapaco2:
 	jal sequencia
 	add $24, $0, $2
 
-#============== PERNA DIREITA QUE T� NO FUNDO
+#============== PERNA DIREITA QUE T�? NO FUNDO
 	
 	add $4, $0, $24
 	addi $5, $0, 0x000000 
@@ -6790,7 +7215,7 @@ megapaco2:
 	jal diagodwt
 	add $24, $0, $2
 
-#============== BRA�O DO MEGAMAN
+#============== BRAÇO DO MEGAMAN
 #-------------- CONTORNO
 	addi $24, $24, -28
 	
@@ -6839,7 +7264,7 @@ megapaco2:
 	jal diagodw
 	add $24, $0, $2
 	
-#______________ CONTORNO EM CIMA DO BRA�O
+#______________ CONTORNO EM CIMA DO BRAÇO
 	addi $24, $24, -1052
 	
 	add $4, $0, $24
@@ -6860,8 +7285,8 @@ megapaco2:
 	jal diagoup
 	add $24, $0, $2
 
-#============== PINTAR BRA�O E BARRIGA
-#-------------- OMBRO/BRA�O
+#============== PINTAR BRAÇO E BARRIGA
+#-------------- OMBRO/BRAÇO
 	add $4, $0, $24
 	addi $5, $0, 0x47a6e6 #ROUPA
 	addi $6, $0, 2
@@ -6931,7 +7356,7 @@ megapaco2:
 	jal diagodwt
 	add $24, $0, $2
 	
-#-------------- BRA�O PINTAR
+#-------------- BRAÇO PINTAR
 	addi $24, $24, -3104
 	
 	add $4, $0, $24
@@ -7108,7 +7533,7 @@ megapaco3:
 	addi $24, $24, 2048
 	jal megahead
 	
-#============== BRA�O DIREITO
+#============== BRAÇO DIREITO
 	addi $24, $24, 4
 	
 	add $4, $0, $24
@@ -7179,7 +7604,7 @@ megapaco3:
 	jal verticais
 	add $24, $0, $2
 	
-#______________ FIM BRA�O DIREITO
+#______________ FIM BRAÇO DIREITO
 	addi $24, $24 2032
 	
 	add $4, $0, $24
@@ -7240,7 +7665,7 @@ megapaco3:
 	jal diagodw
 	add $24, $0, $2
 
-#============== BRA�O ESQUERDO
+#============== BRAÇO ESQUERDO
 	addi $24, $24, -6160
 	
 	add $4, $0, $24
@@ -7638,7 +8063,7 @@ megapaco3:
 	
 	jr $31
 		
-#============== FIM DA FUN��O MEGAPACO3
+#============== FIM DA FUNÇÃO MEGAPACO3
 	
 
 megahead:	
@@ -7739,7 +8164,7 @@ megahead:
 	jal sequencia
 	add $24, $0, $2
 
-#============== NUCA PART5 / BOT�O DA CABE�A
+#============== NUCA PART5 / BOTÃO DA CABEÇA
 	addi $24, $24, 1016
 	
 	add $4, $0, $24
@@ -7963,7 +8388,7 @@ megahead:
 	jal diagodwt
 	add $24, $0, $2
 	
-#============== QUEIXO/ FINAL DA CABE�A
+#============== QUEIXO/ FINAL DA CABEÇA
 	addi $24, $24, 996
 	
 	add $4, $0, $24
@@ -7994,7 +8419,7 @@ megahead:
 	
 	jr $31
 	
-#============== A FUN��O TERMINA NO CONTORNO DO QUEIXO EM BAIXO DO MEGAMAN
+#============== A FUNÇÃO TERMINA NO CONTORNO DO QUEIXO EM BAIXO DO MEGAMAN
 
 
 #==========================================================================
@@ -8097,7 +8522,7 @@ megaleve:
 	jal sequencia
 	add $24, $0, $2
 
-#============== NUCA PART5 / BOT�O DA CABE�A
+#============== NUCA PART5 / BOTÃO DA CABEÇA
 	addi $24, $24, 1016
 	
 	add $4, $0, $24
@@ -8481,7 +8906,7 @@ megaleve:
 	jal vertical
 	add $24, $0, $2
 	
-#============== BRA�O E BUXO
+#============== BRAÇO E BUXO
 	addi $24, $24, 960
 	
 	add $4, $0, $24
@@ -8540,7 +8965,7 @@ megaleve:
 	jal vertical
 	add $24, $0, $2
 	
-#============== ESPA�OES ENTRE M�O E COSTAS
+#============== ESPAÇOES ENTRE MÃO E COSTAS
 	addi $24, $24, 960
 	
 	add $4, $0, $24
@@ -8575,7 +9000,7 @@ megaleve:
 	jal sequencia
 	add $24, $0, $2
 	
-#============== DEDOS DA M�O FECHADA
+#============== DEDOS DA MÃO FECHADA
 	addi $24, $24, 972
 	
 	add $4, $0, $24
@@ -8766,7 +9191,7 @@ megaleve:
 	jal diagoup
 	add $24, $0, $2
 	
-#============== P� ESQUERDO
+#============== PÉ ESQUERDO
 	add $4, $0, $24
 	add $5, $0, 0x1d61b5
 	addi $6, $0, 4
@@ -8819,7 +9244,7 @@ megaleve:
 	jal sequencia
 	add $24, $0, $2
 	
-#============== P� DIREITO
+#============== PÉ DIREITO
 	add $4, $0, $24
 	add $5, $0, 0x000000
 	addi $6, $0, 1
@@ -8872,7 +9297,7 @@ megaleve:
 	
 	jr $31
 	
-#============== FIM DA FUN��O MEGALEVE
+#============== FIM DA FUNÇÃO MEGALEVE
 
 #===================================================
 #	MOVESET DO MEGAMAN		
@@ -8899,12 +9324,12 @@ cod:	addi $10, $0, 'd'
 	beq $9, $10, tras
 	
 	addi $17, $0, 0
-	
+	addi $14, $0, 0
 	add $31, $0, $22
 	jr $31
 #================================================================
 #================================================================
-#	MOVIMENTA��O PARA FRENTE
+#	MOVIMENTAÇÃO PARA FRENTE
 	
 frente:	
 
@@ -8942,7 +9367,7 @@ pacoleve:
 	addi $6, $0, 24
 	
 	jal apagarp
-	
+	addi $14, $0, 1
 	add $31, $0, $22
 	jr $31
 
@@ -8998,7 +9423,7 @@ paco1:
 	
 	
 	addi $17, $17, 1
-	addi $14, $0, 0
+	addi $14, $0, 1
 	
 	add $31, $0, $22
 	jr $31
@@ -9054,7 +9479,7 @@ paco2:
 	
 	jal apagarp
 	
-	beq $14, 1, minus
+	beq $14, 2, minus
 	addi $17, $17, 1
 	
 	add $31, $0, $22
@@ -9119,7 +9544,7 @@ paco3:
 	
 	addi $17, $17, -1
 	
-	addi $14, $0, 1
+	addi $14, $0, 2
 	
 	add $31, $0, $22
 	jr $31	
@@ -9127,7 +9552,7 @@ paco3:
 
 #================================================================
 #================================================================
-#	MOVIMENTA��O PARA TRAS
+#	MOVIMENTAÇÃO PARA TRAS
 
 tras:	
 
@@ -9142,6 +9567,7 @@ tras:
 	beq $17, $0, paco1t
 	beq $17, 1, paco2t
 	beq $17, 2, paco3t
+	
 	
 	add $31, $0, $22
 	jr $31
@@ -9165,7 +9591,7 @@ pacolevet:
 	addi $6, $0, 24
 	
 	jal apagarp
-	
+	addi $14, $0, 1
 	add $31, $0, $22
 	jr $31
 
@@ -9221,7 +9647,7 @@ paco1t:
 	
 	
 	addi $17, $17, 1
-	addi $14, $0, 0
+	addi $14, $0, 1
 	
 	add $31, $0, $22
 	jr $31
@@ -9277,7 +9703,7 @@ paco2t:
 	
 	jal apagarp
 	
-	beq $14, 1, minust
+	beq $14, 2, minust
 	addi $17, $17, 1
 	
 	add $31, $0, $22
@@ -9339,7 +9765,19 @@ paco3t:
 	
 	addi $17, $17, 1
 	
-	addi $14, $0, 1
+	addi $14, $0, 2
 	
 	add $31, $0, $22
+	jr $31
+	
+#=================================================
+#	SOUND EFFECTS
+notaskuj:	
+	addi $6, $0, 7
+	addi $7, $0, 127
+	
+	addi $4, $0, 64
+	addi $5, $0, 400
+	addi $2, $0, 31
+	syscall
 	jr $31
