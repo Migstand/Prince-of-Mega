@@ -12,11 +12,21 @@ main:
 	# 000000 = CONTORNO/PUPILA/ BOCA
 	# ff00ff = CONTORNO DE DESENVOLVIMENTO
 
+	# DO VERTOR AUXILIAR PARA MEGAPULO SE SOMA 2104
+	# DO VERTOR AUXILIAR PARA MEGAPACO1 SE SOMA 10288 para frente
+	# DO VERTOR AUXILIAR PARA MEGAPACO1 SE SOMA 24540 para o pé
+	# DO VERTOR AUXILIAR PARA MEGAPACO2 SE SOMA 5148
+	# DO VERTOR AUXILIAR PARA MEGAPACO3 SE SOMA 15392
+	
 	addi $24, $24, 14396
 	
 	add $3, $0, $24
 	
-
+	addi $8, $0, 0xff00
+	
+	sw $8, 24540($3)
+	
+	
 megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR ALINHADO NO CHÃO
 	
 	add $18, $0, $31
@@ -617,7 +627,7 @@ megapaco1:	#QUANDO CHAMAR O MEGAHEAD TEM QUE PULAR 2 LINHAS PARA O MEGA FICAR AL
 #=====================================================
 
 megapaco2:	
-	add $24, $3, 120 #POR ENQUANDO SÓ PARA TESTE
+	add $24, $3, 120#POR ENQUANDO SÓ PARA TESTE
 	
 	add $18, $0, $31
 	
@@ -1003,7 +1013,7 @@ megapaco2:
 	jal sequencia
 	add $24, $0, $2
 	
-	add $31, $0, $18
+#	add $31, $0, $18
 	
 #	jr $31
 
@@ -1548,14 +1558,13 @@ megapaco3:
 	jal sequencia
 	add $24, $0, $2
 	
-	add $31, $0, $18
+#	add $31, $0, $18
 	
 #	jr $31
 		
 #============== FIM DA FUNÇÃO MEGAPACO3
 	
 megapulo:	
-	
 	addi $24, $3, 360
 	add $18, $0, $31
 	
@@ -2159,8 +2168,8 @@ megapulo:
 	jal verticais
 	add $24, $0, $2
 	
-	add $31, $0, $18
-	jr $31
+#	add $31, $0, $18
+#	jr $31
 	
 fim:	addi $2, $0, 10
 	syscall
