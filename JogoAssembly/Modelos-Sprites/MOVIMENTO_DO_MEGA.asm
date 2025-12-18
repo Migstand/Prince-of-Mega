@@ -25,6 +25,9 @@ main:
 	# DO VERTOR AUXILIAR PARA MEGAPACO2 SE SOMA 24552 para o pé
 	# DO VERTOR AUXILIAR PARA MEGAPACO3 SE SOMA 15392 para frente
 	# DO VERTOR AUXILIAR PARA MEGAPACO3 SE SOMA 24532 para o pé
+	# DO VERTOR AUXILIAR PARA MEGATIRO SE SOMA 10788 do MEGABUSTER para ele comecar na frente do MEGATIRO
+	
+	
 	addi $24, $24, 14396
 	
 	add $3, $0, $24
@@ -3688,6 +3691,107 @@ megatiro:	addi $24, $3, 480
 	add $31, $0, $18
 	
 #	jr $31	
+
+#============ MEGABUSTER
+megabuster:	addi $24, $3, 548
+	
+	addi $24, $24, 10240
+	
+#=========== CONTORNO
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24 2056
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -5132
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+#============ COR DO TIRO
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0xe5aa7a #TIRO
+	addi $6, $0, 4
+	addi $7, $0, 4
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0xe5aa7a #TIRO
+	addi $6, $0, 2
+	addi $7, $0, 6
+	
+	jal verticais
+	add $24, $0, $2
+
+#=============== CHARME/BRILHO	
+	addi $24, $24, -12
+	
+	add $4, $0, $24
+	addi $5, $0, 0xffffff #CHARME
+	addi $6, $0, 2
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xffffff #CHARME
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
 	
 fim:	addi $2, $0, 10
 	syscall
