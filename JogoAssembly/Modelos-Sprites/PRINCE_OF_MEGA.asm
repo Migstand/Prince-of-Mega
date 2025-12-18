@@ -7182,7 +7182,7 @@ megapaco2:
 	jal sequencia
 	add $24, $0, $2
 
-#============== PERNA DIREITA QUE TÃ? NO FUNDO
+#============== PERNA DIREITA QUE Tï¿½? NO FUNDO
 	
 	add $4, $0, $24
 	addi $5, $0, 0x000000 
@@ -9353,6 +9353,16 @@ frente:
 	add $31, $0, $22
 	jr $31
 	
+nopefrente:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
+	
+	addi $21, $21, -4
+	add $24, $21, $0
+	jal mega
+	
+	add $31, $0, $22
+	jr $31
 pacoleve:	
 	addi $4, $24, 0
 	add $12, $0, $4
@@ -9360,6 +9370,58 @@ pacoleve:
 	addi $6, $0, 21
 	
 	jal apagarp
+#============== QUEDA LEVE
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO LEVE
+	addi $9, $21, 40
+	addi $8, $0, 0x0000
+	
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
 	
 	jal megaleve
 	
@@ -9385,7 +9447,60 @@ paco1:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO1
 	
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO1
+	addi $9, $21, 48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+		
 	jal megapaco1 #1
 	
 	addi $4, $0, 10000
@@ -9443,7 +9558,60 @@ paco2:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO2
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO2
+	addi $9, $21, 48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+		
 	jal megapaco2 #1
 	
 	addi $4, $0, 15000
@@ -9490,7 +9658,7 @@ paco2:
 	add $31, $0, $22
 	jr $31
 	
-minus:	addi $17, $0, 0
+minus:	addi $17, $17, -1
 
 	add $31, $0, $22
 	jr $31
@@ -9506,7 +9674,60 @@ paco3:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO3
 	
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO3
+	addi $9, $21, 48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+		
 	jal megapaco3 #1
 	
 	addi $4, $0, 15000
@@ -9577,6 +9798,16 @@ tras:
 	add $31, $0, $22
 	jr $31
 	
+nopetras:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
+	
+	addi $21, $21, 4
+	add $24, $21, $0
+	jal mega
+	
+	add $31, $0, $22
+	jr $31	
 pacolevet:	
 	addi $4, $24, 0
 	add $12, $0, $4
@@ -9584,7 +9815,59 @@ pacolevet:
 	addi $6, $0, 20
 	
 	jal apagarp
+#============== QUEDA LEVET
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
 	
+	beq $10, $8, quedaco
+	
+#============== COLISAO LEVET
+	addi $9, $21, -40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megaleve
 	
 	addi $4, $0, 40000
@@ -9609,7 +9892,60 @@ paco1t:
 	addi $6, $0, 19
 	
 	jal apagarp
+#============== COLISAO PACO1T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO1T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megapaco1 #1
 	
 	addi $4, $0, 10000
@@ -9667,7 +10003,60 @@ paco2t:
 	addi $6, $0, 23
 	
 	jal apagarp
+#============== COLISAO PACO2T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO2T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megapaco2 #1
 	
 	addi $4, $0, 15000
@@ -9714,7 +10103,8 @@ paco2t:
 	add $31, $0, $22
 	jr $31
 	
-minust:	addi $17, $0, 0
+minust:	addi $17, $17, -1
+	add $31, $0, $22
 	jr $31
 
 #-------------------------------------------
@@ -9727,7 +10117,60 @@ paco3t:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO3T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO3T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megapaco3 #1
 	
 	addi $4, $0, 15000
@@ -9785,14 +10228,51 @@ pulomega:	sw $0, 4($23)
 	addi $14, $0, 20
 	
 
-pulaco:	addi $16, $0, 10		
+pulaco:	addi $16, $0, 50		
 pulacol:	beq $16, $0, quedaco
 	
 	
+	addi $9, $0, 10
+	slt $8, $17, $9
+	beq $8, 1, pulolv1
+	addi $9, $0, 20
+	slt $8, $17, $9
+	beq $8, 1, pulolv2
+	addi $9, $0, 30
+	slt $8, $17, $9
+	beq $8, 1, pulolv3
+	addi $9, $0, 40
+	slt $8, $17, $9
+	beq $8, 1, pulolv4
 	
+	j pulolv5
 	
-	addi $4, $0, 15000
+pulolv1:	addi $4, $0, 0
 	jal timer
+	
+	j pulolvf
+	
+pulolv2:	addi $4, $0, 20
+	jal timer
+	
+	j pulolvf
+
+pulolv3:	addi $4, $0, 50
+	jal timer
+	
+	j pulolvf
+	
+pulolv4:	addi $4, $0, 100
+	jal timer
+	
+	j pulolvf
+		
+	
+pulolv5:	addi $4, $0, 500
+	jal timer
+		
+		
+pulolvf:
 	
 	addi $21, $21, -1024
 	addi $24, $21, 0
@@ -9803,6 +10283,15 @@ pulacol:	beq $16, $0, quedaco
 	
 	jal apagarp
 	
+	addi $17, $17, 1
+#============== COLISAO DO TETO
+	
+	addi $9, $21, -1024
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, quedaco	
 	lw $9, 4($23)
 	
 	addi $10, $0, 'd'
@@ -9819,6 +10308,51 @@ pulacol:	beq $16, $0, quedaco
 	jr $31
 	
 pulacod:	
+#============== COLISAO PULACOD
+	addi $9, $21, 80
+	addi $8, $0, 0x0000
+	
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	
 	sw $0, 4($23)
 	addi $21, $21, 8
 	addi $24, $21, 0
@@ -9831,6 +10365,51 @@ pulacod:
 	jr $31
 	
 pulacoe:	
+#============== COLISAO PULACOE
+	addi $9, $21, -32
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
@@ -9842,18 +10421,61 @@ pulacoe:
 	jr $31
 		
 	
-quedaco:	addi $16, $0, 50
-	addi $14, $0, 30
-					
-quedacol:	beq $16, $0, jumperase
-	
-	
-	
-	
-	addi $4, $0, 15000
+quedaco:	
+	addi $17, $0, 0
+	addi $4, $0, 75000
 	jal timer
 	
-	addi $21, $21, 1024
+	addi $14, $0, 30
+					
+quedacol:	
+	addi $9, $21, 18420
+	addi $16, $9, 131072
+	lw $10, 0($16)
+	addi $8, $0, 0x485054
+	beq $10, $8, jumperase
+	
+	addi $9, $0, 10
+	slt $8, $17, $9
+	beq $8, 1, quedalv5
+	addi $9, $0, 20
+	slt $8, $17, $9
+	beq $8, 1, quedalv4
+	addi $9, $0, 30
+	slt $8, $17, $9
+	beq $8, 1, quedalv3
+	addi $9, $0, 40
+	slt $8, $17, $9
+	beq $8, 1, quedalv2
+	
+
+	
+quedalv1:	addi $4, $0, 0
+	jal timer
+	
+	j quedalvf
+	
+quedalv2:	addi $4, $0, 10
+	jal timer
+	
+	j quedalvf
+
+quedalv3:	addi $4, $0, 200
+	jal timer
+	
+	j quedalvf
+	
+quedalv4:	addi $4, $0, 500
+	jal timer
+	
+	j quedalvf
+		
+	
+quedalv5:	addi $4, $0, 1500
+	jal timer
+
+	
+quedalvf:	addi $21, $21, 1024
 	addi $24, $21, 0
 	
 	addi $4, $24, -1076
@@ -9862,7 +10484,7 @@ quedacol:	beq $16, $0, jumperase
 	
 	jal apagarp
 	
-	
+	addi $17, $17, 1
 	lw $9, 4($23)
 	
 	addi $10, $0, 'd'
@@ -9877,6 +10499,51 @@ quedacol:	beq $16, $0, jumperase
 	jr $31
 	
 quedacod:	
+#============== COLISAO QUEDACOD
+	addi $9, $21, 80
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	
 	sw $0, 4($23)
 	addi $21, $21, 8
 	addi $24, $21, 0
@@ -9888,6 +10555,52 @@ quedacod:
 	jr $31
 	
 quedacoe:	
+
+#============== COLISAO QUEDACOE
+	addi $9, $21, -32
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
@@ -9898,7 +10611,9 @@ quedacoe:
 	add $31, $0, $22
 	jr $31
 	
-jumperase:	addi $4, $21, -11312
+jumperase:	
+	jal notamegaj
+	addi $4, $21, -11312
 	addi $5, $0, 31
 	addi $6, $0, 42
 	
@@ -10528,6 +11243,16 @@ notaskuj:
 	addi $7, $0, 127
 	
 	addi $4, $0, 64
+	addi $5, $0, 400
+	addi $2, $0, 31
+	syscall
+	jr $31
+
+notamegaj:	
+	addi $6, $0, 7
+	addi $7, $0, 127
+	
+	addi $4, $0, 76
 	addi $5, $0, 400
 	addi $2, $0, 31
 	syscall

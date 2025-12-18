@@ -1614,6 +1614,16 @@ frente:
 	
 	j looptest
 	
+nopefrente:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
+	
+	addi $21, $21, -4
+	add $24, $21, $0
+	jal mega
+	
+	j looptest
+	
 pacoleve:	
 	addi $4, $24, 0
 	add $12, $0, $4
@@ -1621,6 +1631,63 @@ pacoleve:
 	addi $6, $0, 21
 	
 	jal apagarp
+	
+#============== QUEDA LEVE
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO LEVE
+	addi $9, $21, 40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	
 	
 	jal megaleve
 	
@@ -1635,6 +1702,8 @@ pacoleve:
 	jal apagarp
 	
 	j looptest
+	
+
 
 #-------------------------------------------
 #	PRIMEIRO PACO	
@@ -1645,6 +1714,60 @@ paco1:
 	addi $6, $0, 24
 	
 	jal apagarp
+
+#============== COLISAO PACO1
+	
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO1
+	addi $9, $21, 48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
 	
 	jal megapaco1 #1
 	
@@ -1701,6 +1824,60 @@ paco2:
 	addi $6, $0, 24
 	
 	jal apagarp
+	
+#============== COLISAO PACO2
+	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO2
+	addi $9, $21, 48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
 	
 	jal megapaco2 #1
 	
@@ -1761,6 +1938,60 @@ paco3:
 	
 	jal apagarp
 	
+#============== COLISAO PACO3
+	
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO3
+	addi $9, $21, 48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	
 	jal megapaco3 #1
 	
 	addi $4, $0, 15000
@@ -1814,16 +2045,51 @@ pulomega:	sw $0, 4($23)
 	addi $14, $0, 20
 	
 
-pulaco:	addi $16, $0, 10		
+pulaco:	addi $16, $0, 50		
 pulacol:	beq $16, $0, quedaco
 	
 	
+	addi $9, $0, 10
+	slt $8, $17, $9
+	beq $8, 1, pulolv1
+	addi $9, $0, 20
+	slt $8, $17, $9
+	beq $8, 1, pulolv2
+	addi $9, $0, 30
+	slt $8, $17, $9
+	beq $8, 1, pulolv3
+	addi $9, $0, 40
+	slt $8, $17, $9
+	beq $8, 1, pulolv4
 	
+	j pulolv5
 	
-	addi $4, $0, 15000
+pulolv1:	addi $4, $0, 50
 	jal timer
 	
-	addi $21, $21, -1024
+	j pulolvf
+	
+pulolv2:	addi $4, $0, 200
+	jal timer
+	
+	j pulolvf
+
+pulolv3:	addi $4, $0, 700
+	jal timer
+	
+	j pulolvf
+	
+pulolv4:	addi $4, $0, 2000
+	jal timer
+	
+	j pulolvf
+		
+	
+pulolv5:	addi $4, $0, 4000
+	jal timer
+		
+		
+pulolvf:	addi $21, $21, -1024
 	addi $24, $21, 0
 	
 	addi $4, $24, -1072
@@ -1832,6 +2098,17 @@ pulacol:	beq $16, $0, quedaco
 	
 	jal apagarp
 	
+	addi $17, $17, 1
+#============== Colisao teto
+	
+	addi $9, $21, -1024
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, quedaco
+	
+
 	lw $9, 4($23)
 	
 	addi $10, $0, 'd'
@@ -1846,6 +2123,51 @@ pulacol:	beq $16, $0, quedaco
 	j looptest
 	
 pulacod:	
+#============== COLISAO PULACOD
+	addi $9, $21, 80
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	
 	sw $0, 4($23)
 	addi $21, $21, 8
 	addi $24, $21, 0
@@ -1857,6 +2179,51 @@ pulacod:
 	j looptest
 	
 pulacoe:	
+#============== COLISAO PULACOE
+	addi $9, $21, -32
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
@@ -1867,18 +2234,61 @@ pulacoe:
 	j looptest
 		
 	
-quedaco:	addi $16, $0, 10
-	addi $14, $0, 30
-					
-quedacol:	beq $16, $0, jumperase
-	
-	
-	
-	
-	addi $4, $0, 15000
+quedaco:	
+	addi $17, $0, 0
+	addi $4, $0, 75000
 	jal timer
 	
-	addi $21, $21, 1024
+	addi $14, $0, 30
+				
+quedacol:	addi $9, $21, 18420
+	addi $16, $9, 131072
+	lw $10, 0($16)
+	addi $8, $0, 0x485054
+	beq $10, $8, jumperase
+	
+	
+	addi $9, $0, 10
+	slt $8, $17, $9
+	beq $8, 1, quedalv5
+	addi $9, $0, 20
+	slt $8, $17, $9
+	beq $8, 1, quedalv4
+	addi $9, $0, 30
+	slt $8, $17, $9
+	beq $8, 1, quedalv3
+	addi $9, $0, 40
+	slt $8, $17, $9
+	beq $8, 1, quedalv2
+	
+
+	
+quedalv1:	addi $4, $0, 50
+	jal timer
+	
+	j quedalvf
+	
+quedalv2:	addi $4, $0, 500
+	jal timer
+	
+	j quedalvf
+
+quedalv3:	addi $4, $0, 900
+	jal timer
+	
+	j quedalvf
+	
+quedalv4:	addi $4, $0, 2500
+	jal timer
+	
+	j quedalvf
+		
+	
+quedalv5:	addi $4, $0, 6500
+	jal timer
+
+	
+quedalvf:	addi $21, $21, 1024
 	addi $24, $21, 0
 	
 	addi $4, $24, -1076
@@ -1887,7 +2297,7 @@ quedacol:	beq $16, $0, jumperase
 	
 	jal apagarp
 	
-	
+	addi $17, $17, 1
 	lw $9, 4($23)
 	
 	addi $10, $0, 'd'
@@ -1900,7 +2310,52 @@ quedacol:	beq $16, $0, jumperase
 	addi $16, $16, -1
 	j looptest
 	
-quedacod:	
+quedacod:
+
+#============== COLISAO QUEDACOD
+	addi $9, $21, 80
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopefrente
 	sw $0, 4($23)
 	addi $21, $21, 8
 	addi $24, $21, 0
@@ -1911,6 +2366,51 @@ quedacod:
 	j looptest
 	
 quedacoe:	
+#============== COLISAO QUEDACOE
+	addi $9, $21, -32
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
@@ -2045,6 +2545,16 @@ tras:
 	
 	j looptest
 	
+nopetras:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
+	
+	addi $21, $21, 4
+	add $24, $21, $0
+	jal mega
+	
+	j looptest	
+	
 pacolevet:	
 	addi $4, $24, 0
 	add $12, $0, $4
@@ -2052,6 +2562,58 @@ pacolevet:
 	addi $6, $0, 20
 	
 	jal apagarp
+#============== QUEDA LEVET
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO LEVET
+	addi $9, $21, -40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 	
 	jal megaleve
 	
@@ -2076,7 +2638,59 @@ paco1t:
 	addi $6, $0, 19
 	
 	jal apagarp
+#============== COLISAO PACO1T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO1T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 	jal megapaco1 #1
 	
 	addi $4, $0, 10000
@@ -2132,7 +2746,59 @@ paco2t:
 	addi $6, $0, 23
 	
 	jal apagarp
+#============== COLISAO PACO2T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO2T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 	jal megapaco2 #1
 	
 	addi $4, $0, 15000
@@ -2190,7 +2856,59 @@ paco3t:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO3T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO3T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 	jal megapaco3 #1
 	
 	addi $4, $0, 15000
@@ -6507,6 +7225,645 @@ megaleve:
 	
 #============== FIM DA FUNÇÃO MEGALEVE
 
+#=======================================
+#	FUNCAO MEGATIRO
+megatiro:	
+	add $18, $0, $31
+	jal megahead
+	
+#============== BRACO DIREITO
+
+	addi $4, $24, 4
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -2048
+	
+	add $4, $24, $0 
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+
+#-------------- CONTORNO DO BRACO DIREITO		
+	addi $24, $24, -12
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 1
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+		
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, 4072
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	addi $7, $0, -1028
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, -2056
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 4
+		
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 5
+	addi $7, $0, -4092
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- BUSTER
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA 
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA 
+	addi $6, $0, 1
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, -64
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============== BRACO ESQUERDO
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	
+	
+	addi $24, $24, -5144
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $24, $0, $2
+	
+#-------------- CONTORNO DO BRACO ESQUERDO
+	addi $24, $24, -2060
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 2040
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 3076
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+#-------------- PINTANDO O BRACO ESQUERDO
+	addi $24, $24, -4124
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $24, $0, $2
+	
+#============== BARRIGA
+	addi $24, $24, 12
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 7
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 996
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+#============== CUECA
+	addi $24, $24, -32
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+#============== COXA DIREITA
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodwt
+	add $24, $0, $2
+
+#-------------- CONTORNO	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -36
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 7
+	addi $7, $0, -4132
+	
+	jal sequencia
+	add $24, $0, $2
+
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+#-------------- CANELA DIREITA
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, -1028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 3052
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============== PERNA ESQUERDA 
+	addi $24, $24, -80
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, 3080
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 8
+	addi $7, $0, -6148
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- COXA ESQUERDA
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+#-------------- CANELA ESQUERDA
+	addi $24, $24, -20
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 6
+	addi $7, $0, 992
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	
+	add $31, $0, $18
+	
+	jr $31
 
 #===============================================================
 #	Temporizador
