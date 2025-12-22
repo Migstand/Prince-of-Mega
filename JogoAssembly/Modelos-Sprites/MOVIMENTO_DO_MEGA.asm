@@ -3693,9 +3693,9 @@ megatiro:	addi $24, $3, 480
 #	jr $31	
 
 #============ MEGABUSTER
-megabuster:	addi $24, $3, 548
+megabuster:	
 	
-	addi $24, $24, 10240
+	addi $24, $3, 10788
 	
 #=========== CONTORNO
 	add $4, $0, $24

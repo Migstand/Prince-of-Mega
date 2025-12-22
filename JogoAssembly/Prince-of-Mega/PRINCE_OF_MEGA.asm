@@ -1,7 +1,29 @@
 .text
 
-main:	#ESSE ï¿½ O PROGRAMA PARA CARREGAR O JOGO TODO
-
+main:	#j cenario#ESSE ï¿½ O PROGRAMA PARA CARREGAR O JOGO TODO
+	jal tela
+	lui $23, 0xffff
+	
+titulo:	
+	lw $9, 4($23)
+	
+	jal menutheme
+	addi $10, $0, ' '
+	beq $9, $10, apagar
+	j titulo
+apagar:	sw $0, 4($23)
+	lui $15, 0x1001
+	
+	addi $14, $0, 32768
+	addi $16, $0, 0x000000
+	
+apagte:	beq $14, $0, cenario
+	
+	sw $16, 0($15)
+	
+	addi $15, $15, 4
+	addi $14, $14, -1
+	j apagte
 cenario:	
 	# 485054 Piso 3d
 	# 242424 Tijolo do fundo
@@ -10,6 +32,7 @@ cenario:
 	# 2e2e2e Sombra do pilar
 	# b0b0b0 Piso do pilar
 	
+	add $16, $0, $0
 	lui $15, 0x1001
 	
 	add $4, $0, $15
@@ -2458,7 +2481,12 @@ skullman:
 	# $17 = Valor de movimento; Indica qual movimento deve fazer no momento
 	# $10 = Vai ser o comparador de teclas; ver se é igual a "TECLA"
 	# $16 = Vai guardar a cópia da letra; Loop do Pulo Mega; Loop do TiroMega 
-	
+#========================================================================================
+#	Memoria para guardar os valores chave	
+	lui $15, 0x1001
+	addi $15, $15, 1310720
+	addi $8, $0, 8000
+	sw $8, 4($15)
 funx:	addi $13, $0, 10
 	add $25, $0, $20
 	add $20, $0, $25
@@ -2480,8 +2508,8 @@ puloskull:	beq $13, $0, puloskull2
 	jal jskull
 	
 	
-	
-	bne $14, $0, lagp1
+	beq $14, 2, lagp1
+	beq $14, 1, lagp1
 	add $4, $0, 200
 	
 	jal timer
@@ -2588,14 +2616,14 @@ pulosku2:	beq $13, $0, puloskull3
 		
 	jal jskull
 	
-	
-	bne $14, $0, lagp2
+	beq $14, 2, lagp2
+	beq $14, 1, lagp2
 	addi $4, $0, 1000
 	jal timer
 	
 	j bufp21
 	
-	j bufp21
+	
 	
 lagp2:	
 	beq $13, 1, bufp21
@@ -2693,8 +2721,8 @@ pulosku3:	beq $13, $0, queda
 	jal jskull
 	
 	
-	
-	bne $14, $0, lagp3
+	beq $14, 2, lagp3
+	beq $14, 1, lagp3
 	addi $4, $0, 5000
 	jal timer
 	
@@ -2770,8 +2798,8 @@ quedasku:	beq $13, $0, queda2
 		
 	jal jskull
 	
-	
-	bne $14, $0, lagq1
+	beq $14, 2, lagq1
+	beq $14, 1, lagq1
 	add $4, $0, 5000
 	
 	jal timer
@@ -2874,8 +2902,8 @@ quedasku2:	beq $13, $0, queda3
 		
 	jal jskull
 	
-	
-	bne $14, $0, lagq2
+	beq $14, 1, lagq2
+	beq $14, 2, lagq2
 	add $4, $0, 500
 	
 	jal timer
@@ -2984,7 +3012,8 @@ quedasku3:	beq $13, $0, chasku
 	jal notaskuj
 	
 	
-qnor:	bne $14, $0, lagq3
+qnor:	beq $14, 1, lagq3
+	beq $14, 2, lagq3
 	add $4, $0, 100
 	
 	jal timer
@@ -3082,7 +3111,7 @@ chasku:	jal moveset
 
 	jal skull
 
-fim:	jal moveset
+	jal moveset
 
 	add $4, $0, 25000
 	
@@ -3092,7 +3121,7 @@ fim:	jal moveset
 	
 	j funx
 	
-	addi $2, $0, 10
+fim:	addi $2, $0, 10
 	syscall
 	
 #================================================================
@@ -7182,7 +7211,7 @@ megapaco2:
 	jal sequencia
 	add $24, $0, $2
 
-#============== PERNA DIREITA QUE T�? NO FUNDO
+#============== PERNA DIREITA QUE T�? NO FUNDO
 	
 	add $4, $0, $24
 	addi $5, $0, 0x000000 
@@ -9303,7 +9332,7 @@ megaleve:
 #	MOVESET DO MEGAMAN		
 moveset:
 	add $22, $0, $31
-	
+	beq $14, 40, tirolo
 	beq $14, 20, pulacol
 	beq $14, 30, quedacol								
 	add $24, $0, $21
@@ -9328,6 +9357,63 @@ cod:	addi $10, $0, 'd'
 	addi $10, $0, 'w'
 	beq $9, $10, pulomega
 	
+	addi $10, $0, 'j'
+	beq $9, $10, tiromega
+#============== DETECTOR DE DANO PARADO	
+	addi $9, $21, 40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
 	addi $17, $0, 0
 	addi $14, $0, 0
 	add $31, $0, $22
@@ -9353,6 +9439,16 @@ frente:
 	add $31, $0, $22
 	jr $31
 	
+nopefrente:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
+	
+	addi $21, $21, -4
+	add $24, $21, $0
+	jal mega
+	
+	add $31, $0, $22
+	jr $31
 pacoleve:	
 	addi $4, $24, 0
 	add $12, $0, $4
@@ -9360,10 +9456,73 @@ pacoleve:
 	addi $6, $0, 21
 	
 	jal apagarp
+#============== QUEDA LEVE
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO LEVE
+	addi $9, $21, 40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
 	
 	jal megaleve
 	
-	addi $4, $0, 40000
+	addi $4, $0, 35000
 	jal timer
 	
 	add $4, $0, $12
@@ -9385,10 +9544,73 @@ paco1:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO1
 	
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO1
+	addi $9, $21, 52
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+		
 	jal megapaco1 #1
 	
-	addi $4, $0, 10000
+	addi $4, $0, 12000
 	jal timer
 	
 	addi $4, $24, -40
@@ -9402,7 +9624,7 @@ paco1:
 	
 	jal megapaco1 #2
 	
-	addi $4, $0, 15000
+	addi $4, $0, 12000
 	jal timer
 	
 	addi $4, $24, -40
@@ -9416,7 +9638,7 @@ paco1:
 	
 	jal megapaco1 #3
 	
-	addi $4, $0, 15000
+	addi $4, $0, 12000
 	jal timer
 	
 	add $4, $0, $12
@@ -9443,7 +9665,70 @@ paco2:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO2
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO2
+	addi $9, $21, 52
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+		
 	jal megapaco2 #1
 	
 	addi $4, $0, 15000
@@ -9490,7 +9775,7 @@ paco2:
 	add $31, $0, $22
 	jr $31
 	
-minus:	addi $17, $0, 0
+minus:	addi $17, $17, -1
 
 	add $31, $0, $22
 	jr $31
@@ -9506,7 +9791,70 @@ paco3:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO3
 	
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO3
+	addi $9, $21, 52
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+		
 	jal megapaco3 #1
 	
 	addi $4, $0, 15000
@@ -9577,6 +9925,16 @@ tras:
 	add $31, $0, $22
 	jr $31
 	
+nopetras:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
+	
+	addi $21, $21, 4
+	add $24, $21, $0
+	jal mega
+	
+	add $31, $0, $22
+	jr $31	
 pacolevet:	
 	addi $4, $24, 0
 	add $12, $0, $4
@@ -9584,10 +9942,62 @@ pacolevet:
 	addi $6, $0, 20
 	
 	jal apagarp
+#============== QUEDA LEVET
+	addi $9, $21, 24536
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
 	
+	beq $10, $8, quedaco
+	
+#============== COLISAO LEVET
+	addi $9, $21, -40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megaleve
 	
-	addi $4, $0, 40000
+	addi $4, $0, 35000
 	jal timer
 	
 	add $4, $0, $12
@@ -9609,10 +10019,63 @@ paco1t:
 	addi $6, $0, 19
 	
 	jal apagarp
+#============== COLISAO PACO1T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO1T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megapaco1 #1
 	
-	addi $4, $0, 10000
+	addi $4, $0, 15000
 	jal timer
 	
 	addi $4, $24, 4
@@ -9667,7 +10130,60 @@ paco2t:
 	addi $6, $0, 23
 	
 	jal apagarp
+#============== COLISAO PACO2T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO2T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megapaco2 #1
 	
 	addi $4, $0, 15000
@@ -9728,7 +10244,60 @@ paco3t:
 	addi $6, $0, 24
 	
 	jal apagarp
+#============== COLISAO PACO3T
 	
+	addi $9, $21, 24552
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+	
+#============== COLISAO PACO3T
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+		
 	jal megapaco3 #1
 	
 	addi $4, $0, 15000
@@ -9786,14 +10355,51 @@ pulomega:	sw $0, 4($23)
 	addi $14, $0, 20
 	
 
-pulaco:	addi $16, $0, 10		
+pulaco:	addi $16, $0, 50		
 pulacol:	beq $16, $0, quedaco
 	
 	
+	addi $9, $0, 10
+	slt $8, $17, $9
+	beq $8, 1, pulolv1
+	addi $9, $0, 20
+	slt $8, $17, $9
+	beq $8, 1, pulolv2
+	addi $9, $0, 30
+	slt $8, $17, $9
+	beq $8, 1, pulolv3
+	addi $9, $0, 40
+	slt $8, $17, $9
+	beq $8, 1, pulolv4
 	
+	j pulolv5
 	
-	addi $4, $0, 15000
+pulolv1:	addi $4, $0, 0
 	jal timer
+	
+	j pulolvf
+	
+pulolv2:	addi $4, $0, 20
+	jal timer
+	
+	j pulolvf
+
+pulolv3:	addi $4, $0, 50
+	jal timer
+	
+	j pulolvf
+	
+pulolv4:	addi $4, $0, 100
+	jal timer
+	
+	j pulolvf
+		
+	
+pulolv5:	addi $4, $0, 500
+	jal timer
+		
+		
+pulolvf:
 	
 	addi $21, $21, -1024
 	addi $24, $21, 0
@@ -9804,6 +10410,15 @@ pulacol:	beq $16, $0, quedaco
 	
 	jal apagarp
 	
+	addi $17, $17, 1
+#============== COLISAO DO TETO
+	
+	addi $9, $21, -1024
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, quedaco	
 	lw $9, 4($23)
 	
 	addi $10, $0, 'd'
@@ -9820,6 +10435,61 @@ pulacol:	beq $16, $0, quedaco
 	jr $31
 	
 pulacod:	
+#============== COLISAO PULACOD
+	addi $9, $21, 100
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	
 	sw $0, 4($23)
 	addi $21, $21, 8
 	addi $24, $21, 0
@@ -9832,6 +10502,51 @@ pulacod:
 	jr $31
 	
 pulacoe:	
+#============== COLISAO PULACOE
+	addi $9, $21, -32
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
@@ -9843,18 +10558,61 @@ pulacoe:
 	jr $31
 		
 	
-quedaco:	addi $16, $0, 10
-	addi $14, $0, 30
-					
-quedacol:	beq $16, $0, jumperase
-	
-	
-	
-	
-	addi $4, $0, 15000
+quedaco:	
+	addi $17, $0, 0
+	addi $4, $0, 75000
 	jal timer
 	
-	addi $21, $21, 1024
+	addi $14, $0, 30
+					
+quedacol:	
+	addi $9, $21, 18420
+	addi $16, $9, 131072
+	lw $10, 0($16)
+	addi $8, $0, 0x485054
+	beq $10, $8, jumperase
+	
+	addi $9, $0, 10
+	slt $8, $17, $9
+	beq $8, 1, quedalv5
+	addi $9, $0, 20
+	slt $8, $17, $9
+	beq $8, 1, quedalv4
+	addi $9, $0, 30
+	slt $8, $17, $9
+	beq $8, 1, quedalv3
+	addi $9, $0, 40
+	slt $8, $17, $9
+	beq $8, 1, quedalv2
+	
+
+	
+quedalv1:	addi $4, $0, 0
+	jal timer
+	
+	j quedalvf
+	
+quedalv2:	addi $4, $0, 10
+	jal timer
+	
+	j quedalvf
+
+quedalv3:	addi $4, $0, 200
+	jal timer
+	
+	j quedalvf
+	
+quedalv4:	addi $4, $0, 500
+	jal timer
+	
+	j quedalvf
+		
+	
+quedalv5:	addi $4, $0, 1500
+	jal timer
+
+	
+quedalvf:	addi $21, $21, 1024
 	addi $24, $21, 0
 	
 	addi $4, $24, -1076
@@ -9863,7 +10621,7 @@ quedacol:	beq $16, $0, jumperase
 	
 	jal apagarp
 	
-	
+	addi $17, $17, 1
 	lw $9, 4($23)
 	
 	addi $10, $0, 'd'
@@ -9878,6 +10636,61 @@ quedacol:	beq $16, $0, jumperase
 	jr $31
 	
 quedacod:	
+#============== COLISAO QUEDACOD
+	addi $9, $21, 100
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	
 	sw $0, 4($23)
 	addi $21, $21, 8
 	addi $24, $21, 0
@@ -9889,6 +10702,52 @@ quedacod:
 	jr $31
 	
 quedacoe:	
+
+#============== COLISAO QUEDACOE
+	addi $9, $21, -32
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
@@ -9899,7 +10758,9 @@ quedacoe:
 	add $31, $0, $22
 	jr $31
 	
-jumperase:	addi $4, $21, -11312
+jumperase:	
+	jal notamegaj
+	addi $4, $21, -11312
 	addi $5, $0, 31
 	addi $6, $0, 42
 	
@@ -9909,7 +10770,871 @@ jumperase:	addi $4, $21, -11312
 	add $31, $0, $22
 	jr $31
 
+#=============================================
+#	FUNCAO TIROMEGA. AQUI TEM PORRADARIA GRANDE
 
+tiromega:	
+	sw $0, 4($23)
+	
+	addi $4, $24, -52
+	addi $5, $0, 30
+	addi $6, $0, 30
+	
+	jal apagarp
+	
+	jal notamegat
+	jal megatiro
+	addi $14, $0, 40
+	add $12, $21, 10312 #Depois eu decido qual o melhor registrador para esse loop
+	
+	
+tirolo:	
+	add $24, $0, $12
+	addi $12, $12, 4
+	jal megabuster
+	
+	addi $9, $12, 48
+	addi $8, $0, 0xffffff
+	addi $11, $0, 0x0000
+	lw $10, 0($9)
+	
+	beq $10, $8, damagehit
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	bne $10, $11, stopshot
+	 
+	add $24, $9, $0
+	
+	addi $4, $24, -1076
+	addi $5, $0, 20
+	addi $6, $0, 20
+	
+	jal apagarp
+	
+	addi $4, $0, 100
+	jal timer
+	add $31, $0, $22
+	jr $31
+	
+
+stopshot:	
+	sw $0, 4($23)
+	
+	add $24, $9, $0
+	
+	addi $4, $24, -1100
+	addi $5, $0, 20
+	addi $6, $0, 20
+	
+	jal apagarp
+	
+	addi $4, $21, -56
+	addi $5, $0, 30
+	addi $6, $0, 30
+	
+	jal apagarp
+	
+	add $14, $0, $0
+	add $12, $0, $0
+	
+	add $31, $0, $22
+	jr $31
+	
+damagehit:	
+	sw $0, 4($23)
+	add $24, $9, $0
+	
+	addi $4, $24, -1076
+	addi $5, $0, 12
+	addi $6, $0, 12
+	
+	jal apagarp
+	
+	addi $4, $21, -56
+	addi $5, $0, 30
+	addi $6, $0, 30
+	
+	jal apagarp
+	
+	add $14, $0, $0
+	j telavitoria
+telavitoria:	
+	jal vitoria
+	jal jinglevi
+	j fim
+	
+derrotado:	
+	jal derrota
+	jal jinglede
+	j fim
+#=======================================
+#	FUNCAO MEGATIRO
+megatiro:	
+	add $18, $0, $31
+	jal megahead
+	
+#============== BRACO DIREITO
+
+	addi $4, $24, 4
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -2048
+	
+	add $4, $24, $0 
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+
+#-------------- CONTORNO DO BRACO DIREITO		
+	addi $24, $24, -12
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 1
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+		
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, 4072
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	addi $7, $0, -1028
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, -2056
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 4
+		
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 5
+	addi $7, $0, -4092
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- BUSTER
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA 
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA 
+	addi $6, $0, 1
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, -64
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============== BRACO ESQUERDO
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	
+	
+	addi $24, $24, -5144
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $24, $0, $2
+	
+#-------------- CONTORNO DO BRACO ESQUERDO
+	addi $24, $24, -2060
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 2040
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 3076
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+#-------------- PINTANDO O BRACO ESQUERDO
+	addi $24, $24, -4124
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $24, $0, $2
+	
+#============== BARRIGA
+	addi $24, $24, 12
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 7
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 996
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+#============== CUECA
+	addi $24, $24, -32
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+#============== COXA DIREITA
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodwt
+	add $24, $0, $2
+
+#-------------- CONTORNO	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -36
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 7
+	addi $7, $0, -4132
+	
+	jal sequencia
+	add $24, $0, $2
+
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+#-------------- CANELA DIREITA
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, -1028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 3052
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============== PERNA ESQUERDA 
+	addi $24, $24, -80
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, 3080
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000#CONTORNO
+	addi $6, $0, 8
+	addi $7, $0, -6148
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#-------------- COXA ESQUERDA
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+#-------------- CANELA ESQUERDA
+	addi $24, $24, -20
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 3
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 6
+	addi $7, $0, 992
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5 #COR
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	
+	add $31, $0, $18
+	
+	jr $31
+#============== FIM MEGATIRO
+	
+#===========================================
+#============== MEGABUSTER
+megabuster:	
+	add $18, $0, $31
+	
+#============== CONTORNO
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24 2056
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -5132
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #CONTORNO
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+#============ COR DO TIRO
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0xe5aa7a #TIRO
+	addi $6, $0, 4
+	addi $7, $0, 4
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0xe5aa7a #TIRO
+	addi $6, $0, 2
+	addi $7, $0, 6
+	
+	jal verticais
+	add $24, $0, $2
+
+#=============== CHARME/BRILHO	
+	addi $24, $24, -12
+	
+	add $4, $0, $24
+	addi $5, $0, 0xffffff #CHARME
+	addi $6, $0, 2
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xffffff #CHARME
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
+#============== FIM MEGABUSTER
+				
 #===============================================================	
 #	FUNCAO MEGA PULO
 
@@ -10521,9 +12246,1543 @@ megapulo:
 	jr $31	
 
 #============== FIM DA FUNCAO MEGA PULO
+#=================================================
+#	Vitoria
+vitoria:	
+	add $18, $0, $31
+	lui $8, 0x1001
 	
+	add $9, $0, 0x22b14c
+	addi $10, $0, 32768
+	
+vito:	sw $9, 0($8)
+	
+	addi $10, $10, -1
+	addi $8, $8, 4
+	bne $10, $0, vito
+
+#================================
+#	Texto de vitoria
+vitext:	lui $15, 0x1001
+	
+	addi $15, $15, 40244
+#	0xa8e61d = COR DO TEXTO
+#============== VOCE
+
+#-------------- V
+		
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 6
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 6136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 2036
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 1032
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -2048
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -6144
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+#-------------- O
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3076
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -40
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#-------------- C
+	addi $15, $15, -10212
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#-------------- E
+	addi $15, $15, -10220
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+		
+	addi $15, $15, -5136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 4
+	addi $7, $0, -8224
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#-------------- V ao contrario
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -3060
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	addi $15, $15, -4
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, -1028
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+#-------------- SUBLINHADO
+	addi $15, $15, 18256
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 47
+	addi $7, $0, 6152
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============== GANHOU
+	
+#-------------- G
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 3056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, -23560
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 21
+	addi $7, $0, 5
+	
+	jal verticais
+	add $15, $0, $2
+	
+#-------------- A
+	addi $15, $15, -992
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 7
+	addi $7, $0, 992
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 9
+	addi $7, $0, 984
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 10
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 8
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 10
+	addi $7, $0, 5
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 4068
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 6120
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 12
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, -12268
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#-------------- N	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 11
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 2048
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 9
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 2048
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 1024
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 1024
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 4
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -7164
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 11
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+#-------------- H
+	addi $15, $15, -1004
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 11
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, -1004
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 11
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5088
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal verticais
+	
+	addi $15, $15, -5072
+
+#-------------- O
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3076
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -40
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#-------------- U
+	addi $15, $15, -10220
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 6
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 6136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 2040
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 1024
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -10240
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 8
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+#-------------- Sublinhado
+	addi $15, $15, 13992
+	
+	add $4, $0, $15
+	addi $5, $0, 0xa8e61d
+	addi $6, $0, 88
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $15, $0, $2
+	add $31, $0, $18
+	jr $31
+	
+#============== FIM VITORIA
+
+#==========================================================	
+#	Derrota
+	
+derrota:	add $18, $0, $31
+	lui $8, 0x1001
+	
+	add $9, $0, 0x610005
+	addi $10, $0, 32768
+	
+derrot:	sw $9, 0($8)
+	
+	addi $10, $10, -1
+	addi $8, $8, 4
+	bne $10, $0, derrot
+	
+	# jr $31	
+dertext:	lui $15, 0x1001
+	
+	addi $15, $15, 40244
+#	0xed1c24 = COR DO TEXTO
+#============== VOCE
+
+#-------------- V
+		
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 6
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 6136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 2036
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 1032
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -2048
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -6144
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+#-------------- O
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3076
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -40
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#-------------- C
+	addi $15, $15, -10212
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+#-------------- E
+	addi $15, $15, -10220
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+		
+	addi $15, $15, -5136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, -8224
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#-------------- V ao contrario
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 5
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -3060
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	addi $15, $15, 1020
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	addi $15, $15, -4
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, -1028
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+#-------------- SUBLINHADO
+	addi $15, $15, 18256
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 47
+	addi $7, $0, 6152
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#============== PERDEU
+#-------------- P
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3076
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -40
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 15
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+
+#-------------- E
+	addi $15, $15, -3048
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+		
+	addi $15, $15, -5136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, -11240
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#-------------- R
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3076
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, -40
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 15
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, 1008
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 7
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $15, $0, $2
+	
+#-------------- D
+	addi $15, $15, -9180
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	addi $15, $15, -4
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 1008
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 1008
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 12
+	addi $7, $0, 5
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 12248
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 1
+	addi $7, $0, 12
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 5
+	addi $7, $0, 988
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 7
+	addi $7, $0, -13284
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#-------------- E
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodwt
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 3040
+	
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 5
+	addi $7, $0, 4
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 5104
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 2056
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $15, $0, $2
+		
+	addi $15, $15, -5136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 4
+	addi $7, $0, -5096
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#-------------- U
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 6
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 6136
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 2040
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+	addi $15, $15, 1024
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal diagoup
+	add $15, $0, $2
+	
+	addi $15, $15, -10240
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 8
+	addi $7, $0, 3
+	
+	jal verticais
+	add $15, $0, $2
+	
+#-------------- Sublinhado
+	addi $15, $15, 14020
+	
+	add $4, $0, $15
+	addi $5, $0, 0xed1c24
+	addi $6, $0, 80
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	add $31, $0, $18
+	jr $31
 #=================================================
 #	SOUND EFFECTS
+#	pulo skull
 notaskuj:	
 	addi $6, $0, 7
 	addi $7, $0, 127
@@ -10533,3 +13792,2737 @@ notaskuj:
 	addi $2, $0, 31
 	syscall
 	jr $31
+#	Pulo mega
+notamegaj:	
+	addi $6, $0, 7
+	addi $7, $0, 127
+	
+	addi $4, $0, 76
+	addi $5, $0, 400
+	addi $2, $0, 31
+	syscall
+	jr $31
+#========================================================
+#	Tiro do mega
+notamegat:	addi $6, $0, 7 #efeito
+	addi $7,$0, 80 #volume
+	addi $4, $0, 74 #re
+	addi $5, $0, 75
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 62 #re
+	addi $5, $0, 75
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 86 #re
+	addi $5, $0, 100
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 98 #re
+	addi $5, $0, 300
+	addi $2, $0, 31
+	syscall
+	
+	jr $31
+	
+#	Vitoria
+
+jinglevi:	addi $6, $0, 55 #conjunto / piano 7
+	addi $7, $0, 100 #volume
+	
+	addi $4, $0, 71 #do#
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 150 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 71 #do#
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 400 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	#=================================	
+	addi $4, $0, 73 #re#
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 150 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 73 #re#
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 400 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	#===============================
+	addi $4, $0, 74 #mi
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 150 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 74 #m
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 400 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	#=======================
+	addi $6, $0, 55 #conjunto / efeito 100
+	addi $7,$0, 100 #volume
+	
+	addi $4, $0, 76 #re
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 150 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	
+	addi $4, $0, 74 #re
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 150 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	
+	addi $4, $0, 76 #re
+	addi $5, $0, 500
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 150 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	
+	addi $4, $0, 78 #re
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 750 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+	
+#	Derrota
+
+jinglede:	addi $6, $0, 5 #conjunto / piano 5, 7, 86, 97,  
+	addi $7, $0, 100 #volume
+	addi $4, $0, 59 #do#
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 1200 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 59 #do#
+	addi $5, $0, 1200
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 500 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 64 #do#
+	addi $5, $0, 2000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 1100 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+#====================
+
+	addi $4, $0, 64 #do#
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 64 #do#
+	addi $5, $0, 3250
+	addi $2, $0, 31
+	syscall
+
+	addi $4, $0, 400 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 59 #do#
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	jr $31
+	
+#===========================================
+#	Tema principal
+
+menutheme:	
+	beq $3, $0, menu1
+	beq $3, 1, menu2
+	beq $3, 2, menu3
+	beq $3, 3, menu4
+	beq $3, 4, menu5
+	beq $3, 5, menu6
+	beq $3, 6, menu7
+	beq $3, 7, menu8
+	beq $3, 8, menu9
+	beq $3, 9, menu10
+	beq $3, 10, menu11
+	beq $3, 11, menu12
+	beq $3, 12, menu13
+	beq $3, 13, menu14
+	beq $3, 14, menu15
+	beq $3, 15, menu16
+	beq $3, 16, menu17
+	beq $3, 17, menu18
+	beq $3, 18, menu19
+	beq $3, 19, menu20
+	beq $3, 20, menu21
+	beq $3, 21, menu22
+	beq $3, 22, menu23
+	beq $3, 23, menu24
+	beq $3, 24, menu25
+	beq $3, 25, menu26
+	beq $3, 26, menu27
+	beq $3, 27, menu28
+	beq $3, 28, menu29
+	beq $3, 29, menu30
+	beq $3, 30, menu31
+	beq $3, 31, menu32
+	beq $3, 32, menu33
+	beq $3, 33, menu34
+	beq $3, 34, menu35
+	beq $3, 35, menu36
+	beq $3, 36, menu37
+	beq $3, 37, menu38
+	beq $3, 38, menu39
+	beq $3, 39, menu40
+	beq $3, 40, menu41
+	beq $3, 41, menu42
+	beq $3, 42, menu43
+	beq $3, 43, menu44
+	beq $3, 44, menu45
+	beq $3, 45, menu46
+	beq $3, 46, menu47
+	beq $3, 47, menu48
+	beq $3, 48, menu49
+	beq $3, 49, menu50
+	beq $3, 50, menu51
+	beq $3, 51, menu52
+	beq $3, 52, menu53
+	beq $3, 53, menu54
+	beq $3, 54, menu55
+	beq $3, 55, menu56
+	beq $3, 56, menu57
+	beq $3, 57, menu58
+	beq $3, 58, menu59
+	beq $3, 59, menu60
+	beq $3, 60, menu61
+	beq $3, 61, menu62
+	beq $3, 62, menu63
+	beq $3, 63, menu64
+	beq $3, 64, menu65
+	beq $3, 65, menu66
+	beq $3, 66, menu67
+	beq $3, 67, menu68
+	beq $3, 68, menu69
+	beq $3, 69, menu70
+	beq $3, 70, menu71
+	beq $3, 71, menu72
+	beq $3, 72, menu73
+	beq $3, 73, menu74
+	beq $3, 74, menu75
+	beq $3, 75, menu76
+	beq $3, 76, menu77
+	beq $3, 77, menu78
+	beq $3, 78, menu79
+	beq $3, 79, menu80
+	beq $3, 80, menu81
+	beq $3, 81, menu82
+	beq $3, 82, menu83
+	beq $3, 83, menu84
+	beq $3, 84, menu85
+	beq $3, 85, menu86
+	beq $3, 86, menu87
+	beq $3, 87, menu88
+	beq $3, 88, menu89
+	beq $3, 89, menu90
+	beq $3, 90, menu91
+	beq $3, 91, menu92
+	beq $3, 92, menu93
+	beq $3, 93, menu94
+	beq $3, 94, menu95
+	beq $3, 95, menu96
+	beq $3, 96, menu97
+	beq $3, 97, menu98
+	beq $3, 98, menu99
+	beq $3, 99, menu100
+	beq $3, 100, menu101
+	beq $3, 101, menu102
+	beq $3, 102, menu103
+	beq $3, 103, menu104
+	beq $3, 104, menu105
+	beq $3, 105, menu106
+	beq $3, 106, menu107
+	beq $3, 107, menu108
+	beq $3, 108, menu109
+	beq $3, 109, menu110
+	beq $3, 110, menu111
+	beq $3, 111, menu112
+	beq $3, 112, menu113
+	beq $3, 113, menu114
+	beq $3, 114, menu115
+	beq $3, 115, menu116
+	beq $3, 116, menu117
+	beq $3, 117, menu118
+	beq $3, 118, menu119
+	beq $3, 119, menu120
+	beq $3, 120, menu121
+	beq $3, 121, menu122
+	beq $3, 122, menu123
+	beq $3, 123, menu124
+	beq $3, 124, menu125
+
+menu1:	addi $6, $0, 69 #conjunto / piano 2, 3, 5, 7, 86, 97,  
+	addi $7, $0, 100 #volume
+	addi $4, $0, 55#43 #g2#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31 #1
+	syscall
+	
+	addi $3, $0, 1
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	jr $31
+	
+menu2:	addi $4, $0, 60#48 #c3
+	addi $5, $0, 2000		#0:54
+	addi $2, $0, 31 #2
+	syscall
+	
+	addi $3, $0, 2
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+menu3:	addi $4, $0, 55#43 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31 #3
+	syscall
+	
+	addi $3, $0, 3
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+	
+menu4:	addi $4, $0, 56#44 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31 #4
+	syscall
+	
+	addi $3, $0, 4
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+
+menu5:	addi $4, $0, 59#47 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31 #5
+	syscall
+	
+	addi $3, $0, 5
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+menu6:	addi $4, $0, 60#48 #c3#
+	addi $5, $0, 2500		#0:54
+	addi $2, $0, 31 #6
+	syscall
+	
+	addi $3, $0, 6
+	addi $4, $0, 2500 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+	#==== 13s
+menu7:	addi $4, $0, 55#43 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 7
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu8:	addi $4, $0, 56#44 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 8
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+	
+menu9:	addi $4, $0, 59#47 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 9
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	jr $31
+	
+menu10:	addi $4, $0, 63#51 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 10
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+menu11:	addi $4, $0, 60#48 #do#
+	addi $5, $0, 2000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 11
+
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+
+	#==== 19s
+menu12:	addi $4, $0, 58#46 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 12
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu13:	addi $4, $0, 54#42 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 13
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu14:	addi $4, $0, 58#46 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 14
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu15:	addi $4, $0, 55#43 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 15
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu16:	addi $4, $0, 55#43 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 16
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu17:	addi $4, $0, 60#48 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 17
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu18:	addi $4, $0, 55#43 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 18
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu19:	addi $4, $0, 56#44 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 19
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu20:	addi $4, $0, 59#47 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 20
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu21:	addi $4, $0, 60#48 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 21
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+	#====29s	
+
+menu22:	addi $4, $0, 55#43 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 22
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu23:	addi $4, $0, 56#44 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 23
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu24:	addi $4, $0, 59#47 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 24
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu25:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 25
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+	#======= 31s
+	
+menu26:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 1500		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 26
+
+	addi $4, $0, 1500 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu27:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 27
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu28:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 28
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu29:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 29
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu30:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 30
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu31:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 31
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu32:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 32
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu33:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 33
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu34:	addi $4, $0, 68#56 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 34
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+
+	#======== 40s
+
+menu35:	addi $4, $0, 71#59 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 35
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu36:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 36
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu37:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 37
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu38:	addi $4, $0, 68#56 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 38
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu39:	addi $4, $0, 71#59 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 39	
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+	#======= 47s
+
+menu40:	addi $4, $0, 75#63 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 40
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu41:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 2000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 41
+
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu42:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 42
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu43:	addi $4, $0, 66#54 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 43
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu44:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 44
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu45:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 45
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu46:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 46
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+	#======== 50s
+
+menu47:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 47
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu48:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 48
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu49:	addi $4, $0, 68#56 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 49
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu50:	addi $4, $0, 71#59 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 50
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu51:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 51
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+	#==== 57s
+	
+menu52:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 52
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu53:	addi $4, $0, 68#56 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 53
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu54:	addi $4, $0, 71#59 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 54
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu55:	addi $4, $0, 79#67 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 55
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu56:	addi $4, $0, 74#62 #do#
+	addi $5, $0, 1700		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 56
+
+	addi $4, $0, 1700 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu57:	addi $4, $0, 74#62 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 57
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+	#1:00
+
+menu58:	addi $4, $0, 77#65 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 58
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu59:	addi $4, $0, 79#67 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 59
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu60:	addi $4, $0, 74#62 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 60
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu61:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 61
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu62:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 62
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu63:	addi $4, $0, 63#51 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 63
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu64:	addi $4, $0, 60#48 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 64
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu65:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 65
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu66:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 66
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu67:	addi $4, $0, 63#51 #do#
+	addi $5, $0, 2800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 67
+
+	addi $4, $0, 2800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu68:	addi $4, $0, 63#51 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 68
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu69:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 69
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu70:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 1500		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 70
+
+	addi $4, $0, 1500 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu71:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 71
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu72:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 72
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu73:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 73
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu74:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 74
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu75:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 75
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu76:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 76
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu77:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 1500		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 77
+
+	addi $4, $0, 1500 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu78:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 700		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 78
+
+	addi $4, $0, 700 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+	
+menu79:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 79
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu80:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 80
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu81:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 81
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu82:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 2800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 82
+
+	addi $4, $0, 2800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu83:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 83
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu84:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 84
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu85:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 85
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu86:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 86
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu87:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 87
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu88:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 2000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 88
+
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu89:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 89
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu90:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 2800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 90
+
+	addi $4, $0, 2800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu91:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 91
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu92:	addi $4, $0, 63#51 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 92
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu93:	addi $4, $0, 66#54 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 93
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu94:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 2800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 94
+
+	addi $4, $0, 2800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu95:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 95
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu96:	addi $4, $0, 63#51 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 96
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu97:	addi $4, $0, 66#54 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 97
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu98:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 98
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu99:	addi $4, $0, 67#55 #do#
+	addi $5, $0, 1200		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 99
+
+	addi $4, $0, 1200 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu100:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 100
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu101:	addi $4, $0, 61#49 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 101
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu102:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 102
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu103:	addi $4, $0, 62#50 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 103
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu104:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 104
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu105:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 105
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu106:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 106
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu107:	addi $4, $0, 66#54 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 107
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu108:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 108
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu109:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 2800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 109
+
+	addi $4, $0, 2800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu110:	addi $4, $0, 65#53 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 110
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu111:	addi $4, $0, 66#54 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 111
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu112:	addi $4, $0, 69#57 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 112
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu113:	addi $4, $0, 77#65 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 113
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu114:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 1800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 114
+
+	addi $4, $0, 1800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu115:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 115
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu116:	addi $4, $0, 75#63 #do#
+	addi $5, $0, 1000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 116
+
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu117:	addi $4, $0, 77#65 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 117
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu118:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 3000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 118
+
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu119:	addi $4, $0, 72#60 #do#
+	addi $5, $0, 2000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 119
+
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu120:	addi $4, $0, 70#58 #do#
+	addi $5, $0, 2000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 120
+
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+#=== 2:07
+	
+menu121:	addi $4, $0, 53#41 #do#
+	addi $5, $0, 600		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 121
+
+	addi $4, $0, 600 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu122:	addi $4, $0, 54#42 #do#
+	addi $5, $0, 800		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 122
+
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu123:	addi $4, $0, 57#45 #do#
+	addi $5, $0, 300		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 123
+
+	addi $4, $0, 300 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu124:	addi $4, $0, 58#46 #do#
+	addi $5, $0, 4400		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 124
+
+	addi $4, $0, 4400 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+
+	jr $31
+
+menu125:	addi $4, $0, 53#41 #do#
+	addi $5, $0, 4000		#0:54
+	addi $2, $0, 31
+	syscall
+
+	addi $3, $0, 0
+
+	addi $4, $0, 4000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	jr $31
+
+#===================================================
+#	Splash
+tela:	
+	#Nome do jogo
+	
+	add $18, $0, $31
+	lui $15, 0x1001
+	
+	addi $15, $15, 24836
+	
+p:	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, 1024
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 6108
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, -7160
+
+r:	
+	addi $15, $15, 8
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $13, $15, $0
+	
+	addi $15, $15, 1024
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 6108
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, -32
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	add $15, $13, $0
+	
+	addi $15, $15, 8
+	
+i:	addi $15, $15, 8
+	
+	add $13, $0, $15
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 1
+	addi $7, $0, 2036
+	
+	jal sequencia
+	add $15, $0, $2
+	 
+	addi $15, $15, 8
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 13
+	
+	jal vertical
+	add $15, $0, $2
+	
+n:	add $15, $13, $0
+	
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	addi $15, $15, 56
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+c:	
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 14296
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -14336
+	
+	jal sequencia
+	add $15, $0, $2
+	
+e:	addi $15, $15, 16
+
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -14336
+	
+	jal sequencia
+	add $15, $0, $2
+	
+o:	addi $15, $15, 32
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 14296
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -14336
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+f:	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -7168
+	
+	jal sequencia
+	add $15, $0, $2
+	
+persia:
+	
+	addi $15, $15, 32320
+#=========== P	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, 1024
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 6108
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, -7160
+
+#========= E
+	addi $15, $15, 16
+
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -14336
+	
+	jal sequencia
+	add $15, $0, $2
+
+#==============  R
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $13, $15, $0
+	
+	addi $15, $15, 1024
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 6108
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, -32
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	add $15, $13, $0
+	
+#============ S
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 9
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -7168
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	
+	jal vertical
+	add $15, $0, $2
+	
+	
+#============ I
+	addi $15, $15, -7156
+	
+	add $13, $0, $15
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 1
+	addi $7, $0, 2036
+	
+	jal sequencia
+	add $15, $0, $2
+	 
+	addi $15, $15, 8
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 13
+	
+	jal vertical
+	add $15, $0, $2
+	
+#============= A
+	add $15, $13, $0
+	
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -4
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 8152
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 32368
+	
+	jal sequencia
+	add $15, $0, $2
+
+#============= Autores
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 8192
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -8192
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+#=========== O
+
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 14296
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -14336
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+#==========  R
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $13, $15, $0
+	
+	addi $15, $15, 1024
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 6
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 6108
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	addi $15, $15, -32
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $15, $0, $2
+	
+	add $15, $13, $0
+	
+#========= A
+	
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -4
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 8152
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 400
+	
+	jal sequencia
+	add $15, $0, $2
+
+#========== Dias
+	
+#============= D
+	addi $15, $15, -8240
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 9
+	addi $7, $0, 14296
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -13312
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 13
+	
+	jal vertical
+	add $15, $0, $2
+	
+#======================== I
+	addi $15, $15, -2048
+	
+	addi $15, $15, 16
+	
+	add $13, $0, $15
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 1
+	addi $7, $0, 2036
+	
+	jal sequencia
+	add $15, $0, $2
+	 
+	addi $15, $15, 8
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 13
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $15, $13, $0
+	
+#============= A
+
+	addi $15, $15, 16
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -4
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 15
+	
+	jal vertical
+	add $15, $0, $2
+	
+	addi $15, $15, 8152
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $15, $0, $2
+	
+#================== A
+	addi $15, $15, 16
+	
+	addi $15, $15, -8192
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 9
+	addi $7, $0, 7128
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 10
+	addi $7, $0, -7168
+	
+	jal sequencia
+	add $15, $0, $2
+	
+	add $4, $0, $15
+	addi $5, $0, 0xffffff
+	addi $6, $0, 8
+	
+	jal vertical
+	add $15, $0, $2
+	
+	add $31, $0, $18
+	jr $31		

@@ -1,0 +1,281 @@
+# teste musica avatar 
+
+.text
+main: 	
+	addi $6, $0, 3 #conjunto / piano 2, 3, 5, 7, 86, 97,  
+	addi $7, $0, 100 #volume
+	addi $4, $0, 65 #do#
+	addi $5, $0, 4000		#0:54
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 4000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 67 #do#
+	addi $5, $0, 4000
+	addi $2, $0, 31		#0:57
+	syscall
+	
+	addi $4, $0, 4000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	
+	addi $4, $0, 72#C5
+	addi $5, $0, 3000	#1:01
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 73 #do#
+	addi $5, $0, 800	#1:03
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 72 #C5
+	addi $5, $0, 800	#1:04
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 70 #do#
+	addi $5, $0, 4000	#1:04
+	addi $2, $0, 31
+	syscall
+	
+	
+	addi $4, $0, 4000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	#===============
+	
+	addi $4, $0, 65 #fa
+	addi $5, $0, 4000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 4000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 67 #sol#
+	addi $5, $0, 4000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 4000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 72 #C5#
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 73 #do#
+	addi $5, $0, 800
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 72 #C5
+	addi $5, $0, 800
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 70 #do#
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	
+	#===============
+	addi $4, $0, 75 #D5#
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 77 #do#
+	addi $5, $0, 800
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 75 #D5#
+	addi $5, $0, 800
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 74 #D5#
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 75 #D5#
+	addi $5, $0, 800
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 74 #D5#
+	addi $5, $0, 2000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	
+	addi $4, $0, 72 #C5
+	addi $5, $0, 2000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 70 #D5#
+	addi $5, $0, 1000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 72 #D5#
+	addi $5, $0, 1000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 72 #D5#
+	addi $5, $0, 1000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 72 #D5#
+	addi $5, $0, 800
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	#=======
+	addi $4, $0, 74 #D5#
+	addi $5, $0, 800
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 800 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 75 #D5#
+	addi $5, $0, 2000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 75 #D5#
+	addi $5, $0, 2000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 70 #D5#  #1:41
+	addi $5, $0, 3000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 3000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 72 #D5#
+	addi $5, $0, 1000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 1000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 73 #D5#
+	addi $5, $0, 2000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 2000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 73 #D5#
+	addi $5, $0, 6000
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 6000 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall

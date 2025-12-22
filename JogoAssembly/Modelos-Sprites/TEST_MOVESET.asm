@@ -2960,19 +2960,23 @@ testes:
 	# $16 = Vai guardar a cópia da letra 
 	
 #ANOTAÇÕES:	O SALTO DE BYTES DE UM MOVIMENTO PARA OUTRO DE SER DE 24 (POR ENQUANTO	
-	
+	lui $15, 0x1001
+	addi $15, $15, 1310720
+	addi $8, $0, 10000
+	sw $8, 4($15)
 	
 	jal mega 
-		
-looptest:
 	
+looptest:
+	lw $12, 0($15)
 moveset:
-	beq $14, 40, tirolo
+	bne $12, $0, tirolo
 	beq $14, 20, pulacol
 	beq $14, 30, quedacol
 				
 	add $24, $0, $21
 	lw $9, 4($23)
+	
 	
 	bne $9, $0, cod
 	
@@ -2995,6 +2999,9 @@ cod:	addi $10, $0, 'd'
 	
 	addi $10, $0, 'j'
 	beq $9, $10, tiromega
+		
+	
+	
 	
 	addi $17, $0, 0
 	addi $14, $0, 0
@@ -3099,7 +3106,7 @@ pacoleve:
 	
 	jal megaleve
 	
-	addi $4, $0, 40000
+	addi $4, $0, 12000
 	jal timer
 	
 	add $4, $0, $12
@@ -3116,9 +3123,9 @@ pacoleve:
 #-------------------------------------------
 #	PRIMEIRO PACO	
 paco1:	
-	addi $4, $24, -48
+	addi $4, $24, -60
 	add $12, $0, $4
-	addi $5, $0, 28
+	addi $5, $0, 30
 	addi $6, $0, 24
 	
 	jal apagarp
@@ -3179,7 +3186,7 @@ paco1:
 	
 	jal megapaco1 #1
 	
-	addi $4, $0, 10000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -40
@@ -3193,7 +3200,7 @@ paco1:
 	
 	jal megapaco1 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -40
@@ -3207,18 +3214,19 @@ paco1:
 	
 	jal megapaco1 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
 	addi $4, $4, 0
-	addi $5, $0, 26
+	addi $5, $0, 28	
 	addi $6, $0, 24
-	
+	lw $12, 0($15)
+	bne $12, $0, fimpac1
 	jal apagarp
 	
 	
-	addi $17, $17, 1
+fimpac1:	addi $17, $17, 1
 	addi $14, $0, 0
 	j looptest
 	
@@ -3226,9 +3234,9 @@ paco1:
 #-------------------------------------------
 #	SEGUNDO PACO	
 paco2:	
-	addi $4, $24, -44
+	addi $4, $24, -64
 	add $12, $0, $4
-	addi $5, $0, 24
+	addi $5, $0, 31
 	addi $6, $0, 24
 	
 	jal apagarp
@@ -3289,7 +3297,7 @@ paco2:
 	
 	jal megapaco2 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -40
@@ -3303,7 +3311,7 @@ paco2:
 	
 	jal megapaco2 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -28
@@ -3317,17 +3325,18 @@ paco2:
 	
 	jal megapaco2 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
 	addi $4, $4, 0
-	addi $5, $0, 23
+	addi $5, $0, 29
 	addi $6, $0, 24
-	
+	lw $12, 0($15)
+	bne $12, $0, fimpac2
 	jal apagarp
 	
-	beq $14, 1, minus
+fimpac2:	beq $14, 1, minus
 	addi $17, $17, 1
 	j looptest
 	
@@ -3339,9 +3348,9 @@ minus:	addi $17, $0, 0
 	
 paco3:	
 	
-	addi $4, $24, -44
+	addi $4, $24, -60
 	add $12, $0, $4
-	addi $5, $0, 24
+	addi $5, $0, 30
 	addi $6, $0, 24
 	
 	jal apagarp
@@ -3402,11 +3411,11 @@ paco3:
 	
 	jal megapaco3 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $24, -28
-	addi $5, $0, 1
+	addi $4, $24, -32
+	addi $5, $0, 2
 	addi $6, $0, 1
 	
 	jal apagarp
@@ -3416,11 +3425,11 @@ paco3:
 	
 	jal megapaco3 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $24, -28
-	addi $5, $0, 1
+	addi $4, $24, -32
+	addi $5, $0, 2
 	addi $6, $0, 1
 	jal apagarp
 	
@@ -3430,17 +3439,18 @@ paco3:
 	
 	jal megapaco3 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
 	addi $4, $4, -8
-	addi $5, $0, 24
+	addi $5, $0, 28
 	addi $6, $0, 24
-	
+	lw $12, 0($15)
+	bne $12, $0, fimpac3
 	jal apagarp
 	
-	addi $17, $17, -1
+fimpac3:	addi $17, $17, -1
 	
 	addi $14, $0, 1
 	j looptest	
@@ -3455,8 +3465,8 @@ pulomega:	sw $0, 4($23)
 
 pulaco:	addi $16, $0, 50		
 pulacol:	beq $16, $0, quedaco
-	
-	
+	lw $12, 0($15)
+	bne $12, $0, pulolvf
 	addi $9, $0, 10
 	slt $8, $17, $9
 	beq $8, 1, pulolv1
@@ -3644,7 +3654,7 @@ pulacoe:
 	
 quedaco:	
 	addi $17, $0, 0
-	addi $4, $0, 75000
+	addi $4, $0, 15000
 	jal timer
 	
 	addi $14, $0, 30
@@ -3654,8 +3664,8 @@ quedacol:	addi $9, $21, 18420
 	lw $10, 0($16)
 	addi $8, $0, 0x485054
 	beq $10, $8, jumperase
-	
-	
+	lw $12, 0($15)
+	bne $12, $0, quedalvf
 	addi $9, $0, 10
 	slt $8, $17, $9
 	beq $8, 1, quedalv5
@@ -3668,8 +3678,8 @@ quedacol:	addi $9, $21, 18420
 	addi $9, $0, 40
 	slt $8, $17, $9
 	beq $8, 1, quedalv2
-	
-
+	lw $12, 0($15)
+	bne $12, $0, quedalvf
 	
 quedalv1:	addi $4, $0, 50
 	jal timer
@@ -3716,6 +3726,7 @@ quedalvf:	addi $21, $21, 1024
 	
 	jal megapulo
 	addi $16, $16, -1
+	
 	j looptest
 	
 quedacod:
@@ -3831,10 +3842,12 @@ quedacoe:
 jumperase:	addi $4, $21, -11312
 	addi $5, $0, 31
 	addi $6, $0, 42
-	
+	lw $12, 0($15)
 	jal apagarp
-	
 	addi $14, $0, 0
+	beq $12, $0, looptest
+	add $24, $21, $0
+	jal mega
 	j looptest
 	
 #==============================================================
@@ -4025,7 +4038,7 @@ pacolevet:
 	
 	jal megaleve
 	
-	addi $4, $0, 40000
+	addi $4, $0, 12000
 	jal timer
 	
 	add $4, $0, $12
@@ -4101,7 +4114,7 @@ paco1t:
 	bne $10, $8, nopetras
 	jal megapaco1 #1
 	
-	addi $4, $0, 10000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -4115,7 +4128,7 @@ paco1t:
 	
 	jal megapaco1 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -4129,7 +4142,7 @@ paco1t:
 	
 	jal megapaco1 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
@@ -4209,7 +4222,7 @@ paco2t:
 	bne $10, $8, nopetras
 	jal megapaco2 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -4223,7 +4236,7 @@ paco2t:
 	
 	jal megapaco2 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -4237,7 +4250,7 @@ paco2t:
 	
 	jal megapaco2 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
@@ -4319,7 +4332,7 @@ paco3t:
 	bne $10, $8, nopetras
 	jal megapaco3 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 28
@@ -4333,7 +4346,7 @@ paco3t:
 	
 	jal megapaco3 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 28
@@ -4347,7 +4360,7 @@ paco3t:
 	
 	jal megapaco3 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
@@ -4367,7 +4380,7 @@ paco3t:
 
 tiromega:	
 	sw $0, 4($23)
-	
+	add $24, $21, $0
 	addi $4, $24, -52
 	addi $5, $0, 30
 	addi $6, $0, 30
@@ -4375,13 +4388,17 @@ tiromega:
 	jal apagarp
 	
 	jal megatiro
-	addi $14, $0, 40
+	lw $12, 0($15)
+	bne $12, $0, tirolo
 	add $12, $21, 10312 #Depois eu decido qual o melhor registrador para esse loop
 	
-	
+	sw $12, 0($15)
 tirolo:	
+	
+	lw $12, 0($15)
 	add $24, $0, $12
 	addi $12, $12, 4
+	sw $12, 0($15)
 	jal megabuster
 	
 	addi $9, $12, 48
@@ -4425,14 +4442,38 @@ tirolo:
 	
 	jal apagarp
 	
-	addi $4, $0, 100
+	
+	
+	addi $4, $0, 500
 	jal timer
-	j looptest
+	beq $14, 20, pulacol
+	beq $14, 30, quedacol
+	lw $9, 4($23)
+	addi $10, $0, 'd'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'e'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'a'
+	beq $9, $10, tras
+	
+	addi $10, $0, 'q'
+	beq $9, $10, tras
+	
+	addi $10, $0, 'w'
+	beq $9, $10, pulomega
+	
+	addi $10, $0, 'j'
+	beq $9, $10, tiromega
+	
+	j moveset
 	
 
 stopshot:	
-	sw $0, 4($23)
 	
+	sw $0, 0($15)
+	sw $0, 4($23)
 	add $24, $9, $0
 	
 	addi $4, $24, -1100
@@ -4446,10 +4487,10 @@ stopshot:
 	addi $6, $0, 30
 	
 	jal apagarp
-	
-	add $14, $0, $0
+	beq $14, 20, pulacol
+	beq $14, 30, quedacol
 	add $12, $0, $0
-
+	
 	j looptest
 	
 damagehit:	
