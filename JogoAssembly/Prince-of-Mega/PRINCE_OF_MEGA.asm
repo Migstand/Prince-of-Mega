@@ -1,6 +1,6 @@
 .text
 
-main:	#j cenario#ESSE ï¿½ O PROGRAMA PARA CARREGAR O JOGO TODO
+main:	j cenario#ESSE ï¿½ O PROGRAMA PARA CARREGAR O JOGO TODO
 	jal tela
 	lui $23, 0xffff
 	
@@ -2487,6 +2487,14 @@ skullman:
 	addi $15, $15, 1310720
 	addi $8, $0, 8000
 	sw $8, 4($15)
+	addi $8, $0, 0x0000
+	sw $8, 44($15)
+	addi $8, $0, 0xffffff
+	sw $8, 48($15)
+	addi $8, $0, 0xe5aa7a
+	sw $8, 52($15)
+	
+	
 funx:	addi $13, $0, 10
 	add $25, $0, $20
 	add $20, $0, $25
@@ -9332,7 +9340,8 @@ megaleve:
 #	MOVESET DO MEGAMAN		
 moveset:
 	add $22, $0, $31
-	beq $14, 40, tirolo
+	lw $12, 0($15)
+	bne $12, $0, tirolo
 	beq $14, 20, pulacol
 	beq $14, 30, quedacol								
 	add $24, $0, $21
@@ -9414,8 +9423,12 @@ cod:	addi $10, $0, 'd'
 	 
 	beq $10, $11, derrotado
 	bne $10, $8, nopefrente
+	
+	
 	addi $17, $0, 0
 	addi $14, $0, 0
+	
+	
 	add $31, $0, $22
 	jr $31
 #================================================================
@@ -9435,6 +9448,7 @@ frente:
 	beq $17, $0, paco1
 	beq $17, 1, paco2
 	beq $17, 2, paco3
+	
 	
 	add $31, $0, $22
 	jr $31
@@ -9522,25 +9536,30 @@ pacoleve:
 	
 	jal megaleve
 	
-	addi $4, $0, 35000
+	
+	addi $4, $0, 12000
 	jal timer
+	
 	
 	add $4, $0, $12
 	addi $4, $4, -44
 	addi $5, $0, 22
 	addi $6, $0, 24
 	
+	
 	jal apagarp
 	addi $14, $0, 1
+	
+	
 	add $31, $0, $22
 	jr $31
 
 #-------------------------------------------
 #	PRIMEIRO PACO	
 paco1:	
-	addi $4, $24, -48
+	addi $4, $24, -60
 	add $12, $0, $4
-	addi $5, $0, 28
+	addi $5, $0, 30
 	addi $6, $0, 24
 	
 	jal apagarp
@@ -9610,7 +9629,8 @@ paco1:
 		
 	jal megapaco1 #1
 	
-	addi $4, $0, 12000
+	
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -40
@@ -9624,7 +9644,7 @@ paco1:
 	
 	jal megapaco1 #2
 	
-	addi $4, $0, 12000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -40
@@ -9638,18 +9658,21 @@ paco1:
 	
 	jal megapaco1 #3
 	
-	addi $4, $0, 12000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
 	addi $4, $4, 0
-	addi $5, $0, 26
+	addi $5, $0, 30
 	addi $6, $0, 24
+	
+	lw $12, 0($15)	#CARREGA O VALOR DO TIRO EM MOVIMENTO
+	bne $12, $0, fimpac1
 	
 	jal apagarp
 	
 	
-	addi $17, $17, 1
+fimpac1:	addi $17, $17, 1
 	addi $14, $0, 1
 	
 	add $31, $0, $22
@@ -9659,9 +9682,9 @@ paco1:
 #-------------------------------------------
 #	SEGUNDO PACO	
 paco2:	
-	addi $4, $24, -44
+	addi $4, $24, -64
 	add $12, $0, $4
-	addi $5, $0, 24
+	addi $5, $0, 30
 	addi $6, $0, 24
 	
 	jal apagarp
@@ -9731,7 +9754,7 @@ paco2:
 		
 	jal megapaco2 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -40
@@ -9745,7 +9768,7 @@ paco2:
 	
 	jal megapaco2 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -28
@@ -9759,7 +9782,7 @@ paco2:
 	
 	jal megapaco2 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
@@ -9767,9 +9790,12 @@ paco2:
 	addi $5, $0, 23
 	addi $6, $0, 24
 	
+	lw $12, 0($15)
+	bne $12, $0, fimpac2
+	
 	jal apagarp
 	
-	beq $14, 2, minus
+fimpac2:	beq $14, 2, minus
 	addi $17, $17, 1
 	
 	add $31, $0, $22
@@ -9785,9 +9811,9 @@ minus:	addi $17, $17, -1
 	
 paco3:	
 	
-	addi $4, $24, -44
+	addi $4, $24, -60
 	add $12, $0, $4
-	addi $5, $0, 24
+	addi $5, $0, 28
 	addi $6, $0, 24
 	
 	jal apagarp
@@ -9857,7 +9883,7 @@ paco3:
 		
 	jal megapaco3 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -28
@@ -9871,7 +9897,7 @@ paco3:
 	
 	jal megapaco3 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -28
@@ -9885,17 +9911,20 @@ paco3:
 	
 	jal megapaco3 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
 	addi $4, $4, -8
-	addi $5, $0, 24
+	addi $5, $0, 26
 	addi $6, $0, 24
+	
+	lw $12, 0($15)
+	bne $12, $0, fimpac3
 	
 	jal apagarp
 	
-	addi $17, $17, -1
+fimpac3:	addi $17, $17, -1
 	
 	addi $14, $0, 2
 	
@@ -9997,7 +10026,7 @@ pacolevet:
 		
 	jal megaleve
 	
-	addi $4, $0, 35000
+	addi $4, $0, 12000
 	jal timer
 	
 	add $4, $0, $12
@@ -10075,7 +10104,7 @@ paco1t:
 		
 	jal megapaco1 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -10089,7 +10118,7 @@ paco1t:
 	
 	jal megapaco1 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -10103,7 +10132,7 @@ paco1t:
 	
 	jal megapaco1 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
@@ -10186,7 +10215,7 @@ paco2t:
 		
 	jal megapaco2 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -10200,7 +10229,7 @@ paco2t:
 	
 	jal megapaco2 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 4
@@ -10214,7 +10243,7 @@ paco2t:
 	
 	jal megapaco2 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
@@ -10300,7 +10329,7 @@ paco3t:
 		
 	jal megapaco3 #1
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 28
@@ -10314,7 +10343,7 @@ paco3t:
 	
 	jal megapaco3 #2
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, 28
@@ -10328,7 +10357,7 @@ paco3t:
 	
 	jal megapaco3 #3
 	
-	addi $4, $0, 15000
+	lw $4, 4($15)
 	jal timer
 	
 	add $4, $0, $12
@@ -10358,19 +10387,24 @@ pulomega:	sw $0, 4($23)
 pulaco:	addi $16, $0, 50		
 pulacol:	beq $16, $0, quedaco
 	
+	lw $12, 0($15)
+	bne $12, $0, pulolvf
 	
 	addi $9, $0, 10
 	slt $8, $17, $9
-	beq $8, 1, pulolv1
+	beq $8, 1, pulolv1 	#CAMADA 1
+	
 	addi $9, $0, 20
 	slt $8, $17, $9
-	beq $8, 1, pulolv2
+	beq $8, 1, pulolv2	#CAMADA 2
+	
 	addi $9, $0, 30
 	slt $8, $17, $9
-	beq $8, 1, pulolv3
+	beq $8, 1, pulolv3	#CAMADA 3
+	
 	addi $9, $0, 40
 	slt $8, $17, $9
-	beq $8, 1, pulolv4
+	beq $8, 1, pulolv4	#CAMADA 4
 	
 	j pulolv5
 	
@@ -10560,7 +10594,7 @@ pulacoe:
 	
 quedaco:	
 	addi $17, $0, 0
-	addi $4, $0, 75000
+	addi $4, $0, 30000
 	jal timer
 	
 	addi $14, $0, 30
@@ -10572,18 +10606,24 @@ quedacol:
 	addi $8, $0, 0x485054
 	beq $10, $8, jumperase
 	
+	lw $12, 0($15)
+	bne $12, $0, quedalvf	#CAMADA 1
+	
 	addi $9, $0, 10
 	slt $8, $17, $9
-	beq $8, 1, quedalv5
+	beq $8, 1, quedalv5	#CAMADA 2
+	
 	addi $9, $0, 20
 	slt $8, $17, $9
-	beq $8, 1, quedalv4
+	beq $8, 1, quedalv4	#CAMADA 3
+	
 	addi $9, $0, 30
 	slt $8, $17, $9
-	beq $8, 1, quedalv3
+	beq $8, 1, quedalv3	#CAMADA 4
+	
 	addi $9, $0, 40
 	slt $8, $17, $9
-	beq $8, 1, quedalv2
+	beq $8, 1, quedalv2	#CAMADA 5
 	
 
 	
@@ -10767,14 +10807,24 @@ jumperase:
 	jal apagarp
 	
 	addi $14, $0, 0
-	add $31, $0, $22
+	
+	lw $12, 0($15)
+	beq $12, $0, tiroxpulo
+	
+	add $24, $21, $0
+	
+	jal mega
+	
+tiroxpulo:	add $31, $0, $22
 	jr $31
+
 
 #=============================================
 #	FUNCAO TIROMEGA. AQUI TEM PORRADARIA GRANDE
 
 tiromega:	
 	sw $0, 4($23)
+	add $24, $21, $0
 	
 	addi $4, $24, -52
 	addi $5, $0, 30
@@ -10784,63 +10834,116 @@ tiromega:
 	
 	jal notamegat
 	jal megatiro
-	addi $14, $0, 40
+	
+	lw $12, 0($15)
+	bne $12, $0, tirolo #Tiro durante o tiro
+	
 	add $12, $21, 10312 #Depois eu decido qual o melhor registrador para esse loop
 	
-	
+	sw $12, 0($15)
 tirolo:	
+	lw $12, 0($15)
+	
 	add $24, $0, $12
 	addi $12, $12, 4
+	
+	sw $12, 0($15)
+	
 	jal megabuster
 	
 	addi $9, $12, 48
-	addi $8, $0, 0xffffff
-	addi $11, $0, 0x0000
+	lw $8, 48($15)
+	
+	lw $11, 44($15)
 	lw $10, 0($9)
+	
 	
 	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
 	bne $10, $11, stopshot
 	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	 
-	add $24, $9, $0
 	
-	addi $4, $24, -1076
-	addi $5, $0, 20
-	addi $6, $0, 20
+	lw $10, 0($9)
+	
+	  
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	 
+gnore:	add $24, $9, $0
+	
+	addi $4, $24, -7224
+	addi $5, $0, 1
+	addi $6, $0, 6
 	
 	jal apagarp
 	
 	addi $4, $0, 100
 	jal timer
+	
+	beq $14, 20, pulacol
+	beq $14, 30, quedacol
+	
+	lw $9, 4($23)
+	addi $10, $0, 'd'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'e'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'a'
+	beq $9, $10, tras
+	
+	addi $10, $0, 'q'
+	beq $9, $10, tras
+	
+	addi $10, $0, 'w'
+	beq $9, $10, pulomega
+	
+	addi $10, $0, 'j'
+	beq $9, $10, tiromega
+	
 	add $31, $0, $22
 	jr $31
 	
 
 stopshot:	
+	sw $0, 0($15)
 	sw $0, 4($23)
 	
 	add $24, $9, $0
@@ -10857,8 +10960,10 @@ stopshot:
 	
 	jal apagarp
 	
-	add $14, $0, $0
+	beq $14, 20, pulacol
+	beq $14, 30, quedacol
 	add $12, $0, $0
+	
 	
 	add $31, $0, $22
 	jr $31
@@ -10879,7 +10984,7 @@ damagehit:
 	
 	jal apagarp
 	
-	add $14, $0, $0
+	
 	j telavitoria
 telavitoria:	
 	jal vitoria
@@ -11616,7 +11721,7 @@ megabuster:
 	addi $24, $24, -12
 	
 	add $4, $0, $24
-	addi $5, $0, 0xffffff #CHARME
+	addi $5, $0, 0xfffff7 #CHARME
 	addi $6, $0, 2
 	addi $7, $0, 1020
 	
@@ -11624,7 +11729,7 @@ megabuster:
 	add $24, $0, $2
 	
 	add $4, $0, $24
-	addi $5, $0, 0xffffff #CHARME
+	addi $5, $0, 0xfffff7 #CHARME
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
