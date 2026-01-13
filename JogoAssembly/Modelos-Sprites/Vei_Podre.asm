@@ -1,15 +1,14 @@
 .text
 
 main:	
-#	Auxilio no código ctrl c ctlc v
-	
-	#===================================================
+#===================================================
 #	MOVESET DO MEGAMAN		
 moveset:
 	add $22, $0, $31
 	lw $12, 0($15)
+	bne $12, $0, tirolo
 	beq $14, 20, pulacol
-	beq $14, 30, quedacol								
+	beq $14, 30, quedacol							
 	add $24, $0, $21
 	lw $9, 4($23)
 	
@@ -239,59 +238,12 @@ paco1:
 	beq $10, $8, quedaco
 	
 #============== COLISAO PACO1
-	addi $9, $21, 52
-	addi $8, $0, 0x0000
-	addi $11, $0, 0xffffff
-	lw $10, 0($9)
+	addi $4, $21, 52
+	addi $6, $0, 10
+	addi $7, $0, 1
 	
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
+	jal coliwall
 	
-	beq $10, $11, derrotado 
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
 		
 	jal megapaco1 #1
 	
@@ -300,7 +252,7 @@ paco1:
 	jal timer
 	
 	addi $4, $24, -40
-	addi $5, $0, 1
+	addi $5, $0, 30
 	addi $6, $0, 1
 	
 	jal apagarp 
@@ -310,11 +262,12 @@ paco1:
 	
 	jal megapaco1 #2
 	
+	
 	lw $4, 4($15)
 	jal timer
 	
 	addi $4, $24, -40
-	addi $5, $0, 1
+	addi $5, $0, 30
 	addi $6, $0, 1
 	
 	jal apagarp
@@ -329,7 +282,7 @@ paco1:
 	
 	add $4, $0, $12
 	addi $4, $4, 0
-	addi $5, $0, 26
+	addi $5, $0, 30
 	addi $6, $0, 24
 	
 	lw $12, 0($15)	#CARREGA O VALOR DO TIRO EM MOVIMENTO
@@ -364,59 +317,11 @@ paco2:
 	beq $10, $8, quedaco
 	
 #============== COLISAO PACO2
-	addi $9, $21, 52
-	addi $8, $0, 0x0000
-	addi $11, $0, 0xffffff
-	lw $10, 0($9)
+	addi $4, $21, 52
+	addi $6, $0, 10
+	addi $7, $0, 1
 	
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	
-	beq $10, $11, derrotado 
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
+	jal coliwall
 		
 	jal megapaco2 #1
 	
@@ -493,59 +398,11 @@ paco3:
 	beq $10, $8, quedaco
 	
 #============== COLISAO PACO3
-	addi $9, $21, 52
-	addi $8, $0, 0x0000
-	addi $11, $0, 0xffffff
-	lw $10, 0($9)
+	addi $4, $21, 52
+	addi $6, $0, 10
+	addi $7, $0, 1
 	
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	
-	beq $10, $11, derrotado 
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $11, derrotado
-	bne $10, $8, nopefrente
+	jal coliwall
 		
 	jal megapaco3 #1
 	
@@ -1481,8 +1338,8 @@ jumperase:
 	
 	jal mega
 	
-	add $31, $0, $22
-tiroxpulo:	jr $31
+tiroxpulo:	add $31, $0, $22
+	jr $31
 
 
 #=============================================
@@ -1490,6 +1347,7 @@ tiroxpulo:	jr $31
 
 tiromega:	
 	sw $0, 4($23)
+	add $24, $21, $0
 	
 	addi $4, $24, -52
 	addi $5, $0, 30
@@ -1517,43 +1375,64 @@ tirolo:
 	jal megabuster
 	
 	addi $9, $12, 48
-	addi $8, $0, 0xffffff
-	addi $11, $0, 0x0000
+	lw $8, 48($15)
+	
+	lw $11, 44($15)
 	lw $10, 0($9)
+	
 	
 	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
 	bne $10, $11, stopshot
 	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	addi $9, $9, 1024
-	lw $10, 0($9)
-	 
-	beq $10, $8, damagehit 	
-	bne $10, $11, stopshot
-	 
-	add $24, $9, $0
 	
-	addi $4, $24, -1076
-	addi $5, $0, 20
-	addi $6, $0, 20
+	lw $10, 0($9)
+	
+	  
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	 
+gnore:	add $24, $9, $0
+	
+	addi $4, $24, -7224
+	addi $5, $0, 1
+	addi $6, $0, 6
 	
 	jal apagarp
 	
@@ -1630,3 +1509,12 @@ damagehit:
 	
 	
 	j telavitoria
+telavitoria:	
+	jal vitoria
+	jal jinglevi
+	j fim
+	
+derrotado:	
+	jal derrota
+	jal jinglede
+	j fim

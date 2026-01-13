@@ -14,6 +14,8 @@ loopce:
 	sw $10, 131072($9)
 	
 	addi $8, $8, -1
+	addi $9, $9, 4
+	
 	bne $8, $0, loopce
 	
 	jr $31

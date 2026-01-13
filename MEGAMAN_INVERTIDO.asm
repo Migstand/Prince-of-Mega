@@ -44,7 +44,88 @@ megaheadt:
 	jal diagodwt
 	add $24, $0, $2
 	
-		
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 2
+	addi $7, $0, -4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2052
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3064
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2040
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, -6184
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 6
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 6144
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2052
+	
+	add $4, $0, $24
+	addi $5, $0, 0xff00ff #Contorno
+	addi $6, $0, 4
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
 fim:	addi $2, $0, 10
 	syscall
 	

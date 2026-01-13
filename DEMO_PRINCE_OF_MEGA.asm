@@ -2483,44 +2483,651 @@ skullman:
 	# $16 = Vai guardar a cópia da letra; Loop do Pulo Mega; Loop do TiroMega 
 #========================================================================================
 #	Memoria para guardar os valores chave	
-funx:	lui $15, 0x1001
+	lui $15, 0x1001
 	addi $15, $15, 1310720
-	addi $8, $0, 11200
+	addi $8, $0, 8000
 	sw $8, 4($15)
-	addi $8, $0, -60
-	sw $8, 12($15)
-	addi $8, $0, 3
-	sw $8, 16($15)
-	addi $8, $0, 26
-	sw $8, 20($15)
-	addi $8, $0, 3
-	sw $8, 32($15)
-	addi $8, $0, 10
-	sw $8, 40($15)
 	addi $8, $0, 0x0000
 	sw $8, 44($15)
-	addi $8, $0, 0xfffffe
+	addi $8, $0, 0xffffff
 	sw $8, 48($15)
 	addi $8, $0, 0xe5aa7a
 	sw $8, 52($15)
-	addi $8, $0, 0x828282
-	sw $8, 56($15)
-	addi $8, $0, 0xb0b0b0
-	sw $8, 60($15)
-	addi $8, $0, 0x24224d
-	sw $8, 64($15)
-	addi $8, $0, 0x1d61b5
-	sw $8, 120($15)
-	addi $8, $0, 0x47a6e6
-	sw $8, 124($15)
-	addi $8, $0, 0xf0cd90
-	sw $8, 128($15)
-fase1:
+	
+	
+funx:	addi $13, $0, 10
+	add $25, $0, $20
+	add $20, $0, $25
+#=============== POSIÇÃO ACIMA
+# 	$20 = GUARDA A POSICAO AUXILIAR DO SKULLMAN
+# 	POR ENQUANTO NESSE CÓDIGO O $13 vai cuidar do pulo mas não deve ser usado assim no código final provavelmente
+puloskull:	beq $13, $0, puloskull2
 	jal moveset
-	add $25, $20, $0
-	jal movesku
+	
+	
+	
+	add $4, $0, $25
+	addi $4, $4, -40
+	addi $5, $0, 28
+	addi $6, $0, 38
+	
+	jal apagarp
 		
-	j fase1
+	jal jskull
+	
+	
+	beq $14, 2, lagp1
+	beq $14, 1, lagp1
+	add $4, $0, 200
+	
+	jal timer
+
+	j bufp1
+	
+lagp1:	
+	beq $13, 1, bufp1
+	beq $13, 2, bufp2
+	beq $13, 3, bufp3
+	beq $13, 4, bufp4
+	beq $13, 5, bufp5
+	beq $13, 6, bufp6
+	beq $13, 7, bufp7
+	beq $13, 8, bufp8
+	beq $13, 9, bufp9
+	beq $13, 10, bufp10
+bufp1:	
+	addi $25, $20, -1024
+	addi $20, $20, -1024
+		
+	addi $13, $13, -1
+	j puloskull
+
+bufp2:	
+	
+	addi $25, $20, -2048
+	addi $20, $20, -2048
+	
+	
+	
+	addi $13, $13, -2
+	j puloskull
+
+bufp3:	
+	
+	addi $25, $20, -3072
+	addi $20, $20, -3072
+	addi $13, $13, -3
+	j puloskull	
+
+bufp4:	
+	
+	
+	addi $25, $20, -4096
+	addi $20, $20, -4096
+	addi $13, $13, -4
+	j puloskull	
+bufp5:	
+	
+	addi $25, $20, -5120
+	addi $20, $20, -5120
+	addi $13, $13, -5
+	j puloskull
+
+bufp6:	
+	
+	addi $25, $20, -6144
+	addi $20, $20, -6144
+	addi $13, $13, -6
+	j puloskull
+bufp7:	
+	
+	addi $25, $20, -7168
+	addi $20, $20, -7168
+	addi $13, $13, -7
+	j puloskull
+bufp8:	
+	
+	addi $25, $20, -8192
+	addi $20, $20, -8192
+	addi $13, $13, -8
+	j puloskull
+bufp9:	
+	
+	
+	addi $25, $20, -9216
+	addi $20, $20, -9216
+	addi $13, $13, -9
+	j puloskull
+bufp10:	
+	
+	addi $25, $20, -10240
+	addi $20, $20, -10240
+	addi $13, $13, -10
+	j puloskull
+
+
+	
+
+puloskull2:	addi $13, $0, 10
+	
+pulosku2:	beq $13, $0, puloskull3
+	jal moveset
+	add $25, $0, $20
+	add $20, $0, $25
+	
+	add $4, $0, $25
+	addi $4, $4, -40
+	addi $5, $0, 28
+	addi $6, $0, 44
+	
+	jal apagarp
+		
+	jal jskull
+	
+	beq $14, 2, lagp2
+	beq $14, 1, lagp2
+	addi $4, $0, 1000
+	jal timer
+	
+	j bufp21
+	
+	
+	
+lagp2:	
+	beq $13, 1, bufp21
+	beq $13, 2, bufp22
+	beq $13, 3, bufp23
+	beq $13, 4, bufp24
+	beq $13, 5, bufp25
+	beq $13, 6, bufp26
+	beq $13, 7, bufp27
+	beq $13, 8, bufp28
+	beq $13, 9, bufp29
+	beq $13, 10, bufp210
+bufp21:	
+	addi $25, $20, -1024
+	addi $20, $20, -1024
+		
+	addi $13, $13, -1
+	j pulosku2
+
+bufp22:	
+	
+	addi $25, $20, -2048
+	addi $20, $20, -2048
+	
+	
+	
+	addi $13, $13, -2
+	j pulosku2
+
+bufp23:	
+	
+	addi $25, $20, -3072
+	addi $20, $20, -3072
+	addi $13, $13, -3
+	j pulosku2
+
+bufp24:	
+	
+	
+	addi $25, $20, -4096
+	addi $20, $20, -4096
+	addi $13, $13, -4
+	j pulosku2	
+bufp25:	
+	
+	addi $25, $20, -5120
+	addi $20, $20, -5120
+	addi $13, $13, -5
+	j pulosku2
+
+bufp26:	
+	
+	addi $25, $20, -6144
+	addi $20, $20, -6144
+	addi $13, $13, -6
+	j pulosku2
+bufp27:	
+	
+	addi $25, $20, -7168
+	addi $20, $20, -7168
+	addi $13, $13, -7
+	j pulosku2
+bufp28:	
+	
+	addi $25, $20, -8192
+	addi $20, $20, -8192
+	addi $13, $13, -8
+	j pulosku2
+bufp29:	
+	
+	
+	addi $25, $20, -9216
+	addi $20, $20, -9216
+	addi $13, $13, -9
+	j pulosku2
+bufp210:	
+	
+	addi $25, $20, -10240
+	addi $20, $20, -10240
+	addi $13, $13, -10
+	j pulosku2
+	
+puloskull3:	addi $13, $0, 6
+	
+pulosku3:	beq $13, $0, queda
+	jal moveset
+	
+	add $4, $0, $25
+	addi $4, $4, -40
+	addi $5, $0, 28
+	addi $6, $0, 44
+	
+	jal apagarp
+		
+	jal jskull
+	
+	
+	beq $14, 2, lagp3
+	beq $14, 1, lagp3
+	addi $4, $0, 5000
+	jal timer
+	
+	j bufp31
+lagp3:	
+	beq $13, 1, bufp31
+	beq $13, 2, bufp32
+	beq $13, 3, bufp33
+	beq $13, 4, bufp34
+	beq $13, 5, bufp35
+	beq $13, 6, bufp36
+bufp31:	
+	addi $25, $20, -1024
+	addi $20, $20, -1024
+		
+	addi $13, $13, -1
+	j pulosku3
+
+bufp32:	
+	
+	addi $25, $20, -2048
+	addi $20, $20, -2048
+	
+	
+	
+	addi $13, $13, -2
+	j pulosku3
+
+bufp33:	
+	
+	addi $25, $20, -3072
+	addi $20, $20, -3072
+	addi $13, $13, -3
+	j pulosku3
+
+bufp34:	
+	
+	
+	addi $25, $20, -4096
+	addi $20, $20, -4096
+	addi $13, $13, -4
+	j pulosku3	
+bufp35:	
+	
+	addi $25, $20, -5120
+	addi $20, $20, -5120
+	addi $13, $13, -5
+	j pulosku3
+
+bufp36:	
+	
+	addi $25, $20, -6144
+	addi $20, $20, -6144
+	addi $13, $13, -6
+	j pulosku3	
+queda:	
+	addi $4, $0, 25000
+	
+	jal timer
+	jal moveset
+	addi $13, $0, 6
+	
+quedasku:	beq $13, $0, queda2
+	jal moveset
+	
+	
+	add $4, $0, $25
+	addi $4, $4, -40
+	addi $5, $0, 28
+	addi $6, $0, 40
+	
+	jal apagarp
+		
+	jal jskull
+	
+	beq $14, 2, lagq1
+	beq $14, 1, lagq1
+	add $4, $0, 5000
+	
+	jal timer
+	
+	
+	j bufq1
+	
+lagq1:	
+	beq $13, 1, bufq1
+	beq $13, 2, bufq2
+	beq $13, 3, bufq3
+	beq $13, 4, bufq4
+	beq $13, 5, bufq5
+	beq $13, 6, bufq6
+	beq $13, 7, bufq7
+	beq $13, 8, bufq8
+	beq $13, 9, bufq9
+	beq $13, 10, bufq10
+bufq1:	
+	addi $25, $20, 1024
+	addi $20, $20, 1024
+		
+	addi $13, $13, -1
+	j quedasku
+
+bufq2:	
+	
+	addi $25, $20, 2048
+	addi $20, $20, 2048
+	
+	
+	
+	addi $13, $13, -2
+	j quedasku
+
+bufq3:	
+	
+	addi $25, $20, 3072
+	addi $20, $20, 3072
+	addi $13, $13, -3
+	j quedasku	
+
+bufq4:	
+	
+	
+	addi $25, $20, 4096
+	addi $20, $20, 4096
+	addi $13, $13, -4
+	j quedasku	
+bufq5:	
+	
+	addi $25, $20, 5120
+	addi $20, $20, 5120
+	addi $13, $13, -5
+	j quedasku
+
+bufq6:	
+	
+	addi $25, $20, 6144
+	addi $20, $20, 6144
+	addi $13, $13, -6
+	j quedasku
+bufq7:	
+	
+	addi $25, $20, 7168
+	addi $20, $20, 7168
+	addi $13, $13, -7
+	j quedasku
+bufq8:	
+	
+	addi $25, $20, 8192
+	addi $20, $20, 8192
+	addi $13, $13, -8
+	j quedasku
+bufq9:	
+	
+	
+	addi $25, $20, 9216
+	addi $20, $20, 9216
+	addi $13, $13, -9
+	j quedasku
+bufq10:	
+	
+	addi $25, $20, 10240
+	addi $20, $20, 10240
+	addi $13, $13, -10
+	j quedasku
+	
+queda2:	addi $13, $0, 10
+
+quedasku2:	beq $13, $0, queda3
+	jal moveset
+	
+	add $4, $0, $25
+	addi $4, $4, -5160
+	addi $5, $0, 28
+	addi $6, $0, 38
+	
+	jal apagarp
+		
+	jal jskull
+	
+	beq $14, 1, lagq2
+	beq $14, 2, lagq2
+	add $4, $0, 500
+	
+	jal timer
+	
+	
+	j bufq22
+	
+lagq2:	
+	beq $13, 1, bufq21
+	beq $13, 2, bufq22
+	beq $13, 3, bufq23
+	beq $13, 4, bufq24
+	beq $13, 5, bufq25
+	beq $13, 6, bufq26
+	beq $13, 7, bufq27
+	beq $13, 8, bufq28
+	beq $13, 9, bufq29
+	beq $13, 10, bufq210
+bufq21:	
+	addi $25, $20, 1024
+	addi $20, $20, 1024
+		
+	addi $13, $13, -1
+	j quedasku2
+
+bufq22:	
+	
+	addi $25, $20, 2048
+	addi $20, $20, 2048
+	
+	
+	
+	addi $13, $13, -2
+	j quedasku2
+
+bufq23:	
+	
+	addi $25, $20, 3072
+	addi $20, $20, 3072
+	addi $13, $13, -3
+	j quedasku2	
+
+bufq24:	
+	
+	
+	addi $25, $20, 4096
+	addi $20, $20, 4096
+	addi $13, $13, -4
+	j quedasku2	
+bufq25:	
+	
+	addi $25, $20, 5120
+	addi $20, $20, 5120
+	addi $13, $13, -5
+	j quedasku2
+
+bufq26:	
+	
+	addi $25, $20, 6144
+	addi $20, $20, 6144
+	addi $13, $13, -6
+	j quedasku2
+bufq27:	
+	
+	addi $25, $20, 7168
+	addi $20, $20, 7168
+	addi $13, $13, -7
+	j quedasku2
+bufq28:	
+	
+	addi $25, $20, 8192
+	addi $20, $20, 8192
+	addi $13, $13, -8
+	j quedasku2
+bufq29:	
+	
+	
+	addi $25, $20, 9216
+	addi $20, $20, 9216
+	addi $13, $13, -9
+	j quedasku2
+bufq210:	
+	
+	addi $25, $20, 10240
+	addi $20, $20, 10240
+	addi $13, $13, -10
+	j quedasku2
+	
+queda3:	addi $13, $0, 10
+	
+quedasku3:	beq $13, $0, chasku
+	jal moveset
+	
+	add $4, $0, $25
+	addi $4, $4, -10280
+	addi $5, $0, 28
+	addi $6, $0, 44
+	
+	jal apagarp
+		
+	jal jskull
+	
+	
+	bne $13, 3, qnor
+	
+	jal notaskuj
+	
+	
+qnor:	beq $14, 1, lagq3
+	beq $14, 2, lagq3
+	add $4, $0, 100
+	
+	jal timer
+
+	j bufq31
+	
+lagq3:	beq $13, 1, bufq31
+	beq $13, 2, bufq32
+	beq $13, 3, bufq33
+	beq $13, 4, bufq34
+	beq $13, 5, bufq35
+	beq $13, 6, bufq36
+	beq $13, 7, bufq37
+	beq $13, 8, bufq38
+	beq $13, 9, bufq39
+	beq $13, 10, bufq310
+bufq31:	
+	addi $25, $20, 1024
+	addi $20, $20, 1024
+		
+	addi $13, $13, -1
+	j quedasku3
+
+bufq32:	
+	
+	addi $25, $20, 2048
+	addi $20, $20, 2048
+	
+	jal notaskuj
+	
+	addi $13, $13, -2
+	j quedasku3
+
+bufq33:	
+	jal notaskuj
+	
+	addi $25, $20, 3072
+	addi $20, $20, 3072
+	addi $13, $13, -3
+	j quedasku3	
+
+bufq34:	
+	jal notaskuj
+	
+	addi $25, $20, 4096
+	addi $20, $20, 4096
+	addi $13, $13, -4
+	j quedasku3	
+bufq35:	
+	jal notaskuj
+	addi $25, $20, 5120
+	addi $20, $20, 5120
+	addi $13, $13, -5
+	j quedasku3
+
+bufq36:	
+	jal notaskuj
+	addi $25, $20, 6144
+	addi $20, $20, 6144
+	addi $13, $13, -6
+	j quedasku3
+bufq37:	
+	jal notaskuj
+	addi $25, $20, 7168
+	addi $20, $20, 7168
+	addi $13, $13, -7
+	j quedasku3
+bufq38:	
+	jal notaskuj
+	addi $25, $20, 8192
+	addi $20, $20, 8192
+	addi $13, $13, -8
+	j quedasku3
+bufq39:	
+	
+	jal notaskuj
+	addi $25, $20, 9216
+	addi $20, $20, 9216
+	addi $13, $13, -9
+	j quedasku3
+bufq310:	
+	jal notaskuj
+	addi $25, $20, 10240
+	addi $20, $20, 10240
+	addi $13, $13, -10
+	j quedasku3
+	
+chasku:	jal moveset
+	add $4, $0, $25
+	addi $4, $4, -10280
+	addi $5, $0, 28
+	addi $6, $0, 44
+	
+	jal apagarp
+
+	jal skull
+
+	jal moveset
+
+	add $4, $0, 25000
+	
+	jal timer
+	
+	jal moveset
+	
+	j funx
 	
 fim:	addi $2, $0, 10
 	syscall
@@ -2771,7 +3378,7 @@ skullhead:
 	addi $25, $25, 1020
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -2781,7 +3388,7 @@ skullhead:
 	addi $25, $25, -1024
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	
 	jal vertical
@@ -2798,7 +3405,7 @@ skullhead:
 	addi $25, $25, -1032
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -2815,7 +3422,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 3
 	
@@ -2825,7 +3432,7 @@ skullhead:
 	addi $25, $25, 4076
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -2833,7 +3440,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -2843,7 +3450,7 @@ skullhead:
 	addi $25, $25, 1020
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -3040,7 +3647,7 @@ skullhead:
 #============== BOCA
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -3050,7 +3657,7 @@ skullhead:
 	addi $25, $25, -1028
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -3058,7 +3665,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -3066,7 +3673,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -3074,7 +3681,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -3082,7 +3689,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	
 	jal vertical
@@ -3195,7 +3802,7 @@ skullhead:
 	addi $25, $25, -1024
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	
 	jal vertical
@@ -3212,7 +3819,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -3236,7 +3843,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, -2048
 	
@@ -3244,7 +3851,7 @@ skullhead:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	
 	jal vertical
@@ -3286,7 +3893,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 1
 	
 	jal vertical
@@ -3364,7 +3971,7 @@ skull:
 	addi $25, $25, 1020
 	
 	add $4, $0, $25 #Cor do braï¿½o
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -3372,7 +3979,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25 #Cor do Braï¿½o
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -3382,7 +3989,7 @@ skull:
 	addi $25, $25, 2040
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
@@ -3456,7 +4063,7 @@ skull:
 	
 	add $4, $0, $25 #Comeï¿½o a pintar o peito esquerdo
 	addi $5, $0, 0xb4b4b4
-	addi $6, $0, 0xfffffe
+	addi $6, $0, 0xffffff
 	addi $7, $0, 2
 	
 	jal par
@@ -3484,7 +4091,7 @@ skull:
 	
 	add $4, $0, $25
 	addi $5, $0, 0xb4b4b4
-	addi $6, $0, 0xfffffe
+	addi $6, $0, 0xffffff
 	addi $7, $0, 3
 	
 	jal par
@@ -3509,7 +4116,7 @@ skull:
 	addi $25, $25, 1000
 	
 	add $4, $0, $25 #Inicio da  costela direita
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -3534,7 +4141,7 @@ skull:
 	addi $25, $25, 1004
 	
 	add $4, $0, $25 #Meio da  costela direita
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 0
 	
@@ -3542,7 +4149,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -3575,7 +4182,7 @@ skull:
 	addi $25, $25, 1012
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 0xb4b4b4
 	addi $7, $0, 2
 	
@@ -3612,7 +4219,7 @@ skull:
 	addi $25, $25, -1028
 	
 	add $4, $0, $25 
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 0xed1c24
 	addi $7, $0, 1
 	
@@ -3699,7 +4306,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25 #Inï¿½cio do ombro
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -3709,7 +4316,7 @@ skull:
 	addi $25, $25, -1020
 	
 	add $4, $0, $25 #Inï¿½cio do ombro
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 1
 	addi $7, $0, 0
 	
@@ -3820,7 +4427,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25 
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 0xb4b4b4
 	addi $7, $0, 2
 	
@@ -3900,7 +4507,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25 
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, -2052
 	
@@ -3908,7 +4515,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25 
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -3918,7 +4525,7 @@ skull:
 	addi $25, $25, 1020
 	
 	add $4, $0, $25 
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4024,7 +4631,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25 #Cor da perna esquerda
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4034,7 +4641,7 @@ skull:
 	addi $25, $25, 2040
 	
 	add $4, $0, $25 #Cor da perna esquerda
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4042,7 +4649,7 @@ skull:
 	add $25, $0, $2
 	
 	add $4, $0, $25 #Cor da perna esquerda
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 1
 	addi $7, $0, -1024
 	
@@ -4112,7 +4719,7 @@ skull:
 	addi $25, $25, 5100
 	
 	add $4, $0, $25 #Cor da perna esquerda
-	addi $5, $0, 0xfffffe
+	addi $5, $0, 0xffffff
 	addi $6, $0, 5
 	addi $7, $0, -12296
 	
@@ -4262,7 +4869,7 @@ jumpskull:
 	
 	add $4, $0, $25 
 	addi $5, $0, 0xb4b4b4 #Contorno
-	addi $6, $0, 0xfffffe
+	addi $6, $0, 0xffffff
 	addi $7, $0, 2
 	
 	jal par
@@ -4279,7 +4886,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Cor do braï¿½o
+	addi $5, $0, 0xffffff #Cor do braï¿½o
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4287,7 +4894,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Cor do braï¿½o
+	addi $5, $0, 0xffffff #Cor do braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4379,7 +4986,7 @@ jumpskull:
 	addi $25, $25, 1004
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Cor do Braï¿½o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4395,7 +5002,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Cor do Braï¿½o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 0x000000
 	addi $7, $0, 2
 	
@@ -4473,7 +5080,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Cor do Braï¿½o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4481,7 +5088,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Cor do Braï¿½o
+	addi $5, $0, 0xffffff #Cor do Braï¿½o
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
@@ -4561,7 +5168,7 @@ jumpskull:
 
 	add $4, $0, $25
 	addi $5, $0, 0xb4b4b4
-	addi $6, $0, 0xfffffe
+	addi $6, $0, 0xffffff
 	addi $7, $0, 2
 	
 	jal par
@@ -4584,7 +5191,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #COSTELA
+	addi $5, $0, 0xffffff #COSTELA
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -4610,7 +5217,7 @@ jumpskull:
 	addi $25, $25, 1004
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #COSTELA
+	addi $5, $0, 0xffffff #COSTELA
 	addi $6, $0, 2
 	addi $7, $0, 0
 	
@@ -4628,7 +5235,7 @@ jumpskull:
 	addi $25, $25, 1008
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #COSTELA
+	addi $5, $0, 0xffffff #COSTELA
 	addi $6, $0, 2
 	
 	jal vertical
@@ -4653,7 +5260,7 @@ jumpskull:
 	addi $25, $25, 1004
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #COSTELA
+	addi $5, $0, 0xffffff #COSTELA
 	addi $6, $0, 0xb4b4b4
 	addi $7, $0, 2
 	
@@ -4680,7 +5287,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #COSTELA
+	addi $5, $0, 0xffffff #COSTELA
 	addi $6, $0, 0x000000
 	addi $7, $0, 2
 	
@@ -4690,7 +5297,7 @@ jumpskull:
 #______________ COMEï¿½O DA PINTURA DO BOTï¿½O VERMELHO
 
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #COSTELA
+	addi $5, $0, 0xffffff #COSTELA
 	addi $6, $0, 0xed1c24 #Botï¿½o
 	addi $7, $0, 2
 	
@@ -4719,7 +5326,7 @@ jumpskull:
 
 	add $4, $0, $25
 	addi $5, $0, 0x000000 #COSTELA
-	addi $6, $0, 0xfffffe
+	addi $6, $0, 0xffffff
 	addi $7, $0, 2
 	
 	jal par
@@ -4808,7 +5415,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Perna
+	addi $5, $0, 0xffffff #Perna
 	addi $6, $0, 3
 	
 	jal vertical
@@ -4872,7 +5479,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #PERNA
+	addi $5, $0, 0xffffff #PERNA
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
@@ -4961,7 +5568,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #PERNA
+	addi $5, $0, 0xffffff #PERNA
 	addi $6, $0, 2
 	addi $7, $0, 1012
 	
@@ -4969,7 +5576,7 @@ jumpskull:
 	add $25, $0, $2
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #PERNA
+	addi $5, $0, 0xffffff #PERNA
 	addi $6, $0, 2
 	addi $7, $0, 3
 	
@@ -5002,7 +5609,7 @@ jumpskull:
 	
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Contorno
+	addi $5, $0, 0xffffff #Contorno
 	addi $6, $0, 0xb4b4b4
 	addi $7, $0, 2
 	
@@ -5012,7 +5619,7 @@ jumpskull:
 	addi $25, $25, 1016
 
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #Contorno
+	addi $5, $0, 0xffffff #Contorno
 	addi $6, $0, 2
 	addi $7, $0, 2
 	
@@ -5038,7 +5645,7 @@ jumpskull:
 	addi $25, $25, 1024
 	
 	add $4, $0, $25
-	addi $5, $0, 0xfffffe #PERNA
+	addi $5, $0, 0xffffff #PERNA
 	addi $6, $0, 1
 	
 	jal vertical
@@ -8733,13 +9340,6 @@ megaleve:
 #	MOVESET DO MEGAMAN		
 moveset:
 	add $22, $0, $31
-		
-	sw $0, 8($15)
-	
-	
-	
-	
-	
 	lw $12, 0($15)
 	bne $12, $0, tirolo
 	beq $14, 20, pulacol
@@ -8769,23 +9369,64 @@ cod:	addi $10, $0, 'd'
 	addi $10, $0, 'j'
 	beq $9, $10, tiromega
 #============== DETECTOR DE DANO PARADO	
+	addi $9, $21, 40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
 	
 	
-	addi $4, $21, 0
-	addi $6, $0, 10
-	addi $7, $0, 12
-	
-	lw $5, 48($15)
-	jal colidamage
-	
-	
-	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-	
-	
-	
-	
+	addi $17, $0, 0
+	addi $14, $0, 0
 	
 	
 	add $31, $0, $22
@@ -8795,73 +9436,103 @@ cod:	addi $10, $0, 'd'
 #	MOVIMENTAÇÃO PARA FRENTE
 	
 frente:	
-	addi $8, $0, -4
-	sw $8, 8($15)
-	
-	addi $8, $0, -60
-	sw $8, 12($15)
-	
+
 	lw $16, 4($23)
 	sw $0, 4($23)
 	
-	jal contshot
-	
-	
-	
-	
-
-	
-	
-frentnor:	addi $21, $21, 4
+	addi $21, $21, 4
 	add $24, $0, $21
 	
 	add $10, $0, 'e' #POR ENQUANTO ASSIM
 	beq $16, $10, pacoleve
+	beq $17, $0, paco1
+	beq $17, 1, paco2
+	beq $17, 2, paco3
 	
-	lw $14, 136($15)
-	
-	beq $14, 1, paco1l
-	beq $14, 2, paco2l
-	beq $14, 3, paco3l
-	
-	lw $14, 36($15)
-	
-	beq $14, $0, paco1
-	beq $14, 1, paco2
-	beq $14, 2, paco3
 	
 	add $31, $0, $22
 	jr $31
 	
-pacoleve:		
-#============== COLISAO LEVE
-	addi $4, $21, 20
-	addi $6, $0, 10
-	addi $7, $0, 5
-	lw $5, 48($15)
-	jal colidamage
+nopefrente:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
 	
-	add $4, $21, 32
-	addi $7, $0, 1
-	jal coliwall
+	addi $21, $21, -4
+	add $24, $21, $0
+	jal mega
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-	
+	add $31, $0, $22
+	jr $31
+pacoleve:	
 	addi $4, $24, 0
-	
+	add $12, $0, $4
 	addi $5, $0, 10
 	addi $6, $0, 21
 	
 	jal apagarp
 #============== QUEDA LEVE
 	addi $9, $21, 24536
-	lw $8, 44($15)
+	addi $8, $0, 0x0000
 	
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
-
+	
+#============== COLISAO LEVE
+	addi $9, $21, 40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
 	
 	jal megaleve
 	
@@ -8870,293 +9541,403 @@ pacoleve:
 	jal timer
 	
 	
-	
-	addi $4, $21, -44
+	add $4, $0, $12
+	addi $4, $4, -44
 	addi $5, $0, 22
 	addi $6, $0, 24
 	
+	
 	jal apagarp
+	addi $14, $0, 1
 	
 	
 	add $31, $0, $22
 	jr $31
-	
-#-------------------------------------------	
+
+#-------------------------------------------
 #	PRIMEIRO PACO	
-paco1:	lw $13, 32($15)
-	sw $13, 132($15)
-
-paco1l:	lw $13, 132($15)
-		
-
-	
-	
-	
-	addi $4, $21, -52
-	
-	addi $5, $0, 24
+paco1:	
+	addi $4, $24, -60
+	add $12, $0, $4
+	addi $5, $0, 30
 	addi $6, $0, 24
 	
 	jal apagarp
 #============== COLISAO PACO1
 	
 	addi $9, $21, 24536
-	lw $8, 44($15)
-	
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
-
+	
 #============== COLISAO PACO1
-	add $4, $21, $0
-	addi $6, $0, 10
-	addi $7, $0, 14
+	addi $9, $21, 52
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
 	
-	lw $5, 48($15)
-	jal colidamage
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	addi $4, $21, 48
-	addi $7, $0, 1
-	
-	jal coliwall	
-	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+		
 	jal megapaco1 #1
+	
 	
 	lw $4, 4($15)
 	jal timer
 	
+	addi $4, $24, -40
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp 
+	
 	addi $21, $21, 4
 	addi $24, $21, 0
 	
+	jal megapaco1 #2
 	
-	addi $4, $21, -60 
+	lw $4, 4($15)
+	jal timer
+	
+	addi $4, $24, -40
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco1 #3
+	
+	lw $4, 4($15)
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, 0
 	addi $5, $0, 30
 	addi $6, $0, 24
 	
-	
-	
+	lw $12, 0($15)	#CARREGA O VALOR DO TIRO EM MOVIMENTO
+	bne $12, $0, fimpac1
 	
 	jal apagarp
 	
 	
-	
-	
-	lw $13, 132($15)
-	addi $13, $13, -1
-	beq $13, $0, fimpac1	
-	sw $13, 132($15)
-	
-	addi $8, $0, 1
-	sw $8, 136($15)
-	
-	add $31, $0, $22
-	jr $31
-fimpac1:	
+fimpac1:	addi $17, $17, 1
 	addi $14, $0, 1
-	sw $14, 36($15)
-	sw $0, 136($15)
 	
 	add $31, $0, $22
 	jr $31
-	
-	
-	
-	
-	
-#-------------------------------------------	
-#	SEGUNDO PACO
-paco2:	lw $13, 32($15)
-	sw $13, 132($15)
-	
-paco2l:	lw $13, 132($15)	
 	
 
-		
-	addi $4, $21, -56
-	
-	addi $5, $0, 24
+#-------------------------------------------
+#	SEGUNDO PACO	
+paco2:	
+	addi $4, $24, -64
+	add $12, $0, $4
+	addi $5, $0, 30
 	addi $6, $0, 24
 	
 	jal apagarp
 #============== COLISAO PACO2
 	
 	addi $9, $21, 24552
-	lw $8, 44($15)
+	addi $8, $0, 0x0000
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
-		
+	
 #============== COLISAO PACO2
-	add $4, $21, $0
-	addi $6, $0, 10	
-	addi $7, $0, 14
+	addi $9, $21, 52
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
 	
-	lw $5, 48($15)
-	jal colidamage
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	addi $4, $21, 48
-	addi $7, $0, 1
-	jal coliwall
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
 		
 	jal megapaco2 #1
 	
 	lw $4, 4($15)
 	jal timer
 	
-	addi $21, $21, 4
-	addi $24, $21, 0
-	
-	addi $4, $21, -64
-	addi $5, $0, 24
-	addi $6, $0, 24
-	
-
-	
+	addi $4, $24, -40
+	addi $5, $0, 1
+	addi $6, $0, 1
 	
 	jal apagarp
 	
-	lw $13, 132($15)
-	addi $13, $13, -1
-	beq $13, $0, fimpac2
-	sw $13, 132($15)
-	addi $8, $0, 2
-	sw $8, 136($15)
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco2 #2
+	
+	lw $4, 4($15)
+	jal timer
+	
+	addi $4, $24, -28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco2 #3
+	
+	lw $4, 4($15)
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, 0
+	addi $5, $0, 23
+	addi $6, $0, 24
+	
+	lw $12, 0($15)
+	bne $12, $0, fimpac2
+	
+	jal apagarp
+	
+fimpac2:	beq $14, 2, minus
+	addi $17, $17, 1
 	
 	add $31, $0, $22
 	jr $31
 	
-	
-	
-fimpac2:	
-	lw $14, 140($15)
-	
-	beq $14, 2, minus
-	
-	addi $14, $0, 2
-	sw $14, 36($15)
-	sw $0, 136($15)
-	
+minus:	addi $17, $17, -1
+
 	add $31, $0, $22
 	jr $31
 
-minus:	lw $14, 36($15)
-	addi $14, $14, -1	
-	sw $14, 36($15)
-	sw $0, 136($15)
-	sw $0, 140($15)
-	
-	add $31, $0, $22
-	jr $31
-	
-#-------------------------------------------	
+#-------------------------------------------
 #	TEREIRO PACO
-paco3:	lw $13, 32($15)
-	sw $13, 132($15)
 	
-paco3l:	lw $13, 132($15)	
-
-	addi $4, $21, -52
-
-	addi $5, $0, 24
+paco3:	
+	
+	addi $4, $24, -60
+	add $12, $0, $4
+	addi $5, $0, 28
 	addi $6, $0, 24
 	
 	jal apagarp
 #============== COLISAO PACO3
 	
 	addi $9, $21, 24536
-	lw $8, 44($15)
+	addi $8, $0, 0x0000
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
-			
+	
 #============== COLISAO PACO3
-	add $4, $21, $0
-	addi $6, $0, 10
-	addi $7, $0, 14
+	addi $9, $21, 52
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
 	
-	lw $5, 48($15)
-	jal colidamage
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	addi $4, $21, 48
-	addi $7, $0, 1
-	jal coliwall	
-	
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+		
 	jal megapaco3 #1
 	
 	lw $4, 4($15)
 	jal timer
 	
+	addi $4, $24, -28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	
+	jal apagarp
 	
 	addi $21, $21, 4
 	addi $24, $21, 0
 	
+	jal megapaco3 #2
 	
-	addi $4, $21, -60
+	lw $4, 4($15)
+	jal timer
+	
+	addi $4, $24, -28
+	addi $5, $0, 1
+	addi $6, $0, 1
+	jal apagarp
+	
+	
+	addi $21, $21, 4
+	addi $24, $21, 0
+	
+	jal megapaco3 #3
+	
+	lw $4, 4($15)
+	jal timer
+	
+	add $4, $0, $12
+	addi $4, $4, -8
 	addi $5, $0, 26
 	addi $6, $0, 24
 	
-	
-	
-	
-	jal apagarp	
-	
-	lw $13, 132($15)
-	addi $13, $13, -1
-	beq $13, $0, fimpac3
-	sw $13, 132($15)
-	
-	addi $8, $0, 3
-	sw $8, 136($15)
-	
-	add $31, $0, $22
-	jr $31
-
-	
-fimpac3:	addi $14, $0, 1
-	sw $14, 36($15)
-	sw $0, 136($15)
-	
-	addi $8, $0, 2
-	sw $8, 140($15)
-	
-	add $31, $0, $22
-	jr $31
-
-
-contshot:	add $18, $0, $31
 	lw $12, 0($15)
-	beq $12, $0, nueshot
-	addi $4, $21, -56
-	addi $5, $0, 30
-	addi $6, $0, 30
+	bne $12, $0, fimpac3
+	
 	jal apagarp
-	addi $2, $0, 40
-	sw $2, 144($15)
-nueshot:	add $31, $0, $18
-	jr $31
+	
+fimpac3:	addi $17, $17, -1
+	
+	addi $14, $0, 2
+	
+	add $31, $0, $22
+	jr $31	
+
+
 #================================================================
 #================================================================
 #	MOVIMENTAÇÃO PARA TRAS
 
 tras:	
-	
-	addi $8, $0, 4
-	sw $8, 8($15)
-	
-	addi $8, $0, 52
-	sw $8, 12($15)
-	
+
 	lw $16, 4($23)
 	sw $0, 4($23)
 	
@@ -9171,42 +9952,85 @@ tras:
 	
 	
 	add $31, $0, $22
+	jr $31
+	
+nopetras:	add $9, $0, $0
+	add $10, $0, $0
+	add $8, $0, $0
+	
+	addi $21, $21, 4
+	add $24, $21, $0
+	jal mega
+	
+	add $31, $0, $22
 	jr $31	
 pacolevet:	
 	addi $4, $24, 0
-	
+	add $12, $0, $4
 	addi $5, $0, 10
-	addi $6, $0, 21
+	addi $6, $0, 20
 	
 	jal apagarp
 #============== QUEDA LEVET
 	addi $9, $21, 24536
-	lw $8, 44($15)
+	addi $8, $0, 0x0000
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
 	
 #============== COLISAO LEVET
-	addi $4, $21, -52
-	addi $6, $0, 10
-	addi $7, $0, 1
+	addi $9, $21, -40
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
 	
-	jal coliwall
-	add $4, $4, 8
-	lw $5, 48($15)
-	jal colidamage
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 		
 	jal megaleve
 	
 	addi $4, $0, 12000
 	jal timer
 	
-	
-	addi $4, $21, -44
+	add $4, $0, $12
+	addi $4, $4, 0
 	addi $5, $0, 25
 	addi $6, $0, 24
 	
@@ -9219,39 +10043,71 @@ pacolevet:
 #	PRIMEIRO PACO PARA TRAS
 paco1t:	
 	addi $4, $24, -40
-	
-	addi $5, $0, 30
-	addi $6, $0, 25
+	add $12, $0, $4
+	addi $5, $0, 22
+	addi $6, $0, 19
 	
 	jal apagarp
 #============== COLISAO PACO1T
 	
 	addi $9, $21, 24552
-	lw $8, 44($15)
+	addi $8, $0, 0x0000
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
 	
 #============== COLISAO PACO1T
-	addi $4, $21, -52
-	addi $6, $0, 10
-	addi $7, $0, 1
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
 	
-	jal coliwall
-	add $4, $4, 8
-	lw $5, 48($15)
-	jal colidamage
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 		
 	jal megapaco1 #1
 	
 	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $21, -40
+	addi $4, $24, 4
 	addi $5, $0, 1
 	addi $6, $0, 1
 	
@@ -9265,7 +10121,7 @@ paco1t:
 	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $21, -40
+	addi $4, $24, 4
 	addi $5, $0, 1
 	addi $6, $0, 1
 	
@@ -9279,10 +10135,10 @@ paco1t:
 	lw $4, 4($15)
 	jal timer
 	
-	
-	addi $4, $21, -64
-	addi $5, $0, 28
-	addi $6, $0, 25
+	add $4, $0, $12
+	addi $4, $4, -16
+	addi $5, $0, 27
+	addi $6, $0, 24
 	
 	jal apagarp
 	
@@ -9297,40 +10153,72 @@ paco1t:
 #-------------------------------------------
 #	SEGUNDO PACO PARA TRAS
 paco2t:	
-	addi $4, $24, -40
-	
-	addi $5, $0, 30
-	addi $6, $0, 25
+	addi $4, $24, 0
+	add $12, $0, $4
+	addi $5, $0, 26
+	addi $6, $0, 23
 	
 	jal apagarp
 #============== COLISAO PACO2T
 	
 	addi $9, $21, 24552
-	lw $8, 44($15)
+	addi $8, $0, 0x0000
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
 	
 #============== COLISAO PACO2T
-	addi $4, $21, -52
-	addi $6, $0, 10
-	addi $7, $0, 1
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
 	
-	jal coliwall
-	add $4, $4, 8
-	lw $5, 48($15)
-	jal colidamage
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 		
 	jal megapaco2 #1
 	
 	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $21, 40
+	addi $4, $24, 4
 	addi $5, $0, 1
 	addi $6, $0, 1
 	
@@ -9344,7 +10232,7 @@ paco2t:
 	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $21, 40
+	addi $4, $24, 4
 	addi $5, $0, 1
 	addi $6, $0, 1
 	
@@ -9358,10 +10246,10 @@ paco2t:
 	lw $4, 4($15)
 	jal timer
 	
-	
-	addi $4, $21, -64
-	addi $5, $0, 28
-	addi $6, $0, 25
+	add $4, $0, $12
+	addi $4, $4, 4
+	addi $5, $0, 26
+	addi $6, $0, 23
 	
 	jal apagarp
 	
@@ -9379,40 +10267,72 @@ minust:	addi $17, $17, -1
 #	TEREIRO PACO PARA TRAS	
 paco3t:	
 	
-	addi $4, $24, -40
-	
-	addi $5, $0, 30
-	addi $6, $0, 25
+	addi $4, $24, -28
+	add $12, $0, $4
+	addi $5, $0, 28
+	addi $6, $0, 24
 	
 	jal apagarp
 #============== COLISAO PACO3T
 	
 	addi $9, $21, 24552
-	lw $8, 44($15)
+	addi $8, $0, 0x0000
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
 	
 #============== COLISAO PACO3T
-	addi $4, $21, -52
-	addi $6, $0, 10
-	addi $7, $0, 1
+	addi $9, $21, -48
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
 	
-	jal coliwall
-	add $4, $4, 8
-	lw $5, 48($15)
-	jal colidamage
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 		
 	jal megapaco3 #1
 	
 	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $21, 40
+	addi $4, $24, 28
 	addi $5, $0, 1
 	addi $6, $0, 1
 	
@@ -9426,7 +10346,7 @@ paco3t:
 	lw $4, 4($15)
 	jal timer
 	
-	addi $4, $21, 40
+	addi $4, $24, 28
 	addi $5, $0, 1
 	addi $6, $0, 1
 	jal apagarp
@@ -9440,14 +10360,14 @@ paco3t:
 	lw $4, 4($15)
 	jal timer
 	
-	
-	addi $4, $21, -64
-	addi $5, $0, 28
-	addi $6, $0, 25
+	add $4, $0, $12
+	addi $4, $4, -40
+	addi $5, $0, 25
+	addi $6, $0, 24
 	
 	jal apagarp
 	
-	addi $17, $17, -1
+	addi $17, $17, 1
 	
 	addi $14, $0, 2
 	
@@ -9462,31 +10382,28 @@ paco3t:
 
 pulomega:	sw $0, 4($23)
 	addi $14, $0, 20
-	jal contshot
 	
-pulaco:	addi $8, $0, 50
-	sw $8, 28($15)
-	
-pulacol:	lw $13, 28($15)
-	beq $13, $0, quedaco
+
+pulaco:	addi $16, $0, 50		
+pulacol:	beq $16, $0, quedaco
 	
 	lw $12, 0($15)
 	bne $12, $0, pulolvf
 	
-	addi $9, $0, 40
-	slt $8, $9, $13
+	addi $9, $0, 10
+	slt $8, $17, $9
 	beq $8, 1, pulolv1 	#CAMADA 1
 	
-	addi $9, $0, 30
-	slt $8, $9, $13
+	addi $9, $0, 20
+	slt $8, $17, $9
 	beq $8, 1, pulolv2	#CAMADA 2
 	
-	addi $9, $0, 20
-	slt $8, $9, $13
+	addi $9, $0, 30
+	slt $8, $17, $9
 	beq $8, 1, pulolv3	#CAMADA 3
 	
-	addi $9, $0, 10
-	slt $8, $9, $13
+	addi $9, $0, 40
+	slt $8, $17, $9
 	beq $8, 1, pulolv4	#CAMADA 4
 	
 	j pulolv5
@@ -9516,24 +10433,18 @@ pulolv5:	addi $4, $0, 500
 	jal timer
 		
 		
-pulolvf:	addi $4, $21, -40
-	addi $6, $0, 20
-	addi $7, $0, 20
-	
-	lw $5, 48($15)
-	
-	jal colidamage
+pulolvf:
 	
 	addi $21, $21, -1024
 	addi $24, $21, 0
 	
 	addi $4, $24, -1072
-	addi $5, $0, 25
+	addi $5, $0, 26
 	addi $6, $0, 34
 	
 	jal apagarp
 	
-	
+	addi $17, $17, 1
 #============== COLISAO DO TETO
 	
 	addi $9, $21, -1024
@@ -9548,38 +10459,70 @@ pulolvf:	addi $4, $21, -40
 	beq $9, $10, pulacod
 	
 	addi $10, $0, 'a'
-	
 	beq $9, $10, pulacoe
-	
-	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
 	
 	jal megapulo
 	
-	lw $13, 28($15)
-	addi $13, $13, -1
-	sw $13, 28($15)
+	addi $16, $16, -1
 	
 	add $31, $0, $22
 	jr $31
 	
 pulacod:	
 #============== COLISAO PULACOD
-	addi $8, $0, -8
-	sw $8, 8($15)
-	addi $4, $21, 20
-	addi $6, $0, 15
-	addi $7, $0, 4
+	addi $9, $21, 100
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
 	
-	lw $5, 48($15)
-	jal colidamage
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	add $4, $4, 8
-	jal coliwall
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
 	
 	sw $0, 4($23)
 	addi $21, $21, 8
@@ -9587,60 +10530,79 @@ pulacod:
 	
 	jal megapulo
 	
-	lw $13, 28($15)
-	addi $13, $13, -1
-	sw $13, 28($15)
 	
+	addi $16, $16, -1
 	add $31, $0, $22
 	jr $31
 	
 pulacoe:	
-	
 #============== COLISAO PULACOE
-	addi $8, $0, 8
-	sw $8, 8($15)
-	
 	addi $9, $21, -32
 	addi $8, $0, 0x0000
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
-	addi $4, $21, -32
-	addi $6, $0, 20
-	addi $7, $0, 1
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	jal coliwall
-	
-	lw $5, 48($15)
-	jal colidamage
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 	
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
 	
 	jal megapulo
-		
-	lw $13, 28($15)
-	addi $13, $13, -1
-	sw $13, 28($15)
 	
-
+	addi $16, $16, -1
 	add $31, $0, $22
 	jr $31
 		
 	
 quedaco:	
-	
+	addi $17, $0, 0
 	addi $4, $0, 30000
 	jal timer
 	
 	addi $14, $0, 30
 					
-quedacol:	lw $13, 28($15)
-
-	addi $9, $21, 149492
-	
-	lw $10, 0($9)
+quedacol:	
+	addi $9, $21, 18420
+	addi $16, $9, 131072
+	lw $10, 0($16)
 	addi $8, $0, 0x485054
 	beq $10, $8, jumperase
 	
@@ -9648,19 +10610,19 @@ quedacol:	lw $13, 28($15)
 	bne $12, $0, quedalvf	#CAMADA 1
 	
 	addi $9, $0, 10
-	slt $8, $13, $9
+	slt $8, $17, $9
 	beq $8, 1, quedalv5	#CAMADA 2
 	
 	addi $9, $0, 20
-	slt $8, $13, $9
+	slt $8, $17, $9
 	beq $8, 1, quedalv4	#CAMADA 3
 	
 	addi $9, $0, 30
-	slt $8, $13, $9
+	slt $8, $17, $9
 	beq $8, 1, quedalv3	#CAMADA 4
 	
 	addi $9, $0, 40
-	slt $8, $13, $9
+	slt $8, $17, $9
 	beq $8, 1, quedalv2	#CAMADA 5
 	
 
@@ -9690,24 +10652,16 @@ quedalv5:	addi $4, $0, 1500
 	jal timer
 
 	
-quedalvf:	addi $4, $21, -40
-	addi $6, $0, 20
-	addi $7, $0, 20
-	
-	lw $5, 48($15)
-	
-	jal colidamage
-	
-	addi $21, $21, 1024
+quedalvf:	addi $21, $21, 1024
 	addi $24, $21, 0
 	
 	addi $4, $24, -1076
-	addi $5, $0, 25
+	addi $5, $0, 31
 	addi $6, $0, 31
 	
 	jal apagarp
 	
-	
+	addi $17, $17, 1
 	lw $9, 4($23)
 	
 	addi $10, $0, 'd'
@@ -9716,82 +10670,138 @@ quedalvf:	addi $4, $21, -40
 	addi $10, $0, 'a'
 	beq $9, $10, quedacoe
 	
-	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
 	jal megapulo
-		
-	lw $13, 28($15)
-	addi $13, $13, 1
-	sw $13, 28($15)
-	
-
+	addi $16, $16, -1
 	add $31, $0, $22
 	jr $31
 	
 quedacod:	
 #============== COLISAO QUEDACOD
-	addi $8, $0, -8
-	sw $8, 8($15)
-	addi $4, $21, 20
-	addi $6, $0, 15
-	addi $7, $0, 4
+	addi $9, $21, 100
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xffffff
+	lw $10, 0($9)
 	
-	lw $5, 48($15)
-	jal colidamage
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	add $4, $4, 8
-	jal coliwall
+	beq $10, $11, derrotado 
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $11, derrotado
+	bne $10, $8, nopefrente
 	
 	sw $0, 4($23)
 	addi $21, $21, 8
 	addi $24, $21, 0
 	
 	jal megapulo
-		
-	lw $13, 28($15)
-	addi $13, $13, 1
-	sw $13, 28($15)
 	
-
+	addi $16, $16, -1
 	add $31, $0, $22
 	jr $31
 	
 quedacoe:	
-	
+
 #============== COLISAO QUEDACOE
-	addi $8, $0, 8
-	sw $8, 8($15)
-	addi $4, $21, -32
-	addi $6, $0, 20
-	addi $7, $0, 1
+	addi $9, $21, -32
+	addi $8, $0, 0x0000
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
 	
-	jal coliwall
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
 	
-	lw $5, 48($15)
-	jal colidamage
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	bne $10, $8, nopetras
 	
 	sw $0, 4($23)
 	addi $21, $21, -8
 	addi $24, $21, 0
 	
 	jal megapulo
-		
-	lw $13, 28($15)
-	addi $13, $13, 1
-	sw $13, 28($15)
 	
- 
+	addi $16, $16, -1
 	add $31, $0, $22
 	jr $31
 	
 jumperase:	
 	jal notamegaj
 	addi $4, $21, -11312
-	addi $5, $0, 25
+	addi $5, $0, 31
 	addi $6, $0, 42
 	
 	jal apagarp
@@ -9818,16 +10828,16 @@ tiromega:
 	
 	addi $4, $24, -52
 	addi $5, $0, 30
-	addi $6, $0, 25
+	addi $6, $0, 30
 	
 	jal apagarp
 	
 	jal notamegat
 	jal megatiro
-	#addi $4, $0, 50000
-	#jal timer
+	
 	lw $12, 0($15)
 	bne $12, $0, tirolo #Tiro durante o tiro
+	
 	add $12, $21, 10312 #Depois eu decido qual o melhor registrador para esse loop
 	
 	sw $12, 0($15)
@@ -9841,25 +10851,64 @@ tirolo:
 	
 	jal megabuster
 	
-	addi $4, $12, 0
-	lw $5, 48($15)
-	addi $6, $0, 10
-	addi $7, $0, 5
+	addi $9, $12, 48
+	lw $8, 48($15)
 	
-	jal enedamage
-	beq $2, 10, stopshot
+	lw $11, 44($15)
+	lw $10, 0($9)
 	
-	lw $5, 56($15)
-	jal colishot
 	
-	lw $5, 60($15)
-	jal colishot
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
 	
-	lw $5, 64($15)		
-	jal colishot
-gnore:	
-	addi $4, $4, -2060
-	addi $5, $0, 2
+	lw $10, 0($9)
+	
+	  
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit 	
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	addi $9, $9, 1024
+	lw $10, 0($9)
+	 
+	beq $10, $8, damagehit
+	lw $8, 52($15)
+	beq $10, $8, gnore
+	 	
+	bne $10, $11, stopshot
+	 
+gnore:	add $24, $9, $0
+	
+	addi $4, $24, -7224
+	addi $5, $0, 1
 	addi $6, $0, 6
 	
 	jal apagarp
@@ -9889,28 +10938,19 @@ gnore:
 	addi $10, $0, 'j'
 	beq $9, $10, tiromega
 	
-	lw $2, 144($15)
-	beq $2, 40, newmega
-	j tironue
-	
-newmega:	add $24, $21, $0	
-	jal mega
-	sw $0, 144($15)
-		
-tironue:	add $31, $0, $22
+	add $31, $0, $22
 	jr $31
 	
-stopshot:	lw $4, 0($15)
+
+stopshot:	
 	sw $0, 0($15)
 	sw $0, 4($23)
 	
-	lw $8, 40($15)
-	beq $8, $0, telavitoria
+	add $24, $9, $0
 	
-	
-	addi $4, $4, -2056
-	addi $5, $0, 11
-	addi $6, $0, 7
+	addi $4, $24, -1100
+	addi $5, $0, 20
+	addi $6, $0, 20
 	
 	jal apagarp
 	
@@ -9923,7 +10963,6 @@ stopshot:	lw $4, 0($15)
 	beq $14, 20, pulacol
 	beq $14, 30, quedacol
 	add $12, $0, $0
-	
 	
 	
 	add $31, $0, $22
@@ -9956,219 +10995,6 @@ derrotado:
 	jal derrota
 	jal jinglede
 	j fim
-#=================================================
-#	MOVIMENTOS DO SKULLMAN
-movesku:	
-	add $22, $0, $31
-	lw $13, 20($15)
-	lw $9, 24($15)
-	
-	beq $9, 13, quedaskul
-	beq $13, 26, chaoskul
-	j puloskull
-	
-	
-chaoskul:	
-	sw $0, 24($15)
-	
-	addi $4, $20, -1072
-	addi $5, $0, 30
-	addi $6, $0, 36
-	
-	jal apagarp
-	
-	jal notaskuj
-
-	add $4, $20, -20
-	lw $5, 120($15)
-	addi $6, $0, 20
-	addi $7, $0, 20
-	
-	jal colidamage
-	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-
-	#lw $5, 124($15)
-	#jal colidamage
-	
-	#lw $8, 16($15)
-	#beq $8, $0, derrotado
-	
-	#lw $5, 128($15)
-	#jal colidamage
-		
-	#lw $8, 16($15)
-	#beq $8, $0, derrotado
-	
-	lw $5, 52($15)
-	jal enedamage
-	
-	lw $8, 40($15)
-	beq $8, $0, telavitoria
-	
-	jal skull
-	
-	addi $4, $0, 10000
-	jal timer
-
-puloskull:
-	add $25, $20, $0
-	lw $13, 20($15)
-	
-	beq $13, $0, quedasku
-	
-	addi $4, $20, -1072
-	addi $5, $0, 30
-	addi $6, $0, 36
-	
-	jal apagarp
-	
-	add $4, $20, -20
-	lw $5, 120($15)
-	addi $6, $0, 15
-	addi $7, $0, 15
-
-	jal colidamage
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-
-	#lw $5, 124($15)
-	#jal colidamage
-	
-	#lw $8, 16($15)
-	#beq $8, $0, derrotado
-	
-	#lw $5, 128($15)
-	#jal colidamage
-		
-	#lw $8, 16($15)
-	#beq $8, $0, derrotado
-	
-	lw $5, 52($15)
-	jal enedamage
-	
-	lw $8, 40($15)
-	beq $8, $0, telavitoria
-	
-	jal jskull
-	
-	addi $25, $20, -1024
-	addi $20, $20, -1024
-	lw $13, 20($15)
-	addi $9, $0, 20 #CAMADA 1
-	slt $8, $9, $13
-	beq $8, 1, jskul1
-	
-	addi $9, $0, 10 # CAMADA 2
-	slt $8, $9, $13
-	beq $8, 1, jskul2
-	
-	j jskul3
-		
-jskul1:	add $4, $0, 20
-	
-	jal timer
-	
-	j skut
-	
-jskul2:	add $4, $0, 200
-	
-	jal timer
-	
-	j skut
-
-jskul3:	add $4, $0, 600
-	
-	jal timer
-	
-skut:	
-	addi $13, $13, -1
-	sw $13, 20($15)
-	
-	add $31, $0, $22
-	jr $31
-
-quedasku:	addi $9, $0, 13
-	sw $9, 24($15)
-
-quedaskul:	beq $13, 26, chaoskul
-	
-	add $25, $20, $0
-	lw $13, 20($15)
-	
-	
-	addi $4, $20, -1072
-	addi $5, $0, 30
-	addi $6, $0, 30
-	
-	jal apagarp
-	
-	add $4, $20, -20
-	lw $5, 120($15)
-	addi $6, $0, 15
-	addi $7, $0, 10
-
-	jal colidamage
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-
-	#lw $5, 124($15)
-	#jal colidamage
-	
-	#lw $8, 16($15)
-	#beq $8, $0, derrotado
-	
-	#lw $5, 128($15)
-	#jal colidamage
-		
-	#lw $8, 16($15)
-	#beq $8, $0, derrotado
-	
-	lw $5, 52($15)
-	jal enedamage
-	
-	lw $8, 40($15)
-	beq $8, $0, telavitoria
-	
-	jal jskull
-	
-	addi $25, $20, 1024
-	addi $20, $20, 1024
-	
-	lw $13, 20($15)
-	addi $9, $0, 10 #CAMADA 1
-	slt $8, $13, $9
-	beq $8, 1, qskul1
-	
-	addi $9, $0, 20 # CAMADA 2
-	slt $8, $13, $9
-	beq $8, 1, qskul2
-	
-	j qskul3
-		
-qskul1:	add $4, $0, 400
-	
-	jal timer
-	
-	j skutq
-	
-qskul2:	add $4, $0, 100
-	
-	jal timer
-	
-	j skutq
-
-qskul3:	add $4, $0, 10
-	
-	jal timer
-	
-skutq:	
-	addi $13, $13, 1
-	sw $13, 20($15)
-	
-	add $31, $0, $22
-	jr $31		
 #=======================================
 #	FUNCAO MEGATIRO
 megatiro:	
@@ -15804,603 +16630,4 @@ persia:
 	add $15, $0, $2
 	
 	add $31, $0, $18
-	jr $31
-			
-#===================================================
-#	FUNCAO DE COLISAO DE DANO
-		
-#	$4 = Posicao de verificacao
-#	$5 = Cor do dano
-#	$6 = Quantas linhas
-#	$7 = Quantas colunas
-
-colidamage:	
-
-
-	addi $9, $4, 0
-	add $12, $0, $4
-	
-	add $11, $0, $6
-	add $13, $0, $7
-	
-damageloop:	
-	
-	lw $10, 0($9)
-	
-	beq $10, $5, selfdamage
- 	
- 	addi $9, $9, 1024
- 	addi $11, $11, -1
- 	
-	bne $11, $0, damageloop
-	
-	addi $12, $12, 4
-	add $9, $0, $12
-	add $11, $0, $6
-	addi $13, $13, -1
-	
-	bne $13, $0, damageloop
-	
-	jr $31
-	
-selfdamage:	add $9, $0, $0
-	add $10, $0, $0
-	add $12, $0, $0
-	
-	lw $8, 12($15)
-	add $21, $21, $8
-	add $24, $21, $0
-	
-	addi $4, $21, -40
-	addi $5, $0, 40
-	addi $6, $0, 34
-	jal apagarp
-	
-	add $4, $0, $21
-	jal dano
-	
-	addi $4, $0, 25000
-	jal timer
-	
-	addi $4, $21, -6224
-	addi $5, $0, 38
-	addi $6, $0, 30
-	jal apagarp
-	
-	lw $9, 16($15) # PERDE VIDA
-	addi $9, $9, -1
-	
-	sw $9, 16($15)
-	
-	
-	add $31, $0, $22
-	jr $31
-#===================================================
-#	FUNCAO DE COLISAO DE PAREDES
-		
-#	$4 = Posicao de verificacao
-#	$
-#	$6 = Quantas linhas
-#	$7 = Quantas colunas
-
-coliwall:	
-	addi $9, $4, 0
-	add $12, $0, $4
-	
-	add $11, $0, $6
-	add $13, $0, $7
-	
-walloop:	
-	lw $8, -4($9)
-	lw $10, 0($9)
-	
-	bne $10, $8, nopeandar
- 	
- 	addi $9, $9, 1024
- 	addi $11, $11, -1
- 	
-	bne $11, $0, walloop
-	
-	addi $12, $12, 4
-	add $9, $0, $12
-	add $11, $0, $6
-	addi $13, $13, -1
-	
-	bne $13, $0, walloop
-	
-	jr $31
-	
-nopeandar:	add $9, $0, $0
-	add $10, $0, $0
-	add $12, $0, $0
-	
-	lw $8, 8($15)
-	add $21, $21, $8
-	add $24, $21, $0
-	
-	addi $2, $0, 20
-	
-	
-	
-	
-	add $31, $0, $22
-	jr $31
-#==============================================================
-#	Flicker do dano
-
-#	PARA USAR A FUNCAO, COLOQUE NO $4 O VALOR DA MEM�RIA DE ONDE ELE DEVE COME�AR
-
-dano:	
-	add $18, $0, $31
-	
-	addi $5, $0, 0xffffff
-	
-	addi $6, $0, 11
-	addi $7, $0, 13
-	
-	jal verticais
-	add $4, $0, $2
-	
-	addi $4, $4, -2052
-	
-#============	Triangulo superior direito
-
-	addi $6, $0, 3
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $4, $0, $2
-	
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $4, $0, $2
-	
-	addi $6, $0, 1
-	addi $7, $0, -64
-	
-	jal sequencia
-	add $4, $0, $2
-	
-#============	Triangulo superior esquerdo
-
-	addi $6, $0, 3
-	addi $7, $0, 1
-	
-	jal diagoupt
-	add $4, $0, $2
-	
-	addi $4, $4, -8
-	
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoupt
-	add $4, $0, $2
-	
-	addi $4, $4, -8
-	
-	addi $6, $0, 1
-	addi $7, $0, -4080
-	
-	jal sequencia
-	add $4, $0, $2
-
-#============ Copo virado superior esquerdo
-
-	addi $6, $0, 2
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $4, $4, 2040
-	
-	addi $6, $0, 3
-	addi $7, $0, 3
-	
-	jal verticais
-	add $4, $0, $2
-	
-	addi $4, $4, 1024
-	
-	addi $6, $0, 2
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $4, $4, 1024
-	
-#============ Escadinha superior direita
-
-	addi $6, $0, 5
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $4, $0, $2
-	
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $4, $0, $2
-	
-	addi $6, $0, 1
-	addi $7, $0, -2048
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $4, $4, 3016
-	
-#------------ Fim da coroinha
-	
-	addi $6, $0, 21
-	addi $7, $0, 924
-	
-	jal sequencia
-	add $4, $0, $2
-	
-#============ Triangulo da lateral esquerda
-		
-	addi $6, $0, 7
-	addi $7, $0, 1000
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 6
-	addi $7, $0, 1004
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	addi $7, $0, 1008
-	
-	jal sequencia
-	add $4, $0, $2
-#------------ Seccao de preenchimento da lateral esquerdas	
-	addi $6, $0, 4
-	addi $7, $0, 1004
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	addi $7, $0, 1008
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	addi $7, $0, 1004
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	addi $7, $0, 996
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 7
-	addi $7, $0, 1004
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	addi $7, $0, 1012
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	addi $7, $0, 1008
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	addi $7, $0, 1008
-	
-	jal sequencia
-	add $4, $0, $2
-	
-#============ PERNINHA ESQUERDA DO CANTO INFERIOR
-	addi $6, $0, 4
-	addi $7, $0, 2
-	
-	jal diagodwt
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	addi $7, $0, 1
-	
-	jal diagodwt
-	add $4, $0, $2
-
-#============ PERNA ESQUERDA
-	
-	addi $4, $4, 1020
-	
-	addi $6, $0, 2
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $4, $4, -1024
-	
-	addi $6, $0, 5
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 7
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	
-	jal vertical
-	add $4, $0, $2
-	
-#============ PERNA DIREITA
-
-	addi $6, $0, 2
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 6
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 7
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	
-	jal vertical
-	add $4, $0, $2
-
-#============ PERNINHA DIREITA
-	
-	addi $6, $0, 1
-	
-	jal vertical
-	add $4, $0, $2
-	
-	addi $4, $4, 1020
-	
-	addi $6, $0, 4
-	addi $7, $0, 2
-	
-	jal diagodw
-	add $4, $0, $2
-	
-	addi $4, $4, -2052
-	
-	addi $6, $0, 2
-	
-	jal vertical
-	add $4, $0, $2
-
-#============ LATERAL DIREITA
-	
-	addi $4, $4, -2056
-	
-	addi $6, $0, 3
-	addi $7, $0, -1036
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	addi $7, $0, -1040
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 6
-	addi $7, $0, -1048
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	addi $7, $0, -1040
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	addi $7, $0, -1036
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	addi $7, $0, -1040
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 3
-	addi $7, $0, -1036
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 4
-	addi $7, $0, -1040
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	addi $6, $0, 5
-	addi $7, $0, -1044
-	
-	jal sequencia
-	add $4, $0, $2
-	
-	add $31, $0, $18
-	jr $31
-		
-#===================================================
-#	FUNCAO DE COLISAO DE ATAQUE
-		
-#	$4 = Posicao de verificacao
-#	$5 = Cor do dano
-#	$6 = Quantas linhas
-#	$7 = Quantas colunas
-
-enedamage:	
-	add $19, $0, $31
-
-	addi $9, $4, 0
-	add $12, $0, $4
-	
-	add $11, $0, $6
-	add $13, $0, $7
-	
-enemyloop:	
-	
-	lw $10, 0($9)
-	
-	beq $10, $5, hitdamage
- 	
- 	addi $9, $9, 1024
- 	addi $11, $11, -1
- 	
-	bne $11, $0, enemyloop
-	
-	addi $12, $12, 4
-	add $9, $0, $12
-	add $11, $0, $6
-	addi $13, $13, -1
-	
-	bne $13, $0, enemyloop
-	
-	jr $31
-	
-hitdamage:	add $9, $0, $0
-	add $10, $0, $0
-	add $12, $0, $0
-	
-	
-	add $20, $20, $0
-	add $25, $20, $0
-	
-	addi $4, $20, -40
-	addi $5, $0, 36
-	addi $6, $0, 26
-	jal apagarp
-	
-	add $4, $0, $20
-	jal dano
-	
-	addi $4, $0, 25000
-	jal timer
-	
-	addi $4, $20, -6224
-	addi $5, $0, 38
-	addi $6, $0, 30
-	jal apagarp
-	
-	lw $9, 40($15) # PERDE VIDA
-	addi $9, $9, -1
-	
-	sw $9, 40($15)
-	addi $2, $0, 10
-	
-	add $31, $0, $19
-	jr $31
-#===================================================
-#	FUNCAO DE COLISAO DE PAREDES DO TIRO
-		
-#	$4 = Posicao de verificacao
-#	$5 = Cor que n�o pode passar
-#	$6 = Quantas linhas
-#	$7 = Quantas colunas
-
-colishot:	
-
-	addi $9, $4, 0
-	add $12, $0, $4
-	
-	add $11, $0, $6
-	add $13, $0, $7
-	
-shotloop:	
-	
-	lw $10, 0($9)
-	
-	beq $10, $5, stopshot
- 	
- 	addi $9, $9, 1024
- 	addi $11, $11, -1
- 	
-	bne $11, $0, shotloop
-	
-	addi $12, $12, 4
-	add $9, $0, $12
-	add $11, $0, $6
-	addi $13, $13, -1
-	
-	bne $13, $0, shotloop
-	
-	jr $31
+	jr $31		
