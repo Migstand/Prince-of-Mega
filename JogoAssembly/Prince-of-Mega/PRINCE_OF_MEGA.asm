@@ -9,22 +9,17 @@ titulo:
 	
 	jal menutheme
 	addi $10, $0, ' '
-	beq $9, $10, apagar
+	beq $9, $10, jogo
 	j titulo
-apagar:	sw $0, 4($23)
-	lui $15, 0x1001
-	
-	addi $14, $0, 32768
-	addi $16, $0, 0x000000
-	
-apagte:	beq $14, $0, cenario
-	
-	sw $16, 0($15)
-	
-	addi $15, $15, 4
-	addi $14, $14, -1
-	j apagte
-cenario:	
+jogo:	jal apagar
+
+cenario: 	lui $8, 0x1001
+	addi $9, $0, 0x495865
+	addi $10, $0, 32768
+fundo:	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $10, $10, -1
+	bne $10, $0, fundo
 	# 485054 Piso 3d
 	# 242424 Tijolo do fundo
 	# 828282 Pilar
@@ -32,10 +27,8 @@ cenario:
 	# 2e2e2e Sombra do pilar
 	# b0b0b0 Piso do pilar
 	
-	add $16, $0, $0
-	lui $15, 0x1001
+	lui $4, 0x1001
 	
-	add $4, $0, $15
 	add $5, $0, 0x4850
 	sll $5, $5, 8
 	ori $5, $5, 0x54
@@ -43,13 +36,13 @@ cenario:
 	addi $7, $0, 972
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #==============	TETO CINZA
 
 #============== PRIMEIRO PILAR 
 	
-	add $4, $0, $15
+	
 	add $5, $0, 0x8282
 	sll $5, $5, 8
 	ori $5, $5, 0x82
@@ -57,1479 +50,1479 @@ cenario:
 	addi $7, $0, 8
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 21
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 20
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 19
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 18
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 17
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== PULA PARA UMA SEQUï¿½NCIA DE DIAGONAIS PARA O PISO DO PRIMEIRO PILAR
-	addi $15, $15, 22432
+	addi $4, $4, 22432
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 8
 	addi $7, $0, 4
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 7
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 9
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== SOMBRA NA FRENTE DO PISO DO PRIMEIRO PILAR
-	addi $15, $15, 928
-	add $4, $0, $15
+	addi $4, $4, 928
+	 
 	addi $5, $0, 0x24224d
 	addi $6, $0, 24
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #=============== SOMBRA DO PISO DO PRIMEIRO PILAR 
-	addi $15, $15, 972
-	add $4, $0, $15
+	addi $4, $4, 972
+	 
 	addi $5, $0, 0x032282
 	addi $6, $0, 12
 	addi $7, $0, 976
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== SEGUNDO PILAR ABAIXO DO PRIMEIRO
 	
-	add $4, $0, $15
+	 
 	add $5, $0, 0x828282
 	addi $6, $0, 29
 	addi $7, $0, 8
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============= SEGUNDO PILAR SOMBRA
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 29
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 28
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 27
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 26
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 25
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== SEGUNDO PILAR PISO
-	addi $15, $15, 29600
+	addi $4, $4, 29600
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 8
 	addi $7, $0, 4
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 7
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 9
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== SEGUNDO PILAR SOBRA DO PISO
-	addi $15, $15, 928
-	add $4, $0, $15
+	addi $4, $4, 928
+	 
 	addi $5, $0, 0x24224d
 	addi $6, $0, 24
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #=============== SOMBRA DO PISO DO SEGUNDO PILAR 
-	addi $15, $15, 972
-	add $4, $0, $15
+	addi $4, $4, 972
+	 
 	addi $5, $0, 0x032282
 	addi $6, $0, 12
 	addi $7, $0, 976
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 
 #=============== TERCEIRO PILAR
-	add $4, $0, $15
+	 
 	add $5, $0, 0x828282
 	addi $6, $0, 29
 	addi $7, $0, 8
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============= TERCEIRO PILAR SOMBRA
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 29
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 28
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 27
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 26
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 25
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== TERCEIRO PILAR PISO
-	addi $15, $15, 29600
+	addi $4, $4, 29600
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 8
 	addi $7, $0, 4
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 7
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 9
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== TERCEIRO PILAR SOBRA DO PISO
-	addi $15, $15, 928
-	add $4, $0, $15
+	addi $4, $4, 928
+	 
 	addi $5, $0, 0x24224d
 	addi $6, $0, 24
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #=============== SOMBRA DO PISO DO TERCEIRO PILAR 
-	addi $15, $15, 972
-	add $4, $0, $15
+	addi $4, $4, 972
+	 
 	addi $5, $0, 0x032282
 	addi $6, $0, 12
 	addi $7, $0, 976
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== QUARTO PILAR
-	add $4, $0, $15
+	 
 	add $5, $0, 0x828282
 	addi $6, $0, 29
 	addi $7, $0, 8
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============= QUARTO PILAR SOMBRA
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 29
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 28
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 27
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 26
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 25
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== QUARTO PILAR PISO
-	addi $15, $15, 29600
+	addi $4, $4, 29600
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 8
 	addi $7, $0, 4
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 7
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 9
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xb0b0b0
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== QUARTO PILAR SOBRA DO PISO
-	addi $15, $15, 928
-	add $4, $0, $15
+	addi $4, $4, 928
+	 
 	addi $5, $0, 0x24224d
 	addi $6, $0, 24
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #=============== SOMBRA DO PISO DO QUARTO PILAR 
-	addi $15, $15, 972
-	add $4, $0, $15
+	addi $4, $4, 972
+	 
 	addi $5, $0, 0x032282
 	addi $6, $0, 12
 	addi $7, $0, 976
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== ULTIMO PILAR QUE Nï¿½O PODE ENTRAR NO VETOR DE CLONAGEM/ESPELHADO
-	add $4, $0, $15
+	 
 	add $5, $0, 0x828282
 	addi $6, $0, 5
 	addi $7, $0, 8
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============= QUARTO PILAR SOMBRA
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 5
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 5
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 5
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 5
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha da coluna no topo
+	  #Linha da coluna no topo
 	add $5, $0, 0x24224d
 	addi $6, $0, 5
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== PISO CENï¿½RIO
 	
-	lui $15, 0x1001
-	addi $15, $15, 32768
+	lui $4, 0x1001
+	addi $4, $4, 32768
 	
 #=============== Borda superior DO PISO SUPERIOR
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 90
 	addi $7, $0, 664
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== LAGE DO PISO SUPERIOR
-	add $4, $0, $15
+	 
 	add $5, $0, 0x485054
 	addi $6, $0, 12
 	addi $7, $0, 43
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 #============== DIAGONAIS DA LAGE DO PISO SUPERIOR
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 11
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 10
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 9
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 8
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 7
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 6
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 5
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 4
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 3
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 2
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha subindo
+	  #Linha subindo
 	add $5, $0, 0x485054
 	addi $6, $0, 1
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== LINHA DE CORTE DA LAGE DO PISO SUPERIOR
-	addi $15, $15, 12236
+	addi $4, $4, 12236
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 13
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x474747
 	addi $6, $0, 13
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 13
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
 #=============	DIAGONAIS DA LAGE DO PISO SUPERIOR
 	
-	addi $15, $15, -1020
-	add $4, $0, $15
+	addi $4, $4, -1020
+	 
 	addi $5, $0, 0x485054
 	addi $6, $0, 12
 	addi $7, $0, 27
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============= FINAL DAS DIAGONAIS DO PISO SUPERIOR
 	
-	addi $15, $15, 1020
-	add $4, $0, $15
+	addi $4, $4, 1020
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 13
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0xfffff7
 	addi $6, $0, 13
 	addi $7, $0, 5
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 13
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== BRILHO DO CHï¿½O DO PISO SUPERIOR 
-	addi $15, $15, -312
-	add $4, $0, $15
+	addi $4, $4, -312
+	 
 	addi $5, $0, 0x828282
 	addi $6, $0, 41
 	addi $7, $0, 12
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x828282
 	addi $6, $0, 27
 	addi $7, $0, 732
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #=============== FIM DO PISO SUPERIOR COM A BORDA INFERIOR DELE
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 79
 	addi $7, $0, 716
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============	MURO DEBAIXO DO PISO SUPERIOR
-	add $4, $0, $15
+	 
 	add $5, $0, 0x242424
 	addi $6, $0, 81
 	addi $7, $0, 25
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== lINHAS DIAGONAIS DO MURO DEBAIXO DO PISO SUPERIOR
-	addi $15, $15, 27548
+	addi $4, $4, 27548
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 25
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 9212
+	addi $4, $4, 9212
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 25
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 9212
+	addi $4, $4, 9212
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 25
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 9212
+	addi $4, $4, 9212
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 25
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 9212
+	addi $4, $4, 9212
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 25
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 9212
+	addi $4, $4, 9212
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 25
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 8192
+	addi $4, $4, 8192
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 24
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 32
+	addi $4, $4, 32
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3b3b47
 	addi $6, $0, 15
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== lINHAS VERTICAIS DO MURO DEBAIXO DO PISO SUPERIOR	
-	addi $15, $15, -81936
+	addi $4, $4, -81936
 	
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x3b3b47
 	addi $6, $0, 81
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 40
+	addi $4, $4, 40
 	
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x3b3b47
 	addi $6, $0, 81
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== CONTORDO AO REDOR DO PILAR DEBAIXO DO PISO SUPERIOR
-	addi $15, $15, 96
+	addi $4, $4, 96
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x212121
 	addi $6, $0, 39
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== SOMBRA DO PILAR DEBAIXO DO PISO SUPERIOR	
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x212121
 	addi $6, $0, 16
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== SOMBRA DO PILAR DO FUNDO DEBAIXO DO PISO SUPERIOR
-	add $4, $0, $15
+	 
 	add $5, $0, 0x141414
 	addi $6, $0, 23
 	addi $7, $0, 6
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x141414
 	addi $6, $0, 3
 	addi $7, $0, 1012
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== PILAR DO FUNDO DEBAIXO DO PISO SUPERIOR
-	add $4, $0, $15
+	 
 	add $5, $0, 0x3d3d3d
 	addi $6, $0, 22
 	addi $7, $0, 4
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== PILAR DEBAIXO DO PISO SUPERIOR
 	
-	addi $15, $15, -104
-	add $4, $0, $15
+	addi $4, $4, -104
+	 
 	add $5, $0, 0x828282
 	addi $6, $0, 38
 	addi $7, $0, 7
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== SOMBRA DO PILAR DEBAIXO DO PISO SUPERIOR
 
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x212121
 	addi $6, $0, 38
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x2e2e2e
 	addi $6, $0, 38
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x2e2e2e
 	addi $6, $0, 37
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x2e2e2e
 	addi $6, $0, 36
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x2e2e2e
 	addi $6, $0, 35
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 #Linha decendo
+	  #Linha decendo
 	add $5, $0, 0x2e2e2e
 	addi $6, $0, 34
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== CHï¿½O DA QUEDA DO PISO PRINCIPAL
-	addi $15, $15, 26624
+	addi $4, $4, 26624
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 5
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 6
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 7
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 8
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x3d3d3d
 	addi $6, $0, 9
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== APOIO DO PILAR DEBAIXO DO PISO SUPERIOR
 	
-	addi $15, $15, 6084
-	add $4, $0, $15
+	addi $4, $4, 6084
+	 
 	addi $5, $0, 0x212121
 	addi $6, $0, 9
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== APOIO DO CHï¿½O DA QUEDA DO PISO PRINCIPAL
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x1f1f1f
 	addi $6, $0, 15
 	addi $7, $0, 2
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 #============== APOIO DO PISO PRINCIPAL NA PARTE SUPERIOR	
-	addi $15, $15, -15348
+	addi $4, $4, -15348
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x474747
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x474747
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 1020
+	addi $4, $4, 1020
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x474747
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, -3064
+	addi $4, $4, -3064
 	
-	add $4, $0, $15 # A LINHA RETA DO PONTO SUPERIOR DO SUPORTE
+	  # A LINHA RETA DO PONTO SUPERIOR DO SUPORTE
 	add $5, $0, 0x474747
 	addi $6, $0, 2
 	addi $7, $0, 183
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== PEQUENA CONEXï¿½O COM O CHï¿½O DA QUEDA
-	addi $15, $15, 16596
+	addi $4, $4, 16596
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x474747
 	addi $6, $0, 4
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x474747
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== PISO PRINCIPAL
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x485054
 	addi $6, $0, 11
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x485054
 	addi $6, $0, 16
 	addi $7, $0, 175
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== SUPORTE INFERIOR DO PISO PRINCIPAL
-	addi $15, $15, 272 
+	addi $4, $4, 272 
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x828282
 	addi $6, $0, 188
 	addi $7, $0, 0
 	
 	jal sequencia
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============= COLUNA DO PISO PRINCIPAL
-	addi $15, $15, -756
+	addi $4, $4, -756
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 40
 	addi $7, $0, 189
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== DIAGONAIS Nï¿½O Tï¿½O LEGAIS FORA DO RANGE
-	addi $15, $15, -1024
-	add $4, $0, $15
+	addi $4, $4, -1024
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 15
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 14
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 13
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 12
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 11
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== MALDITO TRIANGULO FORA DO RANGE DIAGONAL
-	addi $15, $15, -7140
+	addi $4, $4, -7140
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 3
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 2
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15
+	 
 	addi $5, $0, 0x242424
 	addi $6, $0, 1
 	addi $7, $0, 1
 	
 	jal diagoup
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== DE VOLTA AS ORIGENS DA COLUNA
-	addi $15, $15, 7108
+	addi $4, $4, 7108
 		
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 41
 	addi $7, $0, 4
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 2048
+	addi $4, $4, 2048
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 24
 	addi $7, $0, 11
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== TRIANGULO INVERTIDO MALTIDO FORA DO RANGE DIAGONAL
-	addi $15, $15, 24532
+	addi $4, $4, 24532
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 7
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 6
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 5
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 4
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 3
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 2
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 1
 	
 	jal vertical
-	add $15, $0, $2
+	add $4, $0, $2
 	
 #============== DE VOLTA AS ORIGENS DA COLUNA DE NOVO  >:  (	!!!!!!!!!!!!!!!
-	addi $15, $15, 9188
+	addi $4, $4, 9188
 	
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x242424
 	addi $6, $0, 6
 	addi $7, $0, 11
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 
 #============== TIJOLOS DA COLUNA
-	addi $15, $15, -33576
+	addi $4, $4, -33576
 	
 	addi $12, $0, 13
 	addi $13, $0, 4
@@ -1537,21 +1530,21 @@ cenario:
 loopmain:	beq $13, $0, copia
 
 loop:	beq $12, $0, loopm
-	add $4, $0, $15 
+	  
 	add $5, $0, 0x828282
 	addi $6, $0, 7
 	addi $7, $0, 11
 	
 	jal verticais
-	add $15, $0, $2
+	add $4, $0, $2
 	
-	addi $15, $15, 12
+	addi $4, $4, 12
 	addi $12, $12, -1
 	j loop
 	
 loopm:	addi $13, $13, -1
 	addi $12, $0, 13
-	addi $15, $15, 9512
+	addi $4, $4, 9512
 	j loopmain
 
 copia:	jal copiace
@@ -1573,885 +1566,8 @@ megaman:	lui $24, 0x1001
 #============== NUCA	
 	addi $24, $24, 14396
 	add $21, $0, $24
+	jal mega
 	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 5
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-#============== NUCA PART2
-	addi $24, $24, 1004
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 2
-	
-	jal diagodw
-	add $24, $0, $2
-	
-#============== NUCA PART 3
-	addi $24, $24, 1000
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24 # ARMADURA
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 3
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-#============== NUCA PART4
-	addi $24, $24, 1004
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	addi $7, $0, 5
-	
-	jal verticais
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-
-#============== NUCA PART5 / BOTï¿½O DA CABEï¿½A
-	addi $24, $24, 1016
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-
-#============== CAPACETE 
-	addi $24, $24, 980
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 3
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 3
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 5
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 4
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 5
-	
-	jal vertical
-	add $24, $0, $2
-	
-#=============== CARA
-	addi $24, $24, 992
-	
-	add $4, $0, $24
-	add $5, $0, 0xf0cd90
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xffffff
-	addi $6, $0, 3
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xffffff
-	addi $6, $0, 4
-	
-	jal vertical
-	add $24, $0, $2
-
-#============== CARA 2
-	addi $24, $24, 992
-	
-	add $4, $0, $24
-	add $5, $0, 0xf0cd90
-	addi $6, $0, 3
-	
-	jal vertical
-	add $24, $0, $2
-
-	add $4, $0, $24
-	add $5, $0, 0xffffff
-	addi $6, $0, 2
-	addi $7, $0, 2
-	
-	jal verticais
-	add $24, $0, $2
-
-	add $4, $0, $24 #======= OLHO ESQUEDO
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 2
-	
-	jal verticais
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xf0cd90
-	addi $6, $0, 3
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24 #======= OLHO DIREITO
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-#============== CARA PART3
-	addi $24, $24, 2008
-	
-	add $4, $0, $24
-	addi $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 3
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xf0cd90
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xffffff
-	addi $6, $0, 3
-	addi $7, $0, 4
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xffffff
-	add $6, $0, 0xf0cd90
-	addi $7, $0, 2
-	
-	jal par
-	add $24, $0, $2
-	
-#============== CARA PART4
-	
-	addi $24, $24, 972
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	add $6, $0, 0x1d61b5
-	addi $7, $0, 2
-	
-	jal par
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xf0cd90
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 4
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xf0cd90
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 3
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-#============== CARA PART 5
-	addi $24, $24, 960
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 4
-	addi $7, $0, 4
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0xf0cd90
-	addi $6, $0, 5
-	addi $7, $0, 4
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-
-#============== CARA 6 / QUEIXO E OMBRO
-	addi $24, $24, 964
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 3
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 4
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	addi $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-#============== BRAï¿½O E BUXO
-	addi $24, $24, 960
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 4
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 4
-	addi $7, $0, 2
-	
-	jal verticais
-	add $24, $0, $2
-	
-	addi $24, $24, 8
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 5
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 3
-	addi $7, $0, 7
-	
-	jal verticais
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 5
-	
-	jal vertical
-	add $24, $0, $2
-	
-	addi $24, $24, 8
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 4
-	addi $7, $0, 2
-	
-	jal verticais
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 4
-	
-	jal vertical
-	add $24, $0, $2
-	
-#============== ESPAï¿½OES ENTRE Mï¿½O E COSTAS
-	addi $24, $24, 960
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 3
-	
-	jal vertical
-	add $24, $0, $2
-	
-	addi $24, $24, 36
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 3
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 1
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-#============== DEDOS DA Mï¿½O FECHADA
-	addi $24, $24, 972
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	addi $24, $24, 44
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-#============== CUECA
-	addi $24, $24, 984
-
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 3
-	addi $7, $0, 4
-	
-	jal verticais
-	add $24, $0, $2
-
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	addi $7, $0, 2
-	
-	jal verticais
-	add $24, $0, $2
-	
-#=============== CONTORNO DO DEDO
-	addi $24, $24, 976
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 3
-	addi $7, $0, 44
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 3
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
-	
-#============== COXAS
-
-#============== COXA ESQUERDA
-	addi $24, $24, 972
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 3
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	addi $24, $24, 2048
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $24, $0, $2
-
-#============== COXA DIREIRTA
-	addi $24, $24, -1024
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	addi $24, $24, -1024
-	
-	add $4, $0, $24
-	add $5, $0, 0x47a6e6
-	addi $6, $0, 2
-	addi $7, $0, 3
-	
-	jal verticais
-	add $24, $0, $2
-	
-#=============== CONTORNO DA PERNA DIREITA
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 4
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	addi $24, $24, 2048
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 1
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-	
-	addi $24, $24, 1032
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagodw
-	add $24, $0, $2
-
-#============== CONTORNO DA PERNA ESQUERDA
-	addi $24, $24, 944
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $24, $0, $2
-	
-	addi $24, $24, -1020
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 4
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $24, $0, $2
-	
-	addi $24, $24, -1020
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 1
-	addi $7, $0, 1
-	
-	jal diagoup
-	add $24, $0, $2
-	
-#============== Pï¿½ ESQUERDO
-	addi $24, $24, -1024
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 4
-	addi $7, $0, 2
-	
-	jal verticais
-	add $24, $0, $2
-	
-	addi $24, $24, 1024
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 3
-	
-	jal vertical
-	add $24, $0, $2
-	
-	addi $24, $24, 1024
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	addi $24, $24, -24
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	addi $7, $0, 0
-
-	jal sequencia
-	add $24, $0, $2
-	
-	addi $24, $24, 1008
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 4
-	addi $7, $0, -996
-	
-	jal sequencia
-	add $24, $0, $2
-	
-#============== Pï¿½ DIREITO
-
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 2
-	
-	jal vertical
-	add $24, $0, $2
-	
-	addi $24, $24, -1024
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 3
-	addi $7, $0, 2
-	
-	jal verticais
-	add $24, $0, $2
-	
-	addi $24, $24, -1024
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 4
-	
-	jal vertical
-	add $24, $0, $2
-	
-	addi $24, $24, 2048
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 2
-	addi $7, $0, 0
-
-	jal sequencia
-	add $24, $0, $2
-	
-	addi $24, $24, 1016
-	
-	add $4, $0, $24
-	add $5, $0, 0x1d61b5
-	addi $6, $0, 4
-	addi $7, $0, 944
-	
-	jal sequencia
-	add $24, $0, $2
-
-#============== SOLA DOS Pï¿½S
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 9
-	addi $7, $0, 12
-	
-	jal sequencia
-	add $24, $0, $2
-	
-	add $4, $0, $24
-	add $5, $0, 0x000000
-	addi $6, $0, 9
-	addi $7, $0, 0
-	
-	jal sequencia
-	add $24, $0, $2
 	
 		
 #=======================================
@@ -2467,9 +1583,9 @@ skullman:
 #	f0be89 = Pele
 	
 	
-	lui $15, 0x1001
+	lui $25, 0x1001
 	
-	addi $25, $15, 56132
+	addi $25, $25, 56132
 	add $20, $0, $25
 	jal skull
 	
@@ -2497,7 +1613,7 @@ funx:	lui $15, 0x1001
 	sw $8, 32($15)
 	addi $8, $0, 10
 	sw $8, 40($15)
-	addi $8, $0, 0x0000
+	addi $8, $0, 0x495865
 	sw $8, 44($15)
 	addi $8, $0, 0xfffffe
 	sw $8, 48($15)
@@ -8731,25 +7847,25 @@ megaleve:
 
 #===================================================
 #	MOVESET DO MEGAMAN		
-moveset:
-	add $22, $0, $31
-		
-	sw $0, 8($15)
+moveset:	add $22, $0, $31
 	
-	
-	
-	
-	
+	sw $0, 8($15)	
 	lw $12, 0($15)
-	bne $12, $0, tirolo
+	bne $12, $0, tiropo
 	beq $14, 20, pulacol
-	beq $14, 30, quedacol								
+	beq $14, 30, quedacol
 	add $24, $0, $21
+	
 	lw $9, 4($23)
 	
 	bne $9, $0, cod
-	
+	lw $8, 80($15)								
+	bne $8, $0, megin
 	jal mega
+	j cod
+	
+megin:	addi $24, $24, -4	
+	jal megat
 	
 cod:	addi $10, $0, 'd'
 	beq $9, $10, frente
@@ -8794,7 +7910,7 @@ cod:	addi $10, $0, 'd'
 #================================================================
 #	MOVIMENTAÇÃO PARA FRENTE
 	
-frente:	
+frente:	sw $0, 80($15)
 	addi $8, $0, -4
 	sw $8, 8($15)
 	
@@ -8872,7 +7988,7 @@ pacoleve:
 	
 	
 	addi $4, $21, -44
-	addi $5, $0, 22
+	addi $5, $0, 23
 	addi $6, $0, 24
 	
 	jal apagarp
@@ -8933,8 +8049,8 @@ paco1l:	lw $13, 132($15)
 	
 	
 	addi $4, $21, -60 
-	addi $5, $0, 30
-	addi $6, $0, 24
+	addi $5, $0, 31
+	addi $6, $0, 25
 	
 	
 	
@@ -9014,7 +8130,7 @@ paco2l:	lw $13, 132($15)
 	addi $24, $21, 0
 	
 	addi $4, $21, -64
-	addi $5, $0, 24
+	addi $5, $0, 25
 	addi $6, $0, 24
 	
 
@@ -9133,7 +8249,6 @@ fimpac3:	addi $14, $0, 1
 	add $31, $0, $22
 	jr $31
 
-
 contshot:	add $18, $0, $31
 	lw $12, 0($15)
 	beq $12, $0, nueshot
@@ -9141,315 +8256,351 @@ contshot:	add $18, $0, $31
 	addi $5, $0, 30
 	addi $6, $0, 30
 	jal apagarp
+	lw $8, 80($15)
+	bne $8, $0, contnor
 	addi $2, $0, 40
-	sw $2, 144($15)
-nueshot:	add $31, $0, $18
+	j nueshot
+contnor:	addi $2, $0, 50
+nueshot:	sw $2, 144($15)
+	add $31, $0, $18
 	jr $31
 #================================================================
-#================================================================
-#	MOVIMENTAÇÃO PARA TRAS
-
+#================================================================ 
+#	MOVIMENTACAO PARA TRAS	
 tras:	
+	addi $8, $0, 1	
+	sw $8, 80($15)
 	
 	addi $8, $0, 4
 	sw $8, 8($15)
 	
-	addi $8, $0, 52
+	addi $8, $0, 60
 	sw $8, 12($15)
 	
 	lw $16, 4($23)
 	sw $0, 4($23)
 	
-	addi $21, $21, -4
+	jal contshot
+	
+	
+	
+	
+
+	
+	
+trasnor:	addi $21, $21, -4
 	add $24, $0, $21
 	
 	add $10, $0, 'q' #POR ENQUANTO ASSIM
 	beq $16, $10, pacolevet
-	beq $17, $0, paco1t
-	beq $17, 1, paco2t
-	beq $17, 2, paco3t
 	
+	lw $14, 136($15)
+	
+	beq $14, 1, paco1lt
+	beq $14, 2, paco2lt
+	beq $14, 3, paco3lt
+	
+	lw $14, 36($15)
+	
+	beq $14, $0, paco1t
+	beq $14, 1, paco2t
+	beq $14, 2, paco3t
 	
 	add $31, $0, $22
-	jr $31	
-pacolevet:	
-	addi $4, $24, 0
+	jr $31
 	
-	addi $5, $0, 10
+pacolevet:	
+#============== COLISAO LEVE
+	addi $4, $21, -12
+	addi $6, $0, 10
+	addi $7, $0, 5
+	lw $5, 48($15)
+	jal colidamage
+	
+	add $4, $21, -32
+	addi $7, $0, 1
+	jal coliwall
+	
+	lw $8, 16($15)
+	beq $8, $0, derrotado
+	
+	addi $4, $24, -8
+	
+	addi $5, $0, 13
 	addi $6, $0, 21
 	
 	jal apagarp
-#============== QUEDA LEVET
+#============== QUEDA LEVE
+	addi $9, $21, 24536
+	lw $8, 44($15)
+	
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+
+	
+	jal megalevet
+	
+	
+	addi $4, $0, 12000
+	jal timer
+	
+	
+	
+	addi $4, $21, -12
+	addi $5, $0, 28
+	addi $6, $0, 26
+	
+	jal apagarp
+	
+	
+	add $31, $0, $22
+	jr $31
+	
+#-------------------------------------------	
+#	PRIMEIRO PACO	
+paco1t:	lw $13, 32($15)
+	sw $13, 132($15)
+
+paco1lt:	lw $13, 132($15)
+	
+	
+	
+	
+	addi $4, $21, -52
+	
+	addi $5, $0, 24
+	addi $6, $0, 24
+	
+	jal apagarp
+#============== COLISAO PACO1
+	
+	addi $9, $21, 24536
+	lw $8, 44($15)
+	
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+
+#============== COLISAO PACO1
+	addi $4, $21, -12
+	addi $6, $0, 10
+	addi $7, $0, 14
+	
+	lw $5, 48($15)
+	jal colidamage
+	
+	lw $8, 16($15)
+	beq $8, $0, derrotado
+	
+	addi $4, $21, -8
+	addi $7, $0, 1
+	
+	jal coliwall	
+	
+	jal megapaco1t #1
+	
+	lw $4, 4($15)
+	jal timer
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	
+	addi $4, $21, -32
+	addi $5, $0, 30
+	addi $6, $0, 24
+	
+	
+	
+	
+	jal apagarp
+	
+	
+	
+	
+	lw $13, 132($15)
+	addi $13, $13, -1
+	beq $13, $0, fimpac1t
+	sw $13, 132($15)
+	
+	addi $8, $0, 1
+	sw $8, 136($15)
+	
+	add $31, $0, $22
+	jr $31
+fimpac1t:
+	addi $14, $0, 1
+	sw $14, 36($15)
+	sw $0, 136($15)
+	
+	add $31, $0, $22
+	jr $31
+	
+	
+#-------------------------------------------	
+#	SEGUNDO PACO
+paco2t: lw $13, 32($15)
+	sw $13, 132($15)
+	
+paco2lt: lw $13, 132($15)
+	
+
+		
+	addi $4, $21, -56
+	
+	addi $5, $0, 24
+	addi $6, $0, 24
+	
+	jal apagarp
+#============== COLISAO PACO2
+	
+	addi $9, $21, 24564
+	lw $8, 44($15)
+	addi $11, $0, 0xff00
+	lw $10, 0($9)
+	
+	beq $10, $8, quedaco
+		
+#============== COLISAO PACO2
+	addi $4, $21, -20
+	addi $6, $0, 10	
+	addi $7, $0, 14
+	
+	lw $5, 48($15)
+	jal colidamage
+	
+	lw $8, 16($15)
+	beq $8, $0, derrotado
+	
+	addi $4, $21, -20
+	addi $7, $0, 1
+	jal coliwall
+		
+	jal megapaco2t #1
+	
+	lw $4, 4($15)
+	jal timer
+	
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	addi $4, $21, 0
+	addi $5, $0, 24
+	addi $6, $0, 24
+	
+
+	
+	
+	jal apagarp
+	
+	lw $13, 132($15)
+	addi $13, $13, -1
+	beq $13, $0, fimpac2t
+	sw $13, 132($15)
+	addi $8, $0, 2
+	sw $8, 136($15)
+	
+	add $31, $0, $22
+	jr $31
+	
+	
+	
+fimpac2t:
+	lw $14, 140($15)
+	
+	beq $14, 2, minust
+	
+	addi $14, $0, 2
+	sw $14, 36($15)
+	sw $0, 136($15)
+	
+	add $31, $0, $22
+	jr $31
+
+minust: lw $14, 36($15)
+	addi $14, $14, -1	
+	sw $14, 36($15)
+	sw $0, 136($15)
+	sw $0, 140($15)
+	
+	add $31, $0, $22
+	jr $31
+	
+#-------------------------------------------	
+#	TEREIRO PACO
+paco3t:	lw $13, 32($15)
+	sw $13, 132($15)
+	
+paco3lt: lw $13, 132($15)
+
+	addi $4, $21, -52
+
+	addi $5, $0, 24
+	addi $6, $0, 24
+	
+	jal apagarp
+#============== COLISAO PACO3
+	
 	addi $9, $21, 24536
 	lw $8, 44($15)
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
 	beq $10, $8, quedaco
-	
-#============== COLISAO LEVET
-	addi $4, $21, -52
+			
+#============== COLISAO PACO3
+	add $4, $21, $0
 	addi $6, $0, 10
-	addi $7, $0, 1
+	addi $7, $0, 14
 	
-	jal coliwall
-	add $4, $4, 8
 	lw $5, 48($15)
 	jal colidamage
 	
 	lw $8, 16($15)
 	beq $8, $0, derrotado
-		
-	jal megaleve
 	
-	addi $4, $0, 12000
+	addi $4, $21, -48
+	addi $7, $0, 1
+	jal coliwall	
+	
+	jal megapaco3t 
+	
+	lw $4, 4($15)
 	jal timer
 	
 	
-	addi $4, $21, -44
-	addi $5, $0, 25
+	addi $21, $21, -4
+	addi $24, $21, 0
+	
+	
+	addi $4, $21, 0
+	addi $5, $0, 26
 	addi $6, $0, 24
 	
-	jal apagarp
-	addi $14, $0, 1
+	
+	
+	
+	jal apagarp	
+	
+	lw $13, 132($15)
+	addi $13, $13, -1
+	beq $13, $0, fimpac3t
+	sw $13, 132($15)
+	
+	addi $8, $0, 3
+	sw $8, 136($15)
+	
 	add $31, $0, $22
 	jr $31
 
-#-------------------------------------------
-#	PRIMEIRO PACO PARA TRAS
-paco1t:	
-	addi $4, $24, -40
 	
-	addi $5, $0, 30
-	addi $6, $0, 25
+fimpac3t:	addi $14, $0, 1
+	sw $14, 36($15)
+	sw $0, 136($15)
 	
-	jal apagarp
-#============== COLISAO PACO1T
-	
-	addi $9, $21, 24552
-	lw $8, 44($15)
-	addi $11, $0, 0xff00
-	lw $10, 0($9)
-	
-	beq $10, $8, quedaco
-	
-#============== COLISAO PACO1T
-	addi $4, $21, -52
-	addi $6, $0, 10
-	addi $7, $0, 1
-	
-	jal coliwall
-	add $4, $4, 8
-	lw $5, 48($15)
-	jal colidamage
-	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-		
-	jal megapaco1 #1
-	
-	lw $4, 4($15)
-	jal timer
-	
-	addi $4, $21, -40
-	addi $5, $0, 1
-	addi $6, $0, 1
-	
-	jal apagarp 
-	
-	addi $21, $21, -4
-	addi $24, $21, 0
-	
-	jal megapaco1 #2
-	
-	lw $4, 4($15)
-	jal timer
-	
-	addi $4, $21, -40
-	addi $5, $0, 1
-	addi $6, $0, 1
-	
-	jal apagarp
-	
-	addi $21, $21, -4
-	addi $24, $21, 0
-	
-	jal megapaco1 #3
-	
-	lw $4, 4($15)
-	jal timer
-	
-	
-	addi $4, $21, -64
-	addi $5, $0, 28
-	addi $6, $0, 25
-	
-	jal apagarp
-	
-	
-	addi $17, $17, 1
-	addi $14, $0, 1
-	
-	add $31, $0, $22
-	jr $31
-	
-
-#-------------------------------------------
-#	SEGUNDO PACO PARA TRAS
-paco2t:	
-	addi $4, $24, -40
-	
-	addi $5, $0, 30
-	addi $6, $0, 25
-	
-	jal apagarp
-#============== COLISAO PACO2T
-	
-	addi $9, $21, 24552
-	lw $8, 44($15)
-	addi $11, $0, 0xff00
-	lw $10, 0($9)
-	
-	beq $10, $8, quedaco
-	
-#============== COLISAO PACO2T
-	addi $4, $21, -52
-	addi $6, $0, 10
-	addi $7, $0, 1
-	
-	jal coliwall
-	add $4, $4, 8
-	lw $5, 48($15)
-	jal colidamage
-	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-		
-	jal megapaco2 #1
-	
-	lw $4, 4($15)
-	jal timer
-	
-	addi $4, $21, 40
-	addi $5, $0, 1
-	addi $6, $0, 1
-	
-	jal apagarp
-	
-	addi $21, $21, -4
-	addi $24, $21, 0
-	
-	jal megapaco2 #2
-	
-	lw $4, 4($15)
-	jal timer
-	
-	addi $4, $21, 40
-	addi $5, $0, 1
-	addi $6, $0, 1
-	
-	jal apagarp
-	
-	addi $21, $21, -4
-	addi $24, $21, 0
-	
-	jal megapaco2 #3
-	
-	lw $4, 4($15)
-	jal timer
-	
-	
-	addi $4, $21, -64
-	addi $5, $0, 28
-	addi $6, $0, 25
-	
-	jal apagarp
-	
-	beq $14, 2, minust
-	addi $17, $17, 1
-	
-	add $31, $0, $22
-	jr $31
-	
-minust:	addi $17, $17, -1
-	add $31, $0, $22
-	jr $31
-
-#-------------------------------------------
-#	TEREIRO PACO PARA TRAS	
-paco3t:	
-	
-	addi $4, $24, -40
-	
-	addi $5, $0, 30
-	addi $6, $0, 25
-	
-	jal apagarp
-#============== COLISAO PACO3T
-	
-	addi $9, $21, 24552
-	lw $8, 44($15)
-	addi $11, $0, 0xff00
-	lw $10, 0($9)
-	
-	beq $10, $8, quedaco
-	
-#============== COLISAO PACO3T
-	addi $4, $21, -52
-	addi $6, $0, 10
-	addi $7, $0, 1
-	
-	jal coliwall
-	add $4, $4, 8
-	lw $5, 48($15)
-	jal colidamage
-	
-	lw $8, 16($15)
-	beq $8, $0, derrotado
-		
-	jal megapaco3 #1
-	
-	lw $4, 4($15)
-	jal timer
-	
-	addi $4, $21, 40
-	addi $5, $0, 1
-	addi $6, $0, 1
-	
-	jal apagarp
-	
-	addi $21, $21, -4
-	addi $24, $21, 0
-	
-	jal megapaco3 #2
-	
-	lw $4, 4($15)
-	jal timer
-	
-	addi $4, $21, 40
-	addi $5, $0, 1
-	addi $6, $0, 1
-	jal apagarp
-	
-	
-	addi $21, $21, -4
-	addi $24, $21, 0
-	
-	jal megapaco3 #3
-	
-	lw $4, 4($15)
-	jal timer
-	
-	
-	addi $4, $21, -64
-	addi $5, $0, 28
-	addi $6, $0, 25
-	
-	jal apagarp
-	
-	addi $17, $17, -1
-	
-	addi $14, $0, 2
+	addi $8, $0, 2
+	sw $8, 140($15)
 	
 	add $31, $0, $22
 	jr $31
@@ -9528,7 +8679,7 @@ pulolvf:	addi $4, $21, -40
 	addi $24, $21, 0
 	
 	addi $4, $24, -1072
-	addi $5, $0, 25
+	addi $5, $0, 27
 	addi $6, $0, 34
 	
 	jal apagarp
@@ -9537,7 +8688,7 @@ pulolvf:	addi $4, $21, -40
 #============== COLISAO DO TETO
 	
 	addi $9, $21, -1024
-	addi $8, $0, 0x0000
+	lw $8, 44($15)
 	addi $11, $0, 0xff00
 	lw $10, 0($9)
 	
@@ -9555,16 +8706,20 @@ pulolvf:	addi $4, $21, -40
 	lw $8, 16($15)
 	beq $8, $0, derrotado
 	
+	lw $8, 80($15)								
+	bne $8, $0, meginp
 	jal megapulo
+	j pulonor
 	
-	lw $13, 28($15)
+meginp:	jal megapulot
+pulonor:	lw $13, 28($15)
 	addi $13, $13, -1
 	sw $13, 28($15)
 	
 	add $31, $0, $22
 	jr $31
 	
-pulacod:	
+pulacod:	sw $0, 80($15)
 #============== COLISAO PULACOD
 	addi $8, $0, -8
 	sw $8, 8($15)
@@ -9618,13 +8773,13 @@ pulacoe:
 	addi $21, $21, -8
 	addi $24, $21, 0
 	
-	jal megapulo
+	jal megapulot
 		
 	lw $13, 28($15)
 	addi $13, $13, -1
 	sw $13, 28($15)
-	
-
+	addi $8, $0, 1
+	sw $8, 80($15)
 	add $31, $0, $22
 	jr $31
 		
@@ -9702,7 +8857,7 @@ quedalvf:	addi $4, $21, -40
 	addi $24, $21, 0
 	
 	addi $4, $24, -1076
-	addi $5, $0, 25
+	addi $5, $0, 28
 	addi $6, $0, 31
 	
 	jal apagarp
@@ -9719,9 +8874,14 @@ quedalvf:	addi $4, $21, -40
 	
 	lw $8, 16($15)
 	beq $8, $0, derrotado
+	lw $8, 80($15)								
+	bne $8, $0, meginq
 	jal megapulo
+	j quedanor
+	
+meginq:	jal megapulot
 		
-	lw $13, 28($15)
+quedanor:	lw $13, 28($15)
 	addi $13, $13, 1
 	sw $13, 28($15)
 	
@@ -9729,7 +8889,7 @@ quedalvf:	addi $4, $21, -40
 	add $31, $0, $22
 	jr $31
 	
-quedacod:	
+quedacod:	sw $0, 80($15)
 #============== COLISAO QUEDACOD
 	addi $8, $0, -8
 	sw $8, 8($15)
@@ -9778,12 +8938,13 @@ quedacoe:
 	addi $21, $21, -8
 	addi $24, $21, 0
 	
-	jal megapulo
+	jal megapulot
 		
 	lw $13, 28($15)
 	addi $13, $13, 1
 	sw $13, 28($15)
-	
+	addi $8, $0, 1
+	sw $8, 80($15)
  
 	add $31, $0, $22
 	jr $31
@@ -9791,7 +8952,7 @@ quedacoe:
 jumperase:	
 	jal notamegaj
 	addi $4, $21, -11312
-	addi $5, $0, 25
+	addi $5, $0, 30
 	addi $6, $0, 42
 	
 	jal apagarp
@@ -9823,14 +8984,85 @@ tiromega:
 	jal apagarp
 	
 	jal notamegat
+	lw $8, 80($15)								
+	bne $8, $0, megint
 	jal megatiro
-	#addi $4, $0, 50000
-	#jal timer
-	lw $12, 0($15)
-	bne $12, $0, tirolo #Tiro durante o tiro
 	add $12, $21, 10312 #Depois eu decido qual o melhor registrador para esse loop
+	sw $12, 0($15)
+	j tirolo
+	
+megint:	jal megatirot
+	
+	add $12, $21, 10140 #Depois eu decido qual o melhor registrador para esse loop
+	sw $12, 0($15)
+tirolot:	
+	lw $12, 0($15)
+	
+	add $24, $0, $12
+	addi $12, $12, -4
 	
 	sw $12, 0($15)
+	
+	jal megabuster
+	
+	addi $4, $12, 0
+	lw $5, 48($15)
+	addi $6, $0, 10
+	addi $7, $0, 5
+	
+	jal enedamage
+	beq $2, 10, stopshot
+	
+	lw $5, 56($15)
+	jal colishot
+	
+	lw $5, 60($15)
+	jal colishot
+	
+	lw $5, 64($15)		
+	jal colishot
+gnoret:	
+	addi $4, $4, -2020
+	addi $5, $0, 4
+	addi $6, $0, 6
+	
+	jal apagarp
+	
+	addi $4, $0, 100
+	jal timer
+	
+	beq $14, 20, pulacol
+	beq $14, 30, quedacol
+	
+	lw $9, 4($23)
+	addi $10, $0, 'd'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'e'
+	beq $9, $10, frente
+	
+	addi $10, $0, 'a'
+	beq $9, $10, tras
+	
+	addi $10, $0, 'q'
+	beq $9, $10, tras
+	
+	addi $10, $0, 'w'
+	beq $9, $10, pulomega
+	
+	lw $2, 144($15)
+	beq $2, 40, newmega
+	beq $2, 50, newmegat
+	
+	
+	j tironuet
+	
+newmegat:	add $24, $21, $0	
+	jal megat
+	sw $0, 144($15)
+		
+tironuet:	add $31, $0, $22
+	jr $31	
 tirolo:	
 	lw $12, 0($15)
 	
@@ -9859,7 +9091,7 @@ tirolo:
 	jal colishot
 gnore:	
 	addi $4, $4, -2060
-	addi $5, $0, 2
+	addi $5, $0, 4
 	addi $6, $0, 6
 	
 	jal apagarp
@@ -9867,6 +9099,8 @@ gnore:
 	addi $4, $0, 100
 	jal timer
 	
+	addi $8, $0, 1
+	sw $8, 148($15)
 	beq $14, 20, pulacol
 	beq $14, 30, quedacol
 	
@@ -9886,11 +9120,9 @@ gnore:
 	addi $10, $0, 'w'
 	beq $9, $10, pulomega
 	
-	addi $10, $0, 'j'
-	beq $9, $10, tiromega
-	
 	lw $2, 144($15)
 	beq $2, 40, newmega
+	beq $2, 50, newmegat
 	j tironue
 	
 newmega:	add $24, $21, $0	
@@ -9907,7 +9139,7 @@ stopshot:	lw $4, 0($15)
 	lw $8, 40($15)
 	beq $8, $0, telavitoria
 	
-	
+	sw $0, 148($15)
 	addi $4, $4, -2056
 	addi $5, $0, 11
 	addi $6, $0, 7
@@ -9915,7 +9147,7 @@ stopshot:	lw $4, 0($15)
 	jal apagarp
 	
 	addi $4, $21, -56
-	addi $5, $0, 30
+	addi $5, $0, 31
 	addi $6, $0, 30
 	
 	jal apagarp
@@ -9924,11 +9156,11 @@ stopshot:	lw $4, 0($15)
 	beq $14, 30, quedacol
 	add $12, $0, $0
 	
-	
-	
 	add $31, $0, $22
 	jr $31
-	
+tiropo:	lw $8, 148($15)	
+	bne $8, $0, tirolo
+	j tirolot
 damagehit:	
 	sw $0, 4($23)
 	add $24, $9, $0
@@ -13267,7 +12499,72 @@ jinglede:	addi $6, $0, 5 #conjunto / piano 5, 7, 86, 97,
 	syscall
 	
 	jr $31
+# som do dano skullman
+#	$4, #TIPO DE NOTA ou pausa
+#	$5 #O TEMPO PARA DURAR SOM OU PAUSA
+#	$2, $0, 31 #FUNCIONA UM SOM
+#	$2, $0, 32 #FUNCIONA UMA PAUSA
+#	$6, $0, 0 #INSTRUMENTO TOCADO
+
 	
+skudamage:	addi $6, $0, 104 #cordas
+	addi $7,$0, 60 #volume
+	
+	addi $4, $0, 60 #re
+	addi $5, $0, 200
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 200 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $7,$0, 100 #volume
+	addi $4, $0, 86 #re
+	addi $5, $0, 100
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 100 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 89 #re
+	addi $5, $0, 100
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 100 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 92 #re
+	addi $5, $0, 100
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 100 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 95 #re
+	addi $5, $0, 100
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 100 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	
+	addi $4, $0, 95 #re
+	addi $5, $0, 100
+	addi $2, $0, 31
+	syscall
+	
+	addi $4, $0, 200 #coloca o tempo da pausa no reg 4
+	addi $2, $0, 32 #quando usa o 32 no reg2 usa o syscall da pausa
+	syscall
+	jr $31	
 #===========================================
 #	Tema principal
 
@@ -16353,6 +15650,8 @@ hitdamage:	add $9, $0, $0
 	add $4, $0, $20
 	jal dano
 	
+	jal skudamage
+	
 	addi $4, $0, 25000
 	jal timer
 	
@@ -16403,4 +15702,4042 @@ shotloop:
 	
 	bne $13, $0, shotloop
 	
+	jr $31
+#================================================
+#	Sprites invertidos do megaman
+	
+	
+megaheadt:	
+	add $19, $0, $31
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6 #ROUPA
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 2
+	addi $7, $0, -4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2052
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3064
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2040
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, -6184
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 6
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 6144
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2052
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 4
+	addi $7, $0, -8216
+	
+	jal sequencia
+	add $24, $0, $2
+
+#============ CAPACETE		
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 1
+	addi $7, $0, -2044
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 2016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Contorno
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 6
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 984
+	
+#------------ OLHOS
+	
+	add $4, $0, $24
+	addi $5, $0, 0xffffff
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xffffff
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 0x1d61b5
+	addi $7, $0, 2
+	
+	jal par
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Olho
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000 #Olho
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xffffff
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2016
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xfffffff
+	addi $6, $0, 1
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xfffffff
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 3
+	addi $7, $0, 1028
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $19
+	jr $31
+	
+#============ A FUNCAO ACABA DEBAIXO DO QUEIXO MEGA
+
+#===================================================
+#	MEGA PRA ESQUERDA
+
+megat:	
+	add $18, $0, $31
+	jal megaheadt
+#============ BRACO DIREITO
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -3076
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1012
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1000
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2044
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -4116
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 5
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -3120
+	
+#============ BRACO ESQUERDO
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 5
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2036
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2036
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -4088
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 7
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 3044
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 7
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 2028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, -5180
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 2044
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -28
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 0x1d61b5
+	addi $7, $0, 2
+	
+	jal par
+	add $24, $0, $2
+	
+	addi $24, $24, 1012
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -32
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 7
+	addi $7, $0, 996
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31	
+		
+#=================================================
+#	MEGAPLEVE PRA ESQUERDA
+
+megalevet:	
+	add $18, $0, $31
+	
+	jal megaheadt
+
+#============ BRACO DIREITO
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -3076
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1012
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1000
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2044
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -4116
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 5
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -3120
+	
+#============ BRACO ESQUERDO
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 5
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2036
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2036
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -4088
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 7
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 3044
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 7
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 2028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, -5180
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============ PERNA ESQUERDA
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, -4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 5
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -20
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
+#============ FIM MEGALEVET	
+
+#===================================================
+#	MEGAPACO1tT PRA ESQUERDA
+
+megapaco1t:	
+	add $18, $0, $31
+	
+	addi $24, $24, 2048
+	jal megaheadt
+
+#============ BARRIGA/BRACO DIREITO
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -4096
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -3080
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 2040
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -2072
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+
+#============ BRACO ESQUERDO
+		
+	addi $24, $24, -2116
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3056
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2	
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3056
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -2044
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, -4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+#============ PERNA ESQUERDA
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 12
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1000
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, -4096
+	
+	jal sequencia
+	add $24, $0, $2
+
+#============ PERNA DIREITA	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, 1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24 -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24 -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24 -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+
+	addi $24, $24 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2012
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
+#============ FIM MEGAPACO1T
+
+#===================================================
+#	MEGAPACO2T PRA ESQUERDA
+
+megapaco2t:	
+	add $18, $0, $31
+	jal megaheadt
+	
+
+#============ BARRIGA/BRACO DIREITO
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -4096
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, -1028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 996
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============ BRACO ESQUERDO
+	addi $24, $24, -5140
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 4
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1012
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+#============ PERNA DIREITA
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 5
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 2024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+		
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 5
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
+	
+#============ FIM MEGAPACO2T
+
+#===================================================
+#	MEGAPACO3T PRA ESQUERDA
+
+megapaco3t:	
+	
+	add $18, $0, $31
+	addi $24, $24, 2048
+	jal megaheadt
+
+#============ BARRIGA/BRACO ESQUERDO
+	addi $24, $24, -1032
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2036
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, -4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1032
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1072
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 2024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 8
+	addi $7, $0, -8176
+	
+	jal sequencia
+	add $24, $0, $2
+
+#============ BRACO DIREITO		
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 996
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 2048
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+#============ CUECA/PERNA DIREITA
+
+	addi $24, $24, 984
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 980
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1000
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -32
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -3120
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============ PERNA ESQUERDA
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+		
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1028
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, -36
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 996
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
+	
+#============ FIM MEGAPACO3T
+
+#===================================================
+#	MEGAPULOT PRA ESQUERDA
+
+megapulot:	
+	add $18, $0, $31
+	
+	jal megaheadt
+#============ BOCA
+	addi $24, $24, -8
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 1
+	addi $7, $0, -2052
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0xf0cd90
+	addi $6, $0, 1
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 1028
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============ BRACO DIREITO
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+		
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	addi $7, $0, -1024
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -2056
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -2056
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, -2052
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, -1044
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, -1040
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, -88
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============ BRACO ESQUERDO
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+		
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 2
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 3068
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	addi $24, $24, 1020
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============ BARRIGA
+
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 8
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 11
+	
+	jal vertical
+	add $24, $0, $2
+	
+#============ CUECA/PERNA ESQUERDA
+	addi $24, $24, 2000
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2	
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 3
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 4
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, -52
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1000
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 5
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+	
+	jal diagodwt
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, -4084
+	
+	jal sequencia
+	add $24, $0, $2
+
+#============ PERNA DIREITA	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, -1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 4
+	addi $7, $0, 1008
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 1012
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1004
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 7
+	addi $7, $0, 3
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 6
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 6128
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
+	
+#============ FIM MEGAPULOT
+	
+#==============================================
+#	MEGATIROT PRA ESQUERDA
+
+megatirot:	
+	add $18, $0, $31
+	jal megaheadt
+	
+	
+#============ BRACO DIREITO
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 2
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+	addi $24, $24, -6140
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1016
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1004
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 1020
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1008
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1012
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, -8
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1016
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 1024
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 2
+	
+	jal verticais
+	add $24, $0, $2
+	
+	addi $24, $24, 2040
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 1
+	
+	jal diagoupt
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 1
+	
+	jal diagoup
+	add $24, $0, $2
+	
+#============ BRACO ESQUERDO
+	addi $24, $24, -7252
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 1000
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+		
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 984
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 0x47a6e6
+	addi $7, $0, 2
+	
+	jal par
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 980
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 0x1d61b5
+	addi $7, $0, 2
+	
+	jal par
+	add $24, $0, $2
+	
+	addi $24, $24, 4
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 8
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 4
+	addi $7, $0, 980
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 8
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 5
+	addi $7, $0, 984
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 4
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 5
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+#============= BARRIGA
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 7
+	addi $7, $0, 996
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 0
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 7
+	addi $7, $0, 996
+	
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	
+	jal vertical
+	add $24, $0, $2
+		
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 5
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 996
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 7
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 4
+	addi $7, $0, 1
+
+	jal diagodw
+	add $24, $0, $2
+	
+	addi $24, $24, 992
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 6
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 1
+	addi $7, $0, 984
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 1
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 976
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 2
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 3
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2	
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 4
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 1
+	addi $7, $0, 976
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 4
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 8
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 1
+
+	jal diagodw
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x47a6e6
+	addi $6, $0, 2
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 956
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 3
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 3
+	addi $7, $0, 20
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 6
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+	addi $7, $0, 944
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 7
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 12
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+
+	jal vertical
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x1d61b5
+	addi $6, $0, 7
+	addi $7, $0, 0
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 2
+
+	jal vertical
+	add $24, $0, $2
+	
+	addi $24, $24, 944
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, 20
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $4, $0, $24
+	addi $5, $0, 0x000000
+	addi $6, $0, 7
+	addi $7, $0, 20
+
+	jal sequencia
+	add $24, $0, $2
+	
+	add $31, $0, $18
+	jr $31
+	
+#============= FIM MEGATIROT
+apagar:	sw $0, 4($23)
+	lui $8, 0x1001
+	
+	addi $10, $0, 32768
+	addi $9, $0, 0x000000
+	
+apagte:	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $10, $10, -1
+	
+	bne $10, $0, apagte
 	jr $31
