@@ -51,9 +51,9 @@ Configure o **Bitmap Display** exatamente com os valores abaixo para que os grá
 
 | Configuração                 | Valor                      |
 | ---------------------------- | -------------------------- |
-| **Unit Width in Pixels**     | 1                          |
-| **Unit Height in Pixels**    | 1                          |
-| **Display Width in Pixels**  | 256                        |
+| **Unit Width in Pixels**     | 2                          |
+| **Unit Height in Pixels**    | 2                          |
+| **Display Width in Pixels**  | 512                        |
 | **Display Height in Pixels** | 256                        |
 | **Base Address for Display** | `0x10010000` (static data) |
 
@@ -82,6 +82,10 @@ Configure o **Bitmap Display** exatamente com os valores abaixo para que os grá
 - `M`: Médio
 - `D`: Difícil
 
+### Escolha da arma
+- 'K': Espada/Katana
+- 'T': Tiro(Mega Buster)
+
 ### Gameplay (Megaman)
 
 Use as teclas abaixo na janela do **MMIO Simulator**:
@@ -89,12 +93,10 @@ Use as teclas abaixo na janela do **MMIO Simulator**:
 | Tecla          | Ação                 |
 | -------------- | -------------------- |
 | **W**          | Pular                |
-| **A** ou **Q** | Mover para Esquerda  |
-| **D** ou **E** | Mover para Direita   |
-| **S**          | Agachar / Ação       |
+| **A** ou **Q** | Mover para Esquerda  (Q para passo lentos e precisos)|
+| **D** ou **E** | Mover para Direita   (E para passo lentos e precisos)|
+| **S**          | Ação / Coletar itens      |
 | **J**          | Atirar (Mega Buster) |
-| **K**          | Salvar (Slot 1)      |
-| **T**          | Salvar (Slot 2)      |
 
 ---
 
@@ -108,9 +110,10 @@ Use as teclas abaixo na janela do **MMIO Simulator**:
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **[Seu Nome/Usuário]**
-_Estudante de Informática - IFRN_
+Desenvolvido por **Miguel Rodrigues/Migstand** e **Gustavo Dias/GustavoDiasdLima**
+_Estudantes de ADS(Análise e Denvovimento de Sistemas) - IFRN_CNAT
 
 ---
 
 > _Este projeto é para fins educacionais, demonstrando conceitos de arquitetura de computadores e programação de baixo nível._
+
