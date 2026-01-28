@@ -1,9 +1,3 @@
-Aqui está uma proposta de `README.md` profissional e detalhada para o seu projeto **Prince of Mega**, formatada para o GitHub.
-
-Este documento destaca as funcionalidades do seu código (como o sistema de menus, saves e colisão) e fornece instruções claras de configuração para o simulador MARS, o que é essencial para projetos de Arquitetura de Computadores.
-
----
-
 # Prince of Mega 🎮 (MIPS Assembly)
 
 **Prince of Mega** é um jogo de plataforma e ação desenvolvido em **Assembly MIPS**, rodando sobre o simulador **MARS**. O projeto foi criado como parte da disciplina de Arquitetura de Computadores, demonstrando o uso de manipulação de memória, E/S via Bitmap Display e MMIO (Memory Mapped I/O), lógica de jogo e renderização gráfica de baixo nível.
@@ -116,4 +110,5 @@ _Estudantes de ADS(Análise e Denvovimento de Sistemas) - IFRN_CNAT
 ---
 
 > _Este projeto é para fins educacionais, demonstrando conceitos de arquitetura de computadores e programação de baixo nível._
+
 
